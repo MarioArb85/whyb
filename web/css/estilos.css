@@ -82,7 +82,15 @@ p {
 th {
 	font-family: "openSans";
 	font-weight: bold;
+	text-align: left;
+	padding: 15px 50px 15px 0px;
 }
+
+tr {
+	font-family: "openSans";
+	text-align: left;
+	/*padding: 5px;*/
+} 
 
 a {
 	font-family: radiohead;
@@ -96,6 +104,10 @@ a:link
 
 a:hover {
 	text-decoration: underline;   
+}
+
+#required {
+	color: red;
 }
 
 #cabecera {
