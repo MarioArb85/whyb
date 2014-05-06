@@ -1,0 +1,159 @@
+/* Reset browser styles */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* End reset browser styles  */
+
+@font-face {
+	font-family: openSans;
+	src: url(/whyb/web/fonts/OpenSans-Regular.ttf);
+	font-weight: normal;
+}
+
+@font-face {
+    font-family: openSans;
+    src: url(/whyb/web/fonts/OpenSans-Bold.ttf);
+    font-weight: bold;
+}
+/*
+@font-face {
+    font-family: openSans;
+    src: url(/whyb/web/fonts/OpenSans-BoldItalic.ttf);
+    font-weight: oblique bold;
+}
+*/
+@font-face {
+	font-family: radiohead;
+	src: url(/whyb/web/fonts/rabiohead.ttf);
+}
+
+html{
+	background-image: url(/whyb/web/img/fondo.jpg);
+}
+
+body {
+	font-family: "openSans";
+	position: relative;
+	height: auto;
+	margin: auto: ;
+}
+
+p {
+	color: #3e444a;
+}
+
+a {
+	font-family: radiohead;
+	font-size: 170%;
+}
+
+a:link   
+{   
+	text-decoration: none;
+} 
+
+a:hover {
+	text-decoration: underline;   
+}
+
+#cabecera {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	height: 60px;
+	width: 1200px;
+}
+
+#logo {
+	position: relative;
+	float: left;
+	height: 60px;
+	padding: 0px 10px;
+	width: 800px;
+}
+
+#registro {
+	position: relative;
+	float: right;
+	line-height: 40px;
+	/*word-spacing: 20px;*/
+	padding: 10px 10px;
+	height: 40px;
+}
+
+.separa{
+	padding-right: 50px;
+}
+
+.separaArriba{
+	padding-top: 30px;
+}
+
+#cuerpo{
+	position: relative;
+	margin: auto;
+	height: auto;
+	width: 1200px;
+}
+
+#imgPortada{
+	height: 500px;
+	/*width: 1600px;*/
+	width: 99.9%;
+	border: 1px solid black;
+}
+
+#textInicio {
+	position: relative;
+    text-align: center;
+    line-height: 20px; 
+	width: 900px;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#footer {
+	position: relative;
+	margin: 20px auto;
+	height: 20px;
+	width: 1200px;
+	text-align: center;
+}
