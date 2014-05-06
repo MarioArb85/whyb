@@ -18,9 +18,36 @@ $firephp = FirePHP::getInstance(true);
 
 //Portada
 $app->get('/', function () use ($app) {
-    return pages::portada();
+    global $firephp;
+    $usuario = "";
+    $admin = 0;
+    $titulo = "Where have you been";
+    $header = header::construye($usuario, $admin);
+    $body=inicio::construye();
+    $footer = footer::construye();
+    $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+    $pagina = $paginaDetalle->mostrar();
+    //$firephp->log($paco, 'Mensaje');
+    return $pagina;
 })
 ->bind('homepage')
+;
+
+//Formulario
+$app->get('/form/', function () use ($app) {
+    global $firephp;
+    $usuario = "";
+    $admin = 0;
+    $titulo = "Where have you been";
+    $header = header::construye($usuario, $admin);
+    $body = users_controller::form();
+    $footer = footer::construye();
+    $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+    $pagina = $paginaDetalle->mostrar();
+    //$firephp->log($paco, 'Mensaje');
+    return $pagina;
+})
+->bind('formulario')
 ;
 
 $app->get('/hello/{name}', function ($name) use ($app) {

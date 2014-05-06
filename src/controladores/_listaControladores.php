@@ -1,3 +1,3 @@
 <?php
-	require "pages.php";
+	require "users_controller.php";
 ?>
