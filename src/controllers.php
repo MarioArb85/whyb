@@ -35,19 +35,23 @@ $app->get('/', function () use ($app) {
 
 //Formulario
 $app->get('/form/', function () use ($app) {
-    global $firephp;
-    $usuario = "";
-    $admin = 0;
-    $titulo = "Where have you been";
-    $header = header::construye($usuario, $admin);
-    $body = users_controller::form();
-    $footer = footer::construye();
-    $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
-    $pagina = $paginaDetalle->mostrar();
-    //$firephp->log($paco, 'Mensaje');
-    return $pagina;
+    return users_controller::form();
 })
 ->bind('formulario')
+;
+
+//Map
+$app->get('/map/', function () use ($app) {
+    return maps_controller::draw();
+})
+->bind('map')
+;
+
+//Places
+$app->get('/places/', function () use ($app) {
+    return places_controller::draw();
+})
+->bind('places')
 ;
 
 $app->get('/hello/{name}', function ($name) use ($app) {

@@ -1,18 +1,19 @@
 <?php 
-  class users_controller {
+  class places_controller {
 
-    static function form() {
+    static function draw() {
       global $firephp;
       $usuario = "";
       $admin = 0;
-      $titulo = "WHYB formulario";
+      $titulo = "WHYB map";
       $header = header::construye($usuario, $admin);
-      $body = formulario::construye();
+      $body = "";
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
       //$firephp->log($paco, 'Mensaje');
       return $pagina;
     }
+
   }
 ?>
