@@ -2,12 +2,12 @@
   class places_controller {
 
     static function draw() {
-      global $firephp;
+      //global $firephp;
       $usuario = "";
       $admin = 0;
       $titulo = "WHYB map";
       $header = header::construye($usuario, $admin);
-      $body = "";
+      $body = places::construye();
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
