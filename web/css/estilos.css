@@ -199,6 +199,14 @@ a:hover {
 	border: 1px solid black;
 }
 
+#placesPage {
+	position: relative;
+	height: 600px;
+	width: 1200px;
+	margin: 50px auto;
+	border: 1px solid black;
+}
+
 #menu {
 	position: relative;
 	margin: 0px 25px ;
@@ -224,6 +232,15 @@ a:hover {
 	height: 500px;
 }
 
+#results {
+	position: relative;
+	float: left;
+	margin: 25px 0px;
+	width: 975px;
+	height: 500px;
+	border: 1px solid black;
+}
+
 #markers {
 	position: relative;
 	float: left;
@@ -234,8 +251,7 @@ a:hover {
 }
 
 #footer {
-	position: fixed;
-	bottom: 0px;
+	position: relative;
 	background-color: white;
 	margin: 20px auto 0px auto;
 	height: 40px;
