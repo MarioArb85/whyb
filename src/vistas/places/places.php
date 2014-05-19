@@ -3,7 +3,7 @@
 class places {						   
 
   static function construye() {
-  	global $firephp;
+    global $firephp;
    
     $conexion = new mysqli('localhost', 'root', '', 'whyb');
     $conexion->set_charset('utf8');
@@ -14,31 +14,17 @@ class places {
 
 
     //Pinta checkboxes categorias
-    $consulta = "SELECT typeId, name_en FROM type";
+    $consulta = "SELECT categoryId, categoryName_en FROM category";
 
     if ($resultado = $conexion->query($consulta)) {
         $checkCat = "";
         while ($fila = $resultado->fetch_object()) {
-            if($fila->typeId != 0)
-                $checkCat .= "<input type='checkbox' id='checkCat".$fila->typeId."' value='".$fila->typeId."'/>".$fila->name_en."<br/>";
+            if($fila->categoryId != 0)
+                $checkCat .= "<input type='checkbox' id='checkCat".$fila->categoryId."' value='".$fila->categoryId."'/>".$fila->categoryName_en."<br/>";
         }       
         // se libera el cursor
         $resultado->free();
     }
-
-
-    //Pinta checkboxes continentes
-    $consulta = "SELECT continentId, name_en FROM continents";
-
-    if ($resultado = $conexion->query($consulta)) {
-        $checkCont = "";
-        while ($fila = $resultado->fetch_object()) {
-                $checkCont .= "<input type='checkbox' id='checkCont".$fila->continentId."' value='".$fila->continentId."'/>".$fila->name_en."<br/>";
-        }       
-        // se libera el cursor
-        $resultado->free();
-    }
-
 
     //Pinta select paises
     $consulta = "SELECT countryId, countryname_en FROM countries ORDER BY countryname_en";
@@ -55,6 +41,18 @@ class places {
         // se libera el cursor
         $resultado->free();
         $select .= "</select>";
+    }
+
+     //Pinta checkboxes continentes
+    $consulta = "SELECT continentId, continentName_en FROM continents";
+
+    if ($resultado = $conexion->query($consulta)) {
+        $checkCont = "";
+        while ($fila = $resultado->fetch_object()) {
+                $checkCont .= "<input type='checkbox' id='checkCont".$fila->continentId."' value='".$fila->continentId."'/>".$fila->continentName_en."<br/>";
+        }       
+        // se libera el cursor
+        $resultado->free();
     }
 
     $body = "
@@ -90,215 +88,9 @@ class places {
                     </div>
                 </div>    
             </div>
-            <div id='results'>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_417.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Ibiza, biodiversidad y cultura</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Mixed</span>
-                        <br/>
-                        <span><b>Country: </b>Spain</span>
-                        <br/>
-                        <span><b>Continent: </b>Europe</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-                <div class='placeresult'>
-                    <img src='http://whc.unesco.org/uploads/sites/site_367.jpg' style='position: relative; float:left;'/>
-                    <h3 class='titleresult'>Tréveris - Monumentos romanos, catedral de San Pedro e iglesia de Nuestra Señora</h3>
-                    <div class='textresult'>
-                        <span><b>Category: </b>Cultural</span>
-                        <br/>
-                        <span><b>Country: </b>Alemania</span>
-                        <br/>
-                        <span><b>Continent: </b>Europa</span>
-                        <br/>
-                        <span><b>Web: </b><a href='http://whc.unesco.org/es/list/367' class='linkResult'>http://whc.unesco.org/es/list/367</a></span>
-                    </div>
-                    <div class='moreresult'>
-                        <a href='#''>Want to visit it!</a>
-                        <a href='#'' style='padding-left: 70px;'>Map</a>
-                    </div>
-                </div>
-            </div>
+            <div id='results'></div>
         </div>
-        <div id='paginacion'></div>
-    ";
+        <div id='paginacion'></div>";
 
     return $body;
   }
