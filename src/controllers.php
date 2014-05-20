@@ -6,12 +6,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+//Require constantes
+require '/whyb/config/constantes.php';
+
 //Requires mios
-require 'controladores/_listaControladores.php';
-require 'vistas/_listaVistas.php';
+require DIR_CONTROLADORES.'_listaControladores.php';
+require DIR_VISTAS.'_listaVistas.php';
 
 //firePHP
-require_once 'FirePHPCore/FirePHP.class.php';
+require_once DIR_LIBS.'FirePHPCore/FirePHP.class.php';
 ob_start();
 //instanciar un objeto de la clase FirePHP
 $firephp = FirePHP::getInstance(true);
@@ -19,6 +22,7 @@ $firephp = FirePHP::getInstance(true);
 //Portada
 $app->get('/', function () use ($app) {
     global $firephp;
+    $firephp->log('lala', 'Mensaje');
     $usuario = "";
     $admin = 0;
     $titulo = "Where have you been";
@@ -27,7 +31,7 @@ $app->get('/', function () use ($app) {
     $footer = footer::construye();
     $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
     $pagina = $paginaDetalle->mostrar();
-    //$firephp->log($paco, 'Mensaje');
+    $firephp->log($paco, 'Mensaje');
     return $pagina;
 })
 ->bind('homepage')
