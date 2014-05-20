@@ -177,7 +177,14 @@
 
 				if ($resultado = $conexion->query($consulta)) {
 					while ($fila = $resultado->fetch_object()) {
-						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'title' => $fila->unesco_en, 'img' => $fila->unescoimage);
+						if ($fila->categoryName_en == 'Natural')
+							$mark = '/whyb/web/img/natural.png';
+						else if ($fila->categoryName_en == 'Cultural')
+							$mark = '/whyb/web/img/cultural.png';
+						else if ($fila->categoryName_en == 'Mixed')
+							$mark = '/whyb/web/img/mixed.png';
+
+						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_en, 'img' => $fila->unescoimage);
 						$list[] = $marca;
 					}
 				}
