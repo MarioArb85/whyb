@@ -127,7 +127,7 @@ a:hover {
 	font-size: 250%;
 }
 
-#required {
+.required {
 	color: red;
 }
 
@@ -348,9 +348,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-
-/* +++++++++++++++++++++++ PAGINATE +++++++++++++++++++++++*/
-
+/* +++++++++++++++++++++++ START PAGINATE +++++++++++++++++++++++*/
 .jPaginate{
     height:34px;
     position:relative;
@@ -457,3 +455,4 @@ span.jPag-sprevious-img{
 span.jPag-snext-img{
     background:transparent url(../images/snext.png) no-repeat center left;
             }
+/* +++++++++++++++++++++++ END PAGINATE +++++++++++++++++++++++*/

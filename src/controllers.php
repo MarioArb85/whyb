@@ -9,6 +9,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //Require configuracion mvc
 require 'controladores/_listaControladores.php';
 require 'vistas/_listaVistas.php';
+require 'funciones/funciones.php';
+require 'modelo/_listaModelos.php';
 
 //firePHP
 require_once '../vendor/FirePHPCore/FirePHP.class.php';
@@ -29,7 +31,6 @@ $app->get('/', function () use ($app) {
     $pagina = $paginaDetalle->mostrar();
     $firephp->log($paco, 'Mensaje');
     return $pagina;
-    //return DIR_PLACES;
 })
 ->bind('homepage')
 ;

@@ -5,6 +5,12 @@
 	$app['twig.path'] = array(__DIR__.'/../templates');
 	$app['twig.options'] = array('cache' => __DIR__.'/../var/cache/twig');
 
+	$aux1 = $_SERVER['DOCUMENT_ROOT'];
+	$aux2 = dirname(__DIR__);
+
+	//carpeta padre
+	//define("DIR_RAIZ_APP", dirname(__DIR__));
+
 	//Variables mias
 	define("DIR_RAIZ_APP", '/whyb/');
 
@@ -14,6 +20,7 @@
 
 	//Ruta controladores
 	define("DIR_CONTROLADORES", DIR_RAIZ_APP."src/controladores/");
+	//define("DIR_CONTROLADORES", "/whyb/src/controladores/");
 
 	//Ruta modelo
 	define("DIR_MODELO", DIR_RAIZ_APP."src/modelo/");
