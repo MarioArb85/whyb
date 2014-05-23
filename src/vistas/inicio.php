@@ -2,7 +2,10 @@
 class inicio {
 
   static function construye() {
+    global $firephp;
+    //$firephp->log($ip, 'ip');
     $rutaImg = DIR_IMG."portada.png";
+
     $cuerpo = "
     <img id='imgPortada' src='".$rutaImg."'>
     <div id='cuerpo'>

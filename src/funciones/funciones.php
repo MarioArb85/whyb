@@ -11,10 +11,7 @@
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
 		        $countries .= "<option value='noCountry' selected>--- No country ---</option>";
 		        while ($fila = $resultado->fetch_object()) {
-		            if($fila->countryId != $country)
-		                $countries .= "<option value='".$fila->countryId."'>".$fila->countryname_en."</option>";
-		            else
-		                $countries .= "<option value='".$fila->countryId."' selected>".$fila->countryname_en."</option>";
+		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_en."</option>";
 		        }       
 		        // se libera el cursor
 		        $resultado->free();
