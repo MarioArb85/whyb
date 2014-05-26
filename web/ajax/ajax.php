@@ -3,15 +3,23 @@
 
 	$func = $_POST['func'];
 
-	//Contadores para paginar
-	$contDivs = 1;
-	$mostrar = 1;
+	//conexion bbdd
+	$conexion = new mysqli('localhost', 'root', '', 'whyb');
+	$conexion->set_charset('utf8');
 
-	//Para pasar parámetros de vuelta
-	$list = array();
+	if ($conexion->connect_error){
+		die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+	}
 
 	switch ($func) {
 		case 'result':
+			//Para pasar parámetros de vuelta
+			$list = array();
+
+			//Contadores para paginar
+			$contDivs = 1;
+			$mostrar = 1;
+
 			if(isset($_POST['categoria']) || isset($_POST['continente']) || isset($_POST['pais'])) {
 				//Recoger datos para filtrar
 				if (isset($_POST['categoria'])){
@@ -26,14 +34,6 @@
 
 				if (isset($_POST['pais']))
 					$country = $_POST['pais'];
-
-				//conexion bbdd
-			    $conexion = new mysqli('localhost', 'root', '', 'whyb');
-			    $conexion->set_charset('utf8');
-
-			    if ($conexion->connect_error){
-			        die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-			    }
 
 			    $consulta = "SELECT	p.unescoimage, p.unesco_en, t.categoryName_en, c.countryName_en, d.continentName_en, p.web_en, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
 
@@ -123,9 +123,14 @@
 				$list[0] = 'Elige algún parámetro melón!';
 			}
 
+			echo json_encode($list);
+
 			break;
 
 		case 'map':
+			//Para pasar parámetros de vuelta
+			$list = array();
+
 			if(isset($_POST['categoria']) || isset($_POST['continente']) || isset($_POST['pais'])) {
 				//Recoger datos para filtrar
 				if (isset($_POST['categoria'])){
@@ -140,14 +145,6 @@
 
 				if (isset($_POST['pais']))
 					$country = $_POST['pais'];
-
-				//conexion bbdd
-			    $conexion = new mysqli('localhost', 'root', '', 'whyb');
-			    $conexion->set_charset('utf8');
-
-			    if ($conexion->connect_error){
-			        die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-			    }
 
 			    $consulta = "SELECT	p.unescoimage, p.unesco_en, t.categoryName_en, c.countryName_en, d.continentName_en, p.web_en, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
 
@@ -189,7 +186,38 @@
 					}
 				}
 			}
+
+			echo json_encode($list);
+			break;
+
+		case 'nick':
+			$nick = $_POST['nick'];
+			$coincide = false;
+
+			$consulta = "SELECT nickname from users";
 			
+			if ($resultado = $conexion->query($consulta)) {
+					while ($fila = $resultado->fetch_object()) {
+						if($fila->nickname == $nick)
+							$coincide = true;
+					}
+			}
+			echo json_encode($coincide);
+			break;
+
+		case 'mail':
+			$mail = $_POST['mail'];
+			$coincide = false;
+
+			$consulta = "SELECT email from users";
+			
+			if ($resultado = $conexion->query($consulta)) {
+					while ($fila = $resultado->fetch_object()) {
+						if($fila->email == $mail)
+							$coincide = true;
+					}
+			}
+			echo json_encode($coincide);
 			break;
 
 		default:
@@ -224,6 +252,4 @@
 	$persona = array('nombre' => $nombreCliente, 'edad' => $edadCliente);
 	$listaPersona[] = $persona;
 	*/
-
-	echo json_encode($list);
 ?>

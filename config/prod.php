@@ -41,6 +41,9 @@
 	//Ruta font
 	define("DIR_FONT", DIR_RAIZ_APP."web/font/");
 
+	//Pagina inicio
+	define("DIR_INICIO", DIR_RAIZ_APP."web/");
+
 	//Pagina form
 	define("DIR_FORM", DIR_RAIZ_APP."web/form/");
 

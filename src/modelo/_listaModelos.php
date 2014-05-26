@@ -1,4 +1,5 @@
 <?php
-	require "accesoBBDD.php";
-	require "formularios.php";
+	require 'accesoBBDD.php';
+	require 'formularios.php';
+	require 'modeloUsuario.php';
 ?>

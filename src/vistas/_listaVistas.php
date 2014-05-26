@@ -2,6 +2,7 @@
 	require "maps/mapa.php";
 	require "places/places.php";
 	require "users/formulario.php";
+	require "users/alta_mod.php";
 	require "footer.php";
 	require "header.php";
 	require "inicio.php";

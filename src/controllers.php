@@ -24,7 +24,7 @@ $app->get('/', function () use ($app) {
     $admin = 0;
     $titulo = "Where have you been";
     $header = header::construye($usuario, $admin);
-    $body=inicio::construye();
+    $body= inicio::construye();
     $footer = footer::construye();
     $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
     $pagina = $paginaDetalle->mostrar();
@@ -42,9 +42,8 @@ $app->get('/form/', function () use ($app) {
 ;
 
 //Resultado formulario
-$app->get('/form/result/', function () use ($app) {
-    //return users_controller::form();
-    return 'pepaaaaaaa';
+$app->post('/form/result/', function (Request $request) {
+    return users_controller::alta_mod($request);
 })
 ->bind('formulario_result')
 ;

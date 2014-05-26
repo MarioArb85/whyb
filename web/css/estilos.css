@@ -195,11 +195,24 @@ a:hover {
 	margin-bottom: 30px;*/
 }
 
-#cuerpoForm{
+#cuerpoForm {
 	position: relative;
 	float: left;
 	height: 600px;
 	margin: 0px 50px;
+}
+
+#resultNewUser{
+	position: relative;
+	float: left;
+	height: 600px;
+	width: 800px;
+	margin: 0px 50px;
+	text-align: center;
+}
+
+#textNewUser {
+	margin: 100px auto 50px auto;
 }
 
 #mapPage {
@@ -348,6 +361,13 @@ a:hover {
 	text-decoration: underline;
 }
 
+.error {
+    border: solid 2px #FF0000;  
+}
+
+.correcto {
+	border: solid 2px #26C35A;	
+}
 /* +++++++++++++++++++++++ START PAGINATE +++++++++++++++++++++++*/
 .jPaginate{
     height:34px;

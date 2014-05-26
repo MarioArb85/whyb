@@ -9,7 +9,6 @@
 
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
-		        $countries .= "<option value='noCountry' selected>--- No country ---</option>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_en."</option>";
 		        }       
@@ -60,7 +59,7 @@
 
 		//Pinta año
 		static function buildYear(){
-			$year = '<select id="selAnio" name="selAnio">';
+			$year = '<select id="selYear" name="selYear">';
 			for ($i = 2010; $i>=1900; $i--){
 				$year .= "<option value='$i'>$i</option>";
 			}

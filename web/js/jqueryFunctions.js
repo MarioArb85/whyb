@@ -1,5 +1,4 @@
   $(document).ready(function(){
-
     //Recoge pais por ip y hace la busqueda al cargar la pagina
     if ($('#selCountries').length){
       $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
@@ -185,6 +184,168 @@
         },
       });
     });
+
+  //Comprobar campos formulario
+  if ($('#formulario').length){
+      $( "#formulario" ).click(function() {
+        var error = false;
+
+        //Comprobar campo usuario
+        if(!$("#txtUserName").val().match(/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]+$/)){
+          $("#userError").html('El nombre tiene que tener al menos 4 carateres entre letras y números');
+          $("#txtUserName").addClass("error");
+          error = true;
+        }
+        else {
+          $("#txtUserName").removeClass("error");
+          $("#txtUserName").addClass("correcto");
+          $("#userError").html('');  
+        }
+
+        //Comprobar campo contaseña
+        if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
+          $("#passError").html('La contraseña debe tener  al menos un número y una letra');
+          $("#txtPass").addClass("error"); 
+          $("#txtPassRep").addClass("error");
+          error = true;  
+        }
+        else {
+          $("#txtPass").removeClass("error");
+          $("#txtPass").addClass("correcto");
+          $("#passError").html('');  
+        }
+
+        //Comprobar campo repetir contaseña
+        if($("#txtPass").val() != $("#txtPassRep").val()){
+          $("#passRepError").html('Las contraseñas no son iguales');
+          $("#txtPassRep").addClass("error");
+          error = true;
+        }
+        else {
+          if($("#txtPassRep").val() != ""){
+            $("#txtPassRep").removeClass("error");
+            $("#txtPassRep").addClass("correcto");
+            $("#passRepError").html(''); 
+          }
+          else
+            $("#passRepError").html('La contraseña tiene que coincidir con la anterior');
+        }
+
+        //Comprobar campo email
+        if(!$("#txtMail").val().match(/^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/)){
+          $("#mailError").html('El campo email no es correcto ejemplo@ejemplo.com');
+          $("#txtMail").addClass("error");
+          error = true;       
+        }
+        else  {
+          $("#txtMail").removeClass("error");
+          $("#txtPassRep").addClass("correcto");
+          $("#mailError").html('');
+        }
+
+        if (error == true){
+          return false;
+        }
+      });
+    }
+
+    //Comprobaciones al perder el foco
+    if($("#txtUserName").length){
+      //Comprobar usuario
+      $("#txtUserName").focusout(function() {
+        if($("#txtUserName").val().length >= 4){
+          var nick = $("#txtUserName").val();
+          //Funcion ajax        
+          $.ajax({
+            url: '/whyb/web/ajax/ajax.php',
+            type: 'POST',
+            data: {
+              func: 'nick',
+              nick: nick
+            },                
+            dataType: 'json',
+            success: function(resultado) {
+              if (resultado == true){
+                $("#txtUserName").removeClass("correcto");
+                $("#txtUserName").addClass("error");
+                $("#userError").html('El nombre de usuario ya esta en uso');
+              }
+              else{
+                $("#txtUserName").removeClass("error");
+                $("#txtUserName").addClass("correcto");
+                $("#userError").html('');
+              }
+            }          
+          });
+        }
+        else{
+          $("#txtUserName").removeClass("correcto");
+          $("#txtUserName").addClass("error");
+          $("#userError").html('El nombre tiene que tener al menos 4 carateres entre letras y números');
+        }
+      });
+    
+      //Comprobar si las contraseñas son correctas
+      $("#txtPass").focusout(function() {
+        if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
+          $("#passError").html('La contraseña debe tener al menos un número y una letra');
+          $("#txtPass").addClass("error");
+        }
+        else{
+          $("#txtPass").removeClass("error");
+          $("#passError").html('');
+          $("#txtPass").addClass("correcto");
+        }
+      });
+
+      $("#txtPassRep").focusout(function() {
+        if($("#txtPass").val() != $("#txtPassRep").val()){
+          $("#passRepError").html('Las contraseñas no son iguales');
+          $("#txtPassRep").addClass("error");
+        }
+        else{
+          if($("#txtPassRep").val() != ""){
+            $("#txtPassRep").removeClass("error");
+            $("#passRepError").html(''); 
+            $("#txtPassRep").addClass("correcto");
+          }
+        }
+      });
+    
+      //Comprobar si ya existe el mail al registrarse
+      $("#txtMail").focusout(function() {
+        if($("#txtMail").val().length >= 1){
+          var mail = $("#txtMail").val();
+          //Funcion ajax        
+          $.ajax({
+            url: '/whyb/web/ajax/ajax.php',
+            type: 'POST',
+            data: {
+              func: 'mail',
+              mail: mail
+            },                
+            dataType: 'json',
+            success: function(resultado) {
+              if (resultado == true){
+                $("#txtMail").removeClass("correcto");
+                $("#txtMail").addClass("error");
+                $("#mailError").html('la dirección de correo electrónico ya esta en uso');
+              }
+              else{
+                $("#txtMail").removeClass("error");
+                $("#txtMail").addClass("correcto");
+                $("#mailError").html('');
+              }
+            }          
+          });
+        }
+        else{
+          $("#txtMail").removeClass("correcto");
+          $("#txtMail").addClass("error");
+          $("#mailError").html('La dirección de correo electrónico es obligatoria');
+        }
+      });
+    }
   });
 
   function getCategory(){
