@@ -86,6 +86,7 @@
         }
       });
     };
+
     //Actualizar por ajax sitios Unesco
     $('#updateListBtn').click(function(){
       //Seleccionar categoria
@@ -188,14 +189,16 @@
 
   function getCategory(){
       var category = [];
-      if ($('#checkCat1').is(":checked")) {
-        category.push($("#checkCat1").val());
-      }
-      if ($('#checkCat2').is(":checked")) {
-        category.push($("#checkCat2").val());
-      }
-      if ($('#checkCat3').is(":checked")) {
-        category.push($("#checkCat3").val());
+      if ($('#placesCategory').css('display') != 'none') {
+        if ($('#checkCat1').is(":checked")) {
+          category.push($("#checkCat1").val());
+        }
+        if ($('#checkCat2').is(":checked")) {
+          category.push($("#checkCat2").val());
+        }
+        if ($('#checkCat3').is(":checked")) {
+          category.push($("#checkCat3").val());
+        }
       }
     return category;
   }
