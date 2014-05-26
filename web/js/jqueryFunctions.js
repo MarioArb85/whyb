@@ -40,7 +40,7 @@
               });
             },
             beforeSend: function() {
-              $('#results').html('Cargando...');
+              $('#results').html('<img src="/whyb/web/img/load.gif" />');
             }
           });
         }
@@ -173,7 +173,7 @@
             infoWindow = new google.maps.InfoWindow();
             //Onclick
             google.maps.event.addListener(marker, 'click', function() {
-              map.setZoom(5);
+              //map.setZoom(5);
               map.setCenter(marker.getPosition());
               infoWindow.open(map, marker);
               openInfoWindow(marker, this.title, img);

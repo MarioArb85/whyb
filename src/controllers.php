@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //Require configuracion mvc
 require 'controladores/_listaControladores.php';
 require 'vistas/_listaVistas.php';
-require 'funciones/funciones.php';
 require 'modelo/_listaModelos.php';
 
 //firePHP
@@ -40,6 +39,14 @@ $app->get('/form/', function () use ($app) {
     return users_controller::form();
 })
 ->bind('formulario')
+;
+
+//Resultado formulario
+$app->get('/form/result/', function () use ($app) {
+    //return users_controller::form();
+    return 'pepaaaaaaa';
+})
+->bind('formulario_result')
 ;
 
 //Map

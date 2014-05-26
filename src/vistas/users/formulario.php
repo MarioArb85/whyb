@@ -2,10 +2,10 @@
 	class formulario{
 
 		static function construye() {
-			$dia = funciones::buildDay();
-			$mes = funciones::buildMonth();
-			$anio = funciones::buildYear();
-			$select = funciones::buildCountries(null);
+			$dia = formularios::buildDay();
+			$mes = formularios::buildMonth();
+			$anio = formularios::buildYear();
+			$select = formularios::buildCountries(null);
 
 		    $cuerpo = "
 		      <div id='divForm'>

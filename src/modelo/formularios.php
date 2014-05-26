@@ -1,5 +1,5 @@
 <?php
-	class funciones {
+	class formularios {
 
 		//Pinta select
 		static function buildCountries($country){

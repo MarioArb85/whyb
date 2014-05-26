@@ -6,13 +6,13 @@ class mapa {
   	global $firephp;
 
   	//pinta categorias
-    $checkCat = funciones::buildCategories();
+    $checkCat = formularios::buildCategories();
 
     //pinta select
-    $select = funciones::buildCountries('ES');
+    $select = formularios::buildCountries('ES');
 
     //Pinta continentes
-    $checkCont = funciones::buildContinents();
+    $checkCont = formularios::buildContinents();
 
   	$body = "
 		<div id='mapPage'>
