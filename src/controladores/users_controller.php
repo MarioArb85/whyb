@@ -49,18 +49,24 @@
     //Registro de usuario - resultado
     static function logResultado($request) {
       global $firephp;
-      $resultado = modeloUsuario::logUser($request);
-      if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
-        $dire = '/whyb/web/menu/unesco/';
-        header('Location: '.$dire);
-        die();
+      try{
+        $resultado = modeloUsuario::logUser($request);
+        if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
+          $dire = '/whyb/web/menu/unesco/';
+          header('Location: '.$dire);
+          die();
+        }
+        else{
+          $dire = '/whyb/web/log/';
+          header('Location: '.$dire);
+          die();
+        }
+        return 'Redirigiendo...';
       }
-      else{
-        $dire = '/whyb/web/log/';
-        header('Location: '.$dire);
-        die();
+      catch(Exception $e){
+        return $e->getMessage();
+
       }
-      return 'Redirigiendo...';
     }
   }
 ?>
