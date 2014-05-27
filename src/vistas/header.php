@@ -15,7 +15,7 @@ class header {
     else{
     	if($usuario=="")
       		$cabecera .= "<a href='/whyb/web/form/'>Registrarse</a>
-                        <a href='/whyb/web/registro/' style='margin-left: 50px;'>Iniciar sesion</a><br/>";
+                        <a href='/whyb/web/log/' style='margin-left: 50px;'>Iniciar sesion</a><br/>";
     	else
     		$cabecera .= "Conectado como: <a href='#'><b>$usuario</b></a>";
     }

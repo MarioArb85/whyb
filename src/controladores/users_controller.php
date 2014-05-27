@@ -45,5 +45,31 @@
       //$firephp->log($paco, 'Mensaje');
       return $pagina;
     }
+
+    //Registro de usuario - resultado
+    static function logResultado($request) {
+      global $firephp;
+      $resultado = modeloUsuario::logUser($request);
+      if ($resultado == md5($request->get('txtPassReg')){
+
+
+      }
+      else{
+        $dire = '/whyb/web/log/';
+        header('Location: '.$dire);
+      }
+
+      $usuario = "";
+      $admin = 0;
+      $titulo = "Iniciar sesión";
+      $header = header::construye($usuario, $admin);
+      $body = registro::construye();
+      $footer = footer::construye();
+      $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+      $pagina = $paginaDetalle->mostrar();
+      //$firephp->log($paco, 'Mensaje');
+      //return $pagina;
+      return 'Redirigiendo...';
+    }
   }
 ?>

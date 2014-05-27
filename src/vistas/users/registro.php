@@ -10,7 +10,7 @@
 					<br/><br/>
 					<span id='iniSesionError' class='required' hidden='true'>Nombre de usuario o contraseña incorrectos.</span>
 					<br/><br/>
-					<form id='iniSesionForm' action='/whyb/web/form/result/' method='post'>
+					<form id='iniSesionForm' action='/whyb/web/log/result/' method='post'>
 					<table>
 			            <tr>
 			              	<th>Usuario:</th>

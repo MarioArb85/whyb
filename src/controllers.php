@@ -49,10 +49,17 @@ $app->post('/form/result/', function (Request $request) {
 ;
 
 //Registrarse
-$app->get('/registro/', function () use ($app) {
+$app->get('/log/', function () use ($app) {
     return users_controller::iniciaSesion();
 })
-->bind('registro')
+->bind('log')
+;
+
+//Registrarse - resultado
+$app->post('/log/result/', function (Request $request){
+    return users_controller::logResultado($request);
+})
+->bind('log_result')
 ;
 
 //Map
@@ -67,6 +74,13 @@ $app->get('/places/', function () use ($app) {
     return places_controller::draw();
 })
 ->bind('places')
+;
+
+//Menu usuario - mis sitios unesco
+$app->get('/menu/unesco/', function () use ($app) {
+    return 'ee';
+})
+->bind('unesco')
 ;
 
 $app->get('/hello/{name}', function ($name) use ($app) {

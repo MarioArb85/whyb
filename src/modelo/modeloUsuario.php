@@ -34,6 +34,26 @@
       		}
 		}
 
+
+		//Comprueba usuario
+		static function logUser($request){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+      		$consulta = "SELECT password FROM users WHERE nickname = '".$request->get('txtUserNameReg')."'";
+				
+			$resultado = $conexion->query($consulta);
+			$firephp->log($resultado, 'nuevo usuario');
+
+			if ($resultado)
+	    		AccesoBBDD::cierraConexionBD($conexion);
+	   		else
+	   			
+
+	   			
+		    return $resultado;
+      		}
+		}
+
 		//Comprueba los campos introducidos en el formulario
 		static function verificacion($request){
 			$avisos = "";
