@@ -38,7 +38,7 @@
       $admin = 0;
       $titulo = "Registro";
       $header = header::construye($usuario, $admin);
-      $body = "";
+      $body = registro::construye();
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
