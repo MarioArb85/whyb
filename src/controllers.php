@@ -50,7 +50,7 @@ $app->post('/form/result/', function (Request $request) {
 
 //Registrarse
 $app->get('/registro/', function () use ($app) {
-    return users_controller::registro();
+    return users_controller::iniciaSesion();
 })
 ->bind('registro')
 ;

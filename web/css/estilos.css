@@ -129,6 +129,7 @@ a:hover {
 
 .required {
 	color: red;
+	font-weight: bold;
 }
 
 #cabecera {
@@ -163,10 +164,10 @@ a:hover {
 	width: 1200px;
 }
 
-#divForm{
+.divRegForm{
 	position: relative;
 	margin: 50px auto;
-	height: 600px;
+	height: 550px;
 	width: 1200px;
 }
 
@@ -175,7 +176,7 @@ a:hover {
 	width: 100%;
 }
 
-#imgForm{
+.imgFormReg{
 	position: relative;
 	float: left;
 	height: 525px;
@@ -183,6 +184,13 @@ a:hover {
 	/*padding: 0px 25px;*/
 	margin: 0px 25px;
 	/*border: 1px solid black;*/
+}
+
+#divIniSesion{
+	position: relative;
+	float: left;
+	height: 550px;
+	margin: 0px 50px;
 }
 
 #textInicio {
@@ -198,7 +206,7 @@ a:hover {
 #cuerpoForm {
 	position: relative;
 	float: left;
-	height: 600px;
+	height: 550px;
 	margin: 0px 50px;
 }
 
@@ -349,7 +357,7 @@ a:hover {
 	color: #919aa3;
 }
 
-#formularioBtn {
+.formularioBtn {
 	background-image: none;
 	background-color: white;
 	border:0px;
@@ -357,7 +365,7 @@ a:hover {
 	font-size: 170%;
 }
 
-#formularioBtn:hover {
+.formularioBtn:hover {
 	text-decoration: underline;
 }
 

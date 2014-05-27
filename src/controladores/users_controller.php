@@ -32,11 +32,11 @@
     }
 
     //Registro de usuario
-    static function registro() {
+    static function iniciaSesion() {
       global $firephp;
       $usuario = "";
       $admin = 0;
-      $titulo = "Registro";
+      $titulo = "Iniciar sesión";
       $header = header::construye($usuario, $admin);
       $body = registro::construye();
       $footer = footer::construye();

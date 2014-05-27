@@ -8,14 +8,14 @@
 			$select = formularios::buildCountries(null);
 
 		    $cuerpo = "
-		    <div id='divForm'>
-		        <img src='/whyb/web/img/imgForm.png' id='imgForm'/>
+		    <div id='divForm' class='divRegForm'>
+		        <img src='/whyb/web/img/imgForm.png' id='imgForm' class='imgFormReg'/>
 		        <div id='cuerpoForm'>
 		        	<h1>Formulario de registro</h1>
-		          	<br/>
-		          	<span id='required' hidden='true'>Los campos marcados con * son obligatorios</span>
 		          	<br/><br/>
-		          	<form action='/whyb/web/form/result/' method='post'>
+		          	<span class='required' hidden='true'>Los campos marcados con * son obligatorios</span>
+		          	<br/><br/>
+		          	<form id='formulario' action='/whyb/web/form/result/' method='post'>
 		          	<table>
 			            <tr>
 			              	<th><span class='required'>*</span> Usuario:</th>
@@ -59,8 +59,8 @@
 			           	</tr>
 		        	</table>
 		        	<br/><br/><br/><br/>
-		          		<input type='submit' id='formulario' value='Aceptar' id='formularioBtn'/></td>
-		          		<a href='/whyb/web' style='margin-left: 100px;'>Volver al inicio</a></td>
+		          	<input type='submit'  value='Aceptar' id='formularioBtn' class='formularioBtn'/></td>
+		          	<a href='/whyb/web' style='margin-left: 100px;'>Volver al inicio</a></td>
 		        	</form>
 		    	</div>  
 			</div>";
