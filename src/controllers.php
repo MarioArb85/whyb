@@ -50,13 +50,13 @@ $app->post('/form/result/', function (Request $request) {
 
 //Registrarse
 $app->get('/log/', function () use ($app) {
-    return users_controller::iniciaSesion();
+    return users_controller::iniciaSesion($problem);
 })
 ->bind('log')
 ;
 
 //Registrarse - resultado
-$app->post('/log/result/', function (Request $request){
+$app->post('/log/result/', function (Request $request) {
     return users_controller::logResultado($request);
 })
 ->bind('log_result')

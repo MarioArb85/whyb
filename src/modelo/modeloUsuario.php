@@ -11,6 +11,10 @@
     		else {
     			$dob = $request->get('selYear')."-".$request->get('selMonth')."-".$request->get('selDay');
       			$conexion = accesoBBDD::abreConexionBD();
+
+      			if (!$conexion)
+      				die('Error de conexión (' . $conexion->connect_errno . ') ' . $conexion->connect_error);
+
       			$consulta = "INSERT INTO users (rolId, countryId, nickname, password, email, name, birthdate, sex)
 	                 		VALUES (3, '".$request->get('selCountries')."', '".$request->get('txtUserName')."', '".md5($request->get('txtPass'))."',
                      '".$request->get('txtMail')."', '".$request->get('txtName')."', '$dob', '".$sex = $request->get('sex')."')";
@@ -39,20 +43,21 @@
 		static function logUser($request){
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
-      		$consulta = "SELECT password FROM users WHERE nickname = '".$request->get('txtUserNameReg')."'";
-				
-			$resultado = $conexion->query($consulta);
-			$firephp->log($resultado, 'nuevo usuario');
 
-			if ($resultado)
-	    		AccesoBBDD::cierraConexionBD($conexion);
-	   		else
-	   			
-
-	   			
-		    return $resultado;
-      		}
-		}
+      		if (!$conexion)
+      			die('Error de conexión (' . $conexion->connect_errno . ') ' . $conexion->connect_error);
+      		else{
+	      		$consulta = "SELECT userId, password FROM users WHERE nickname = '".$request->get('txtUserNameReg')."'";
+	      		if ($resultado = $conexion->query($consulta)) {
+	        		while($fila = $resultado->fetch_object()) { 
+	          			$user = new Usuario($fila->userId, null, null, null, $fila->password, null, null, null, null, null);
+	        		}	
+	        		$resultado->free();
+	      		}
+	      		AccesoBBDD::cierraConexionBD($conexion);
+		 		return $user;
+	    	}
+	  	}
 
 		//Comprueba los campos introducidos en el formulario
 		static function verificacion($request){

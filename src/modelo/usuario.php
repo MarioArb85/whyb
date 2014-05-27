@@ -1,7 +1,5 @@
 <?php
-  // Clase Usuario
   class Usuario {
-
     private $userId;
     private $rolId;
     private $countryId;

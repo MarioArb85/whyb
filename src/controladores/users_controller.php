@@ -50,25 +50,16 @@
     static function logResultado($request) {
       global $firephp;
       $resultado = modeloUsuario::logUser($request);
-      if ($resultado == md5($request->get('txtPassReg')){
-
-
+      if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
+        $dire = '/whyb/web/menu/unesco/';
+        header('Location: '.$dire);
+        die();
       }
       else{
         $dire = '/whyb/web/log/';
         header('Location: '.$dire);
+        die();
       }
-
-      $usuario = "";
-      $admin = 0;
-      $titulo = "Iniciar sesión";
-      $header = header::construye($usuario, $admin);
-      $body = registro::construye();
-      $footer = footer::construye();
-      $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
-      $pagina = $paginaDetalle->mostrar();
-      //$firephp->log($paco, 'Mensaje');
-      //return $pagina;
       return 'Redirigiendo...';
     }
   }
