@@ -191,20 +191,29 @@
         var error = false;
 
         //Comprobar campo usuario
-        if(!$("#txtUserName").val().match(/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]+$/)){
-          $("#userError").html('El nombre tiene que tener al menos 4 carateres entre letras y números');
+        if(!$("#txtUserName").val().match(/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]{4,}$/)){
+          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre tiene que tener al menos 4 carateres entre letras y números');
+          $("#txtUserName").removeClass("correcto");
           $("#txtUserName").addClass("error");
           error = true;
         }
         else {
-          $("#txtUserName").removeClass("error");
-          $("#txtUserName").addClass("correcto");
-          $("#userError").html('');  
+          if($('#txtUserName').attr('class') == 'error'){
+            $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre de usuario ya esta en uso');
+            $("#txtUserName").removeClass("correcto");
+            $("#txtUserName").addClass("error");
+            error = true;
+          }
+          else{
+            $("#txtUserName").removeClass("error");
+            $("#txtUserName").addClass("correcto");
+            $("#userError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');  
+          }
         }
 
         //Comprobar campo contaseña
         if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
-          $("#passError").html('La contraseña debe tener  al menos un número y una letra');
+          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La contraseña debe tener  al menos un número y una letra');
           $("#txtPass").addClass("error"); 
           $("#txtPassRep").addClass("error");
           error = true;  
@@ -212,12 +221,12 @@
         else {
           $("#txtPass").removeClass("error");
           $("#txtPass").addClass("correcto");
-          $("#passError").html('');  
+          $("#passError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');  
         }
 
         //Comprobar campo repetir contaseña
         if($("#txtPass").val() != $("#txtPassRep").val()){
-          $("#passRepError").html('Las contraseñas no son iguales');
+          $("#passRepError").html('<img src="/whyb/web/img/error.png" class="imgForm" />&nbsp;&nbsp;Las contraseñas no son iguales');
           $("#txtPassRep").addClass("error");
           error = true;
         }
@@ -225,22 +234,31 @@
           if($("#txtPassRep").val() != ""){
             $("#txtPassRep").removeClass("error");
             $("#txtPassRep").addClass("correcto");
-            $("#passRepError").html(''); 
+            $("#passRepError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>'); 
           }
           else
-            $("#passRepError").html('La contraseña tiene que coincidir con la anterior');
+            $("#passRepError").html('<img src="/whyb/web/img/error.png" class="imgForm" />&nbsp;&nbsp;La contraseña tiene que coincidir con la anterior');
         }
 
         //Comprobar campo email
         if(!$("#txtMail").val().match(/^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/)){
-          $("#mailError").html('El campo email no es correcto ejemplo@ejemplo.com');
+          $("#mailError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La dirección de correo electrónico no es correcta: ejemplo@ejemplo.com');
+          $("#txtMail").removeClass("correcto");
           $("#txtMail").addClass("error");
           error = true;       
         }
-        else  {
-          $("#txtMail").removeClass("error");
-          $("#txtPassRep").addClass("correcto");
-          $("#mailError").html('');
+        else {
+          if($('#txtMail').attr('class') == 'error'){
+            $("#mailError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La dirección de correo electrónico ya esta en uso');
+            $("#txtMail").removeClass("correcto");
+            $("#txtMail").addClass("error");
+            error = true;
+          }
+          else{
+            $("#txtMail").removeClass("error");
+            $("#txtPassRep").addClass("correcto");
+            $("#mailError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');
+          }
         }
 
         if (error == true){
@@ -252,7 +270,7 @@
     //Comprobaciones al perder el foco
     if($("#txtUserName").length){
       //Comprobar usuario
-      $("#txtUserName").focusout(function() {
+      $("#txtUserName").keyup(function() {
         if($("#txtUserName").val().length >= 4){
           var nick = $("#txtUserName").val();
           //Funcion ajax        
@@ -268,12 +286,12 @@
               if (resultado == true){
                 $("#txtUserName").removeClass("correcto");
                 $("#txtUserName").addClass("error");
-                $("#userError").html('El nombre de usuario ya esta en uso');
+                $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre de usuario ya esta en uso');
               }
               else{
                 $("#txtUserName").removeClass("error");
                 $("#txtUserName").addClass("correcto");
-                $("#userError").html('');
+                $("#userError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');
               }
             }          
           });
@@ -281,40 +299,42 @@
         else{
           $("#txtUserName").removeClass("correcto");
           $("#txtUserName").addClass("error");
-          $("#userError").html('El nombre tiene que tener al menos 4 carateres entre letras y números');
+          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre tiene que tener al menos 4 carateres entre letras y números');
         }
       });
     
       //Comprobar si las contraseñas son correctas
-      $("#txtPass").focusout(function() {
+      $("#txtPass").keyup(function() {
         if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
-          $("#passError").html('La contraseña debe tener al menos un número y una letra');
+          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La contraseña debe tener al menos un número y una letra');
+          $("#txtPass").removeClass("correcto");
           $("#txtPass").addClass("error");
         }
         else{
           $("#txtPass").removeClass("error");
-          $("#passError").html('');
+          $("#passError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');
           $("#txtPass").addClass("correcto");
         }
       });
 
-      $("#txtPassRep").focusout(function() {
+      $("#txtPassRep").keyup(function() {
         if($("#txtPass").val() != $("#txtPassRep").val()){
-          $("#passRepError").html('Las contraseñas no son iguales');
+          $("#passRepError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;Las contraseñas no son iguales');
+          $("#txtPassRep").removeClass("correcto");
           $("#txtPassRep").addClass("error");
         }
         else{
-          if($("#txtPassRep").val() != ""){
+          if($("#txtPassRep").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
             $("#txtPassRep").removeClass("error");
-            $("#passRepError").html(''); 
+            $("#passRepError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>'); 
             $("#txtPassRep").addClass("correcto");
           }
         }
       });
     
       //Comprobar si ya existe el mail al registrarse
-      $("#txtMail").focusout(function() {
-        if($("#txtMail").val().length >= 1){
+      $("#txtMail").keyup(function() {
+        if($("#txtMail").val().match(/^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/)){  
           var mail = $("#txtMail").val();
           //Funcion ajax        
           $.ajax({
@@ -329,12 +349,12 @@
               if (resultado == true){
                 $("#txtMail").removeClass("correcto");
                 $("#txtMail").addClass("error");
-                $("#mailError").html('la dirección de correo electrónico ya esta en uso');
+                $("#mailError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La dirección de correo electrónico ya esta en uso');
               }
               else{
                 $("#txtMail").removeClass("error");
                 $("#txtMail").addClass("correcto");
-                $("#mailError").html('');
+                $("#mailError").html('<img src="/whyb/web/img/correcto.png" class="imgForm"/>');
               }
             }          
           });
@@ -342,7 +362,7 @@
         else{
           $("#txtMail").removeClass("correcto");
           $("#txtMail").addClass("error");
-          $("#mailError").html('La dirección de correo electrónico es obligatoria');
+          $("#mailError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El email no es correcto: ejemplo@ejemplo.com');
         }
       });
     }
