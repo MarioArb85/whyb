@@ -48,6 +48,13 @@ $app->post('/form/result/', function (Request $request) {
 ->bind('formulario_result')
 ;
 
+//Registrarse
+$app->get('/registro/', function () use ($app) {
+    return users_controller::registro();
+})
+->bind('registro')
+;
+
 //Map
 $app->get('/map/', function () use ($app) {
     return maps_controller::draw();
