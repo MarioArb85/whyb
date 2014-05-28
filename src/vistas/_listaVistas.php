@@ -1,5 +1,7 @@
 <?php
 	require 'maps/mapa.php';
+	require 'menu/userMenu.php';
+	require 'menu/cabecera.php';
 	require 'places/places.php';
 	require 'users/formulario.php';
 	require 'users/alta_mod.php';

@@ -71,15 +71,15 @@ $app->get('/map/', function () use ($app) {
 ;
 
 //Places
-$app->get('/places/', function () use ($app) {
-    return places_controller::draw();
+$app->get('/unesco/', function () use ($app) {
+    return unesco_controller::draw();
 })
 ->bind('places')
 ;
 
 //Menu usuario - mis sitios unesco
-$app->get('/menu/unesco/', function () use ($app) {
-    return menu_controller::unescoPlaces();
+$app->get('/menu/', function () use ($app) {
+    return menu_controller::menu();
 })
 ->bind('unesco')
 ;

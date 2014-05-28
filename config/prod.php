@@ -47,8 +47,11 @@
 	//Pagina form
 	define("DIR_FORM", DIR_RAIZ_APP."web/form/");
 
-	//Pagina places
-	define("DIR_PLACES", DIR_RAIZ_APP."web/places/");
+	//Pagina unesco
+	define("DIR_UNESCO", DIR_RAIZ_APP."web/unesco/");
 
 	//Pagina maps
 	define("DIR_MAP", DIR_RAIZ_APP."web/map/");
+
+	//Pagina places
+	define("DIR_PLACES", DIR_RAIZ_APP."web/places/");

@@ -52,7 +52,7 @@
           //Usuario y contraseña correctos
           $_SESSION['user'] = $request->get('txtUserNameReg');
           $_SESSION['userId'] = $resultado->getUserId();
-          header('Location: /whyb/web/menu/unesco/');
+          header('Location: /whyb/web/menu/');
           die();
         }
         else{

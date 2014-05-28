@@ -1,14 +1,13 @@
 <?php 
   class menu_controller {
 
-    static function unescoPlaces() {
+    static function menu() {
       global $firephp;
 
       $titulo = "Sitios Unesco";
       $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
-      $menu = '';
-      //$body = mapa::construye();
-      $body = '';
+      $menu = cabecera::construye();
+      $body = userMenu::construye();
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header,$menu, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
@@ -16,6 +15,5 @@
 
       return $pagina;
     }
-
   }
 ?>
