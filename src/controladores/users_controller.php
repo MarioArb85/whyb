@@ -71,6 +71,7 @@
     static function disconnect() {
       session_destroy();
       header('Location: /whyb/web/');
+      die();
       return 'Redirigiendo...';
     }
 
