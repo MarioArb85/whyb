@@ -16,9 +16,6 @@ class places {
 
     $body = "
         <div id='placesPage'>
-            <div id='menu'>
-                menu
-            </div>
             <div id='filters'>
                 <div id='placesFilters'/>
                     Filter by:<br/><br/>
@@ -43,7 +40,7 @@ class places {
                     <hr style='color: #919aa3;' width='80%'/>
                     <br/>
                     <div id='updateList'>          
-                        <input type='button' id='updateListBtn' name='updateListBtn' value='Update list'/>
+                        <input type='button' id='updateListBtn' name='updateListBtn' value='Update list' class='formularioBtn'/>
                     </div>
                 </div>    
             </div>

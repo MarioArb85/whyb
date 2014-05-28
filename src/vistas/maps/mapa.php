@@ -16,9 +16,6 @@ class mapa {
 
   	$body = "
 		<div id='mapPage'>
-			<div id='menu'>
-				menu
-			</div>
 			<div id='filters'>
 				 Filter by:<br/><br/>
                     <a href='#' onclick='ocultar(\"placesCategory\",\"imgCategory\")'><img id='imgCategory' src='/whyb/web/img/flecha_abajo.png'/></a>&nbsp;Category:<br/>
@@ -42,13 +39,10 @@ class mapa {
                     <hr style='color: #919aa3;' width='80%'/>
                     <br/>
                     <div id='updateList'>          
-                        <input type='button' id='updateListBtnMap' name='updateListBtnMap' value='Update list'/>
+                        <input type='button' id='updateListBtnMap' name='updateListBtnMap' value='Update list' class='formularioBtn'/>
                     </div>
 			</div>
 			<div id='map'></div>
-			<div id='markers'>
-				nuevos marcadores
-			</div>
 		</div>
   	";
 	

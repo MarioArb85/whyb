@@ -8,9 +8,10 @@
       $admin = 0;
       $titulo = "Alta usuario";
       $header = header::construye($usuario, $admin);
+      $menu='';
       $body = formulario::construye();
       $footer = footer::construye();
-      $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+      $paginaDetalle = new plantillaPagina($titulo, $header, $menu, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
       return $pagina;
     }
@@ -23,9 +24,10 @@
       $admin = 0;
       $titulo = "Resultado registro";
       $header = header::construye($usuario, $admin);
+      $menu='';
       $body = alta_mod::construye($resultado);
       $footer = footer::construye();
-      $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+      $paginaDetalle = new plantillaPagina($titulo, $header, $menu, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
       //$firephp->log($paco, 'Mensaje');
       return $pagina;
@@ -38,9 +40,10 @@
       $admin = 0;
       $titulo = "Iniciar sesión";
       $header = header::construye($usuario, $admin);
+      $menu='';
       $body = registro::construye();
       $footer = footer::construye();
-      $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
+      $paginaDetalle = new plantillaPagina($titulo, $header, $menu, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
       //$firephp->log($paco, 'Mensaje');
       return $pagina;

@@ -88,8 +88,8 @@
 			                $body .= "<span><b>Web: </b><a href='".$fila->web_en."' class='linkResult' target='_blank'>".$fila->web_en."</a></span>";
 			                $body .= "</div>";
 			                $body .= "<div class='moreresult'>";
-			                $body .= "<a href='#''>Want to visit it!</a>";
-			                $body .= "<a href='#'' style='padding-left: 70px;'>Map</a>";
+			                $body .= "<a href='#'' style='text-align: none;'>Want to visit it!</a>";
+			                $body .= "<a href='#'' style='padding-left: 50px;'>Already visited</a>";
 			                $body .= "</div>";
 			                $body .= "</div>";
 

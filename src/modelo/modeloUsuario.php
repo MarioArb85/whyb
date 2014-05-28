@@ -54,6 +54,9 @@
 	        		}	
 	        		$resultado->free();
 	      		}
+	      		else
+	      			$user = '';
+	      		
 	      		AccesoBBDD::cierraConexionBD($conexion);
 		 		return $user;
 	    	}
