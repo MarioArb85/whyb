@@ -70,9 +70,16 @@ $app->get('/map/', function () use ($app) {
 ->bind('map')
 ;
 
-//Places
+//Unesco
 $app->get('/unesco/', function () use ($app) {
     return unesco_controller::draw();
+})
+->bind('unesco')
+;
+
+//Places
+$app->get('/places/', function () use ($app) {
+    return places_controller::draw();
 })
 ->bind('places')
 ;

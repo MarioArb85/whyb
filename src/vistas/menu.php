@@ -14,7 +14,7 @@ class menu {
           <a href='".DIR_MAP."' class='link $map'>Unesco Map</a>
         </div>
         <div id='linkPlaces'>
-          <a href='#' class='link $places'>My places</a>
+          <a href='".DIR_PLACES."' class='link $places'>My places</a>
         </div>
         <div id='linkRoutes'>
           <a href='#' class='link'  id='linkRoutesa $route'>My routes</a>
