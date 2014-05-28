@@ -4,10 +4,8 @@
     //Pinta formulario
     static function form() {
       global $firephp;
-      $usuario = "";
-      $admin = 0;
       $titulo = "Alta usuario";
-      $header = header::construye($usuario, $admin);
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu='';
       $body = formulario::construye();
       $footer = footer::construye();
@@ -20,10 +18,8 @@
     static function alta_mod($request) {
       global $firephp;
       $resultado = modeloUsuario::alta($request);
-      $usuario = "";
-      $admin = 0;
       $titulo = "Resultado registro";
-      $header = header::construye($usuario, $admin);
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu='';
       $body = alta_mod::construye($resultado);
       $footer = footer::construye();
@@ -36,10 +32,8 @@
     //Registro de usuario
     static function iniciaSesion() {
       global $firephp;
-      $usuario = "";
-      $admin = 0;
       $titulo = "Iniciar sesión";
-      $header = header::construye($usuario, $admin);
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu='';
       $body = registro::construye();
       $footer = footer::construye();
@@ -73,5 +67,12 @@
 
       }
     }
+
+    static function disconnect() {
+      session_destroy();
+      header('Location: /whyb/web/');
+      return 'Redirigiendo...';
+    }
+
   }
 ?>

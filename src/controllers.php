@@ -23,10 +23,8 @@ $firephp = FirePHP::getInstance(true);
 //Portada
 $app->get('/', function () use ($app) {
     global $firephp;
-    $usuario = "";
-    $admin = 0;
     $titulo = "Where have you been";
-    $header = header::construye($usuario, $admin);
+    $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
     $body= inicio::construye();
     $footer = footer::construye();
     $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
@@ -81,10 +79,16 @@ $app->get('/places/', function () use ($app) {
 
 //Menu usuario - mis sitios unesco
 $app->get('/menu/unesco/', function () use ($app) {
-    
     return menu_controller::unescoPlaces();
 })
 ->bind('unesco')
+;
+
+//disconnect
+$app->get('/disconnect/', function () use ($app) {
+    return users_controller::disconnect();
+})
+->bind('disconnect')
 ;
 
 $app->get('/hello/{name}', function ($name) use ($app) {

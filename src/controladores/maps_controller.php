@@ -3,10 +3,8 @@
 
     static function draw() {
       global $firephp;
-      $usuario = "";
-      $admin = 0;
       $titulo = "WHYB map";
-      $header = header::construye($usuario, $admin);
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu = menu::construye($usuario);
       $body = mapa::construye();
       $footer = footer::construye();
@@ -14,7 +12,6 @@
       $pagina = $paginaDetalle->mostrar();
       //$firephp->log($paco, 'Mensaje');
       return $pagina;
-
     }
 
   }
