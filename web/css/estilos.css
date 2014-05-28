@@ -253,6 +253,8 @@ a:hover {
 	height: 30px;
 	width: 1148px;
 	border: 1px solid black;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 .link {
@@ -272,6 +274,8 @@ a:hover {
 	width: 150px;
 	height: 500px;
 	border: 1px solid black;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 #map {
@@ -314,9 +318,10 @@ a:hover {
 	width: 300px;
 	height: 200px;
 	border: 1px solid black;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	/*-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;*/
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 .titleresult {

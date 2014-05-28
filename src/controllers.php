@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+//Arracamos sesion
+session_start();
+
 //Require configuracion mvc
 require 'controladores/_listaControladores.php';
 require 'vistas/_listaVistas.php';
@@ -78,7 +81,8 @@ $app->get('/places/', function () use ($app) {
 
 //Menu usuario - mis sitios unesco
 $app->get('/menu/unesco/', function () use ($app) {
-    return 'ee';
+    
+    return menu_controller::unescoPlaces();
 })
 ->bind('unesco')
 ;

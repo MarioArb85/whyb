@@ -55,8 +55,10 @@
       try{
         $resultado = modeloUsuario::logUser($request);
         if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
-          $dire = '/whyb/web/menu/unesco/';
-          header('Location: '.$dire);
+          //Usuario y contraseña correctos
+          $_SESSION['user'] = $request->get('txtUserNameReg');
+          $_SESSION['userId'] = $resultado->getUserId();
+          header('Location: /whyb/web/menu/unesco/');
           die();
         }
         else{
