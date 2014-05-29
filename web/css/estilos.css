@@ -132,6 +132,16 @@ a:hover {
 	font-weight: bold;
 }
 
+.enlace {
+	font-family: radiohead;
+	color: #34629b;
+	text-decoration: none;
+}
+
+.enlace:hover {
+	text-decoration: underline;
+}
+
 #cabecera {
 	position: relative;
 	margin-left: auto;
@@ -239,6 +249,14 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+#placesPage {
+	position: relative;
+	height: 1000px;
+	width: 1200px;
+	margin: 0px auto;
+	/*border: 1px solid black;*/
+}
+
 #menu {
 	position: relative;
 	margin: 20px auto;
@@ -294,10 +312,25 @@ a:hover {
 	float: left;
 	margin: 25px;
 	width: 150px;
-	height: 450px;
-	border: 1px solid black;
+	height: 440px;
+	/*border: 1px solid black;*/
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+}
+
+.linkFilter {
+	position: relative;
+	float: left;
+	height: 25px;
+	width: 140px;
+	/*border: 1px solid black;*/
+	/*font-weight: bold;*/
+	color: white;
+	background-color: #34629b;
+}
+
+.linkFilter:hover {
+	text-decoration: none;
 }
 
 #map {
@@ -440,12 +473,11 @@ a:hover {
 .linkMenu{
 	position: relative;
 	float: left;
-	height:30px;
+	height:25px;
 	width: 170px;
 	padding-left: 10px;
-	padding-top: 5px;
 	margin-top: 10px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	/*font-size: 100%;*/
 	color: #34629b;
 }
@@ -465,8 +497,7 @@ a:hover {
 	background-image: none;
 	background-color: white;
 	border:0px;
-	font-family: radiohead;
-	font-size: 170%;
+	padding-left: 20px;
 }
 
 .formularioBtn:hover {

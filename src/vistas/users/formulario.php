@@ -59,8 +59,8 @@
 			           	</tr>
 		        	</table>
 		        	<br/><br/><br/><br/>
-		          	<input type='submit'  value='Aceptar' id='formularioBtn' class='formularioBtn'/></td>
-		          	<a href='/whyb/web' style='margin-left: 100px;'>Volver al inicio</a></td>
+		          	<input type='submit'  value='Aceptar' id='formularioBtn' class='formularioBtn enlace' style='font-size:150%;'/></td>
+		          	<a href='/whyb/web' style='margin-left: 100px;' class='enlace'>Volver al inicio</a></td>
 		        	</form>
 		    	</div>  
 			</div>";

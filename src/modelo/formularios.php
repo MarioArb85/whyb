@@ -5,12 +5,12 @@
 		static function buildCountries($country){
 			$conexion = AccesoBBDD::abreConexionBD();
 
-			$consulta = "SELECT countryId, countryname_en FROM countries ORDER BY countryname_en";
+			$consulta = "SELECT countryId, countryname_es FROM countries ORDER BY countryname_en";
 
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
 		        while ($fila = $resultado->fetch_object()) {
-		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_en."</option>";
+		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_es."</option>";
 		        }       
 		        // se libera el cursor
 		        $resultado->free();
@@ -24,13 +24,13 @@
 		static function buildCategories(){
 			$conexion = AccesoBBDD::abreConexionBD();
 
-		    $consulta = "SELECT categoryId, categoryName_en FROM category";
+		    $consulta = "SELECT categoryId, categoryName_es FROM category";
 
 		    if ($resultado = $conexion->query($consulta)) {
 		        $checkCat = "";
 		        while ($fila = $resultado->fetch_object()) {
 		            if($fila->categoryId != 0)
-		                $checkCat .= "<input type='checkbox' id='checkCat".$fila->categoryId."' value='".$fila->categoryId."'/>".$fila->categoryName_en."<br/>";
+		                $checkCat .= "<input type='checkbox' id='checkCat".$fila->categoryId."' value='".$fila->categoryId."'/>".$fila->categoryName_es."<br/>";
 		        }       
 		        // se libera el cursor
 		        $resultado->free();
@@ -43,12 +43,12 @@
 		static function buildContinents(){
 			$conexion = AccesoBBDD::abreConexionBD();
 
-		   	$consulta = "SELECT continentId, continentName_en FROM continents";
+		   	$consulta = "SELECT continentId, continentName_es FROM continents";
 
 		    if ($resultado = $conexion->query($consulta)) {
 		        $checkCont = "";
 		        while ($fila = $resultado->fetch_object()) {
-		            $checkCont .= "<input type='checkbox' id='checkCont".$fila->continentId."' value='".$fila->continentId."'/>".$fila->continentName_en."<br/>";
+		            $checkCont .= "<input type='checkbox' id='checkCont".$fila->continentId."' value='".$fila->continentId."'/>".$fila->continentName_es."<br/>";
 		        }       
 		        // se libera el cursor
 		        $resultado->free();

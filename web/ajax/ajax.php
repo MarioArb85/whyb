@@ -35,7 +35,7 @@
 				if (isset($_POST['pais']))
 					$country = $_POST['pais'];
 
-			    $consulta = "SELECT	p.unescoimage, p.unesco_en, t.categoryName_en, c.countryName_en, d.continentName_en, p.web_en, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
+			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
 
 				if (isset($cat)){
 					$consulta .= "(";
@@ -77,19 +77,19 @@
 
 			                $body .= "<div class='placeresult'>";
 			                $body .= "<img src='".$fila->unescoimage."' style='position: relative; float:left; height: 80px; width: 80px;'/>";
-			                $body .= "<h3 class='titleresult'>".$fila->unesco_en."</h3>";
+			                $body .= "<h3 class='titleresult'>".$fila->unesco_es."</h3>";
 			                $body .= "<div class='textresult'>";
-			                $body .= "<span><b>Category: </b>".$fila->categoryName_en."</span>";
+			                $body .= "<span><b>Categoría: </b>".$fila->categoryName_es."</span>";
 			                $body .= "<br/>";
-			                $body .= "<span><b>Country: </b>".$fila->countryName_en."</span>";
+			                $body .= "<span><b>País: </b>".$fila->countryName_es."</span>";
 			                $body .= "<br/>";
-			                $body .= "<span><b>Continent: </b>".$fila->continentName_en."</span>";
+			                $body .= "<span><b>Continente: </b>".$fila->continentName_es."</span>";
 			                $body .= "<br/>";
-			                $body .= "<span><b>Web: </b><a href='".$fila->web_en."' class='linkResult' target='_blank'>".$fila->web_en."</a></span>";
+			                $body .= "<span><b>Web: </b><a href='".$fila->web_es."' class='linkResult' target='_blank'>".$fila->web_es."</a></span>";
 			                $body .= "</div>";
 			                $body .= "<div class='moreresult'>";
-			                $body .= "<a href='#'' style='text-align: none;'>Want to visit it!</a>";
-			                $body .= "<a href='#'' style='padding-left: 50px;'>Already visited</a>";
+			                $body .= "<a href='javascript: void(0)' style='text-align: none;' class'enlace'>Quiero visitarlo!</a>";
+			                $body .= "<a href='javascript: void(0)' style='padding-left: 50px;' class'enlace'>Ya visitado</a>";
 			                $body .= "</div>";
 			                $body .= "</div>";
 

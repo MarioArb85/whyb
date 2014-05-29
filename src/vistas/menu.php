@@ -8,16 +8,16 @@ class menu {
       <img src='".DIR_IMG."menu.png'>
       <div id='menuLinks'>
         <div id='linkUnesco'>
-          <a href='".DIR_UNESCO."' id='linkUnescoa' class='link $unesco'>Unesco places</a>
+          <a href='".DIR_UNESCO."' id='linkUnescoa' class='link $unesco'>Sitios Unesco</a>
         </div>
         <div id='linkMaps'>
-          <a href='".DIR_MAP."' class='link $map'>Unesco Map</a>
+          <a href='".DIR_MAP."' class='link $map'>Mapa Unesco</a>
         </div>
         <div id='linkPlaces'>
-          <a href='".DIR_PLACES."' class='link $places'>My places</a>
+          <a href='".DIR_PLACES."' class='link $places'>Mis lugares</a>
         </div>
         <div id='linkRoutes'>
-          <a href='#' class='link'  id='linkRoutesa $route'>My routes</a>
+          <a href='javascript: void(0)' class='link'  id='linkRoutesa $route'>Mis rutas</a>
         </div>
       </div>  
     </div>";

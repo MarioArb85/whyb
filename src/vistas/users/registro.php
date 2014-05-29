@@ -22,8 +22,8 @@
 			            </tr>
 		        	</table>
 		        	<br/><br/>
-		          	<input type='submit' id='iniSesionFormBtn' value='Iniciar sesión' class='formularioBtn'/></td>
-		          	<a href='/whyb/web' style='margin-left: 50px;'>Volver al inicio</a></td>
+		          	<input type='submit' id='iniSesionFormBtn' value='Iniciar sesión' class='formularioBtn enlace' style='font-size:150%;'/></td>
+		          	<a href='/whyb/web' style='margin-left: 50px;' class='enlace'>Volver al inicio</a></td>
 		        	</form>
 		        </div>
 			</div>";

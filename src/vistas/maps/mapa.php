@@ -9,7 +9,7 @@ class mapa {
     $checkCat = formularios::buildCategories();
 
     //pinta select
-    $select = formularios::buildCountries('ES');
+    $select = formularios::buildCountries();
 
     //Pinta continentes
     $checkCont = formularios::buildContinents();
@@ -17,30 +17,27 @@ class mapa {
   	$body = "
 		<div id='mapPage'>
 			<div id='filters'>
-				 Filter by:<br/><br/>
-                    <a href='#' onclick='ocultar(\"placesCategory\",\"imgCategory\")'><img id='imgCategory' src='/whyb/web/img/flecha_abajo.png'/></a>&nbsp;Category:<br/>
-                    <div id='placesCategory' class='sangria'>          
-                        $checkCat
-                    </div>  
-                    <br/>
-                    <a href='#' onclick='ocultar(\"placesCountry\",\"imgCountry\")'><img id='imgCountry' src='/whyb/web/img/flecha_abajo.png'/></a>&nbsp;Country:
-                    <br/>
-                    <div id='placesCountry' class='sangria'>          
-                        $select
-                    </div>
-                    <br/>
-                    <a href='#' onclick='ocultar(\"placesContinent\",\"imgContinent\")'><img id='imgContinent' src='/whyb/web/img/flecha_abajo.png'/></a>&nbsp;Continent:
-                    <br/>
-                    <div id='placesContinent' class='sangria' style='display: none;'>          
-                        $checkCont
-                    </div>
-                    <br/>
-                    
-                    <hr style='color: #919aa3;' width='80%'/>
-                    <br/>
-                    <div id='updateList'>          
-                        <input type='button' id='updateListBtnMap' name='updateListBtnMap' value='Update list' class='formularioBtn'/>
-                    </div>
+                <a href='#' onclick='ocultar(\"placesCategory\",\"imgCategory\")' class='linkFilter'>&nbsp;<img id='imgCategory' src='/whyb/web/img/flecha_abajo.png'/>&nbsp;&nbsp;Categoría:</a>
+                <br/><br/>
+                <div id='placesCategory' class='sangria'>          
+                    $checkCat
+                </div>  
+                <br/>
+                <a href='#' onclick='ocultar(\"placesCountry\",\"imgCountry\")' class='linkFilter'>&nbsp;<img id='imgCountry' src='/whyb/web/img/flecha_abajo.png'/>&nbsp;&nbsp;País:</a>
+                <br/><br/>
+                <div id='placesCountry' class='sangria'>          
+                    $select
+                </div>
+                <br/>
+                <a href='#' onclick='ocultar(\"placesContinent\",\"imgContinent\")' class='linkFilter'>&nbsp;<img id='imgContinent' src='/whyb/web/img/flecha_derecha.png'/>&nbsp;&nbsp;Continente:</a>
+                <br/><br/>
+                <div id='placesContinent' class='sangria' style='display: none;'>          
+                    $checkCont
+                </div>
+                <br/><br/>
+                <div id='updateList'>          
+                    <a href='javascript: void(0)' id='updateListBtnMap' name='updateListBtnMap' class='formularioBtn enlace'>Actualizar</a>
+                </div>
 			</div>
 			<div id='map'></div>
 		</div>
