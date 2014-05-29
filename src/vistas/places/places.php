@@ -24,6 +24,9 @@ class places {
                     <br/><br/>
                     <textarea id="placesComentarios" rows="10" cols="16" maxlength="256" style="resize:none;">Arrastra la marca del mapa para obtener la localización!</textarea>
                     <br/><br/><br/>
+                    <input type="hidden" id="placesCountryId"/>
+                    <input type="hidden" id="placesLat"/>
+                    <input type="hidden" id="placeslong"/>
                     <div id="updateList">          
                         <a href="javascript: void(0)" id="updateLugares" class="formularioBtn enlace">Guardar lugar!</a>
                     </div>

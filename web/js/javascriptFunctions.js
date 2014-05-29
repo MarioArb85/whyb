@@ -30,7 +30,7 @@
                   position: new google.maps.LatLng(40.416742, -3.703719),
                   draggable: true,
                   map: mapMio,
-                  title: 'dfdf'
+                  title: ''
                 });
       google.maps.event.addListener(marker, 'dragstart', function(evt){
         $('#placesCountry').val('Esperando lugar...');
@@ -44,6 +44,9 @@
           success: function(xml){
             var ciudad = '';
             var pais = '';
+            var paisId = '';
+            var lat = evt.latLng.lat().toFixed(5);
+            var lon = evt.latLng.lng().toFixed(5);
             $(xml).find('address_component').each(function(){
               if ($(this).find('type').text() == "administrative_area_level_2political"){
                 //console.log('nivel 2: ' + $(this).find('long_name').text());
@@ -60,6 +63,7 @@
                 //console.log('Codigo pais: ' + $(this).find('short_name').text());
                 //console.log('Nombre pais: ' + $(this).find('long_name').text());
                 pais = $(this).find('long_name').text();
+                paisId = $(this).find('short_name').text();
                 return false;
               }
             });
@@ -70,6 +74,9 @@
 
             $('#placesCity').val(ciudad);
             $('#placesCountry').val(pais);
+            $('#placesCountryId').val(paisId);
+            $('#placesLat').val(lat);
+            $('#placeslong').val(lon);
           },
           error: function() {
             alert("An error occurred while processing XML file.");
