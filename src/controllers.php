@@ -88,7 +88,7 @@ $app->get('/places/', function () use ($app) {
 $app->get('/menu/', function () use ($app) {
     return menu_controller::menu();
 })
-->bind('unesco')
+->bind('menu')
 ;
 
 //disconnect
