@@ -1,5 +1,13 @@
 <?php
 	global $firephp;
+	require '../../src/modelo/_listaModelos.php';
+	require_once '../../vendor/FirePHPCore/FirePHP.class.php';
+	ob_start();
+	//instanciar un objeto de la clase FirePHP
+	$firephp = FirePHP::getInstance(true);
+
+	//Arracamos sesion
+	session_start();
 
 	$func = $_POST['func'];
 
@@ -217,6 +225,34 @@
 							$coincide = true;
 					}
 			}
+			echo json_encode($coincide);
+			break;
+
+		case 'myPlaces':
+			$userId = $_SESSION['userId'];
+			$countryId = $_POST['countryId'];
+			$lat = $_POST['lat'];
+			$lon = $_POST['lon'];
+			$ciudad = $_POST['ciudad'];
+			$lugar = $_POST['lugar'];
+			$comentario = $_POST['comentario'];
+
+			modeloSitios::alta($countryId, $lat, $lon, $ciudad, $lugar, $comentario, $userId);
+
+
+
+			$coincide = '';
+			/*
+			$coincide = false;
+
+			$consulta = "SELECT email from users";
+			
+			if ($resultado = $conexion->query($consulta)) {
+					while ($fila = $resultado->fetch_object()) {
+						if($fila->email == $mail)
+							$coincide = true;
+					}
+			}*/
 			echo json_encode($coincide);
 			break;
 

@@ -185,6 +185,70 @@
       });
     });
 
+    //Guardar sitio propio
+    $('#updateLugares').click(function(){
+      //Id del pais
+      var countryId = $("#placesCountryId").val();
+      //Latitud
+      var lat = $("#placesLat").val();
+      //Longitud
+      var lon = $("#placeslong").val();
+      //Ciudad
+      var ciudad = $("#placesCity").val();
+      //Lugar
+      var lugar = $("#placesLugar").val();
+      //Descripcion
+      var comentario = $("#placesComentarios").val();
+
+      if (ciudad == "------")
+        alert('Hay que rellenar todos los campos!')
+      else if (ciudad == '')
+        alert('Hay que rellenar todos los campos!')
+      else if (lugar == '')
+        alert('Hay que rellenar todos los campos!')
+      else if (comen = '')
+        alert('Hay que rellenar todos los campos!')
+      else {
+        //Funcion ajax        
+        $.ajax({
+          url: '/whyb/web/ajax/ajax.php',
+          type: 'POST',
+          data: {
+            func: 'myPlaces',
+            countryId: countryId,
+            lat: lat,
+            lon: lon,
+            ciudad: ciudad,
+            comentario: comentario,
+            lugar: lugar
+          },                
+          dataType: 'json',
+          success: function(resultado) {
+            /*$('#results').html(resultado[0]);
+            //Paginate
+            $("#paginacion").paginate({
+              count: resultado[1],
+              start: 1,
+              display: resultado[2],
+              border: true,
+              border_color: '#fff',
+              text_color: 'white',
+              background_color: '#34629b',  
+              border_hover_color: '#ccc',
+              text_hover_color: '#34629b',
+              background_hover_color: '#fff', 
+              images: false,
+              mouse: 'press',
+              onChange: function(page){
+                $('._current','#results').removeClass('_current').hide();
+                $('#p'+page).addClass('_current').show();
+              }
+            });*/
+          }
+        });
+      }
+    });
+
   //Comprobar campos formulario
   if ($('#formulario').length){
       $( "#formulario" ).click(function() {

@@ -35,6 +35,8 @@
       google.maps.event.addListener(marker, 'dragstart', function(evt){
         $('#placesCountry').val('Esperando lugar...');
         $('#placesCity').val('Esperando lugar...');
+        if ($('#placesComentarios').val() == 'Arrastra la marca del mapa para obtener la localización!')
+          $('#placesComentarios').val('');
       });
       google.maps.event.addListener(marker, 'dragend', function(evt){
         $.ajax({

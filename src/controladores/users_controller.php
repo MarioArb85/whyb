@@ -46,26 +46,33 @@
     //Registro de usuario - resultado
     static function logResultado($request) {
       global $firephp;
-      try{
+
         $resultado = modeloUsuario::logUser($request);
-        if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
-          //Usuario y contraseña correctos
-          $_SESSION['user'] = $request->get('txtUserNameReg');
-          $_SESSION['userId'] = $resultado->getUserId();
-          header('Location: /whyb/web/menu/');
-          die();
+        
+        $firephp->log($resultado, 'Mensaje');
+
+        if($resultado != null || $resultado != ''){
+          if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
+            //Usuario y contraseña correctos
+            $_SESSION['user'] = $request->get('txtUserNameReg');
+            $_SESSION['userId'] = $resultado->getUserId();
+
+            header('Location: /whyb/web/menu/');
+            die();
+          }
+          else{
+            $dire = '/whyb/web/log/';
+            header('Location: '.$dire);
+            die();
+          }
+          return 'Redirigiendo...';
         }
         else{
           $dire = '/whyb/web/log/';
           header('Location: '.$dire);
           die();
         }
-        return 'Redirigiendo...';
-      }
-      catch(Exception $e){
-        return $e->getMessage();
 
-      }
     }
 
     static function disconnect() {

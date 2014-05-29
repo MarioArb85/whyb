@@ -49,9 +49,12 @@
       		else{
 	      		$consulta = "SELECT userId, password FROM users WHERE nickname = '".$request->get('txtUserNameReg')."'";
 	      		if ($resultado = $conexion->query($consulta)) {
-	        		while($fila = $resultado->fetch_object()) { 
+	        		if($fila = $resultado->fetch_object()) { 
 	          			$user = new Usuario($fila->userId, null, null, null, $fila->password, null, null, null, null, null);
-	        		}	
+	        		}
+	        		else
+	      				$user = '';
+
 	        		$resultado->free();
 	      		}
 	      		else

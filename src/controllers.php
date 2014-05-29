@@ -29,7 +29,7 @@ $app->get('/', function () use ($app) {
     $footer = footer::construye();
     $paginaDetalle = new plantillaPagina($titulo, $header, $body, $footer);
     $pagina = $paginaDetalle->mostrar();
-    $firephp->log($paco, 'Mensaje');
+    //$firephp->log($paco, 'Mensaje');
     return $pagina;
 })
 ->bind('homepage')
