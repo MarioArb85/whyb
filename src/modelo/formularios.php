@@ -5,7 +5,7 @@
 		static function buildCountries($country){
 			$conexion = AccesoBBDD::abreConexionBD();
 
-			$consulta = "SELECT countryId, countryname_es FROM countries ORDER BY countryname_en";
+			$consulta = "SELECT countryId, countryname_es FROM countries ORDER BY countryname_es";
 
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";

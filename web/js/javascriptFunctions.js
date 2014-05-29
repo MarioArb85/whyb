@@ -1,7 +1,9 @@
   //Variables globales para markers
   var map = null;
+  var mapMio = null;
   var markersArray = new Array();
   var infoWindow = null; 
+  //var marker = null;
 
   function initialize() {
     if (document.getElementById("map")){
@@ -13,6 +15,66 @@
       map = new google.maps.Map(document.getElementById("map"), mapOptions);
       google.maps.event.addListener(map, 'click', function(){
         closeInfoWindow();
+      });
+    }
+
+    if (document.getElementById("mapPlaces")){
+      var mapOptions = {
+        center: new google.maps.LatLng(50, 30),
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      mapMio = new google.maps.Map(document.getElementById("mapPlaces"), mapOptions);
+
+      var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(40.416742, -3.703719),
+                  draggable: true,
+                  map: mapMio,
+                  title: 'dfdf'
+                });
+      google.maps.event.addListener(marker, 'dragstart', function(evt){
+        $('#placesCountry').val('Esperando lugar...');
+        $('#placesCity').val('Esperando lugar...');
+      });
+      google.maps.event.addListener(marker, 'dragend', function(evt){
+        $.ajax({
+          type: "GET",
+          url: 'http://maps.googleapis.com/maps/api/geocode/xml?latlng='+evt.latLng.lat().toFixed(5)+','+evt.latLng.lng().toFixed(5)+'&sensor=false',
+          dataType: "xml",
+          success: function(xml){
+            var ciudad = '';
+            var pais = '';
+            $(xml).find('address_component').each(function(){
+              if ($(this).find('type').text() == "administrative_area_level_2political"){
+                //console.log('nivel 2: ' + $(this).find('long_name').text());
+                ciudad = $(this).find('long_name').text();
+              }
+              else if ($(this).find('type').text() == "administrative_area_level_1political"){
+                //console.log('nivel 1: ' + $(this).find('long_name').text());
+                if (ciudad == ''){
+                  ciudad = $(this).find('long_name').text();
+                }
+              }
+
+              if ($(this).find('type').text() == "countrypolitical"){
+                //console.log('Codigo pais: ' + $(this).find('short_name').text());
+                //console.log('Nombre pais: ' + $(this).find('long_name').text());
+                pais = $(this).find('long_name').text();
+                return false;
+              }
+            });
+            if(ciudad == '')
+              ciudad = "Error al localizar";
+            if(pais == '')
+              pais = "Error al localizar";
+
+            $('#placesCity').val(ciudad);
+            $('#placesCountry').val(pais);
+          },
+          error: function() {
+            alert("An error occurred while processing XML file.");
+          }
+        });     
       });
     }
   }

@@ -39,7 +39,8 @@ class mapa {
                     <a href='javascript: void(0)' id='updateListBtnMap' name='updateListBtnMap' class='formularioBtn enlace'>Actualizar</a>
                 </div>
 			</div>
-			<div id='map'></div>
+			<div id='map'>
+            </div>
 		</div>
   	";
 	

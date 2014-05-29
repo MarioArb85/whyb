@@ -146,7 +146,7 @@
 				if (isset($_POST['pais']))
 					$country = $_POST['pais'];
 
-			    $consulta = "SELECT	p.unescoimage, p.unesco_en, t.categoryName_en, c.countryName_en, d.continentName_en, p.web_en, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
+			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
 
 				if (isset($cat)){
 					$consulta .= "(";
@@ -174,14 +174,14 @@
 
 				if ($resultado = $conexion->query($consulta)) {
 					while ($fila = $resultado->fetch_object()) {
-						if ($fila->categoryName_en == 'Natural')
+						if ($fila->categoryName_es == 'Natural')
 							$mark = '/whyb/web/img/natural.png';
-						else if ($fila->categoryName_en == 'Cultural')
+						else if ($fila->categoryName_es == 'Cultural')
 							$mark = '/whyb/web/img/cultural.png';
-						else if ($fila->categoryName_en == 'Mixed')
+						else if ($fila->categoryName_es == 'Mixed')
 							$mark = '/whyb/web/img/mixed.png';
 
-						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_en, 'img' => $fila->unescoimage);
+						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage);
 						$list[] = $marca;
 					}
 				}

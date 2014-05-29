@@ -70,7 +70,7 @@ html{
 
 body {
 	font-family: "openSans";
-	font-size: 90%;
+	font-size: 85%;
 	position: relative;
 	height: auto;
 	margin: auto: ;
@@ -111,7 +111,7 @@ tr {
 
 a {
 	font-family: radiohead;
-	font-size: 170%;
+	font-size: 140%;
 }
 
 a:link
@@ -280,7 +280,7 @@ a:hover {
 	float: left;
 	display: inline;
 	width: 285px;
-	height: 30px;
+	height: 25px;
 	text-align: center; 
 	/*border-right: 1px solid black;*/
 	font-weight: bold;
@@ -321,7 +321,7 @@ a:hover {
 .linkFilter {
 	position: relative;
 	float: left;
-	height: 25px;
+	height: 20px;
 	width: 140px;
 	/*border: 1px solid black;*/
 	/*font-weight: bold;*/
@@ -333,7 +333,20 @@ a:hover {
 	text-decoration: none;
 }
 
+.linkPlaces {
+	font-family: radiohead;
+	font-size: 140%;
+}
+
 #map {
+	position: relative;
+	float: left;
+	margin: 25px 0px;
+	width: 975px;
+	height: 500px;
+}
+
+#mapPlaces {
 	position: relative;
 	float: left;
 	margin: 25px 0px;

@@ -4,7 +4,7 @@
     static function menu() {
       global $firephp;
 
-      $titulo = "Sitios Unesco";
+      $titulo = "Menu usuario";
       $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu = cabecera::construye();
       $body = userMenu::construye();

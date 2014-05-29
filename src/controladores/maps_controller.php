@@ -3,7 +3,7 @@
 
     static function draw() {
       global $firephp;
-      $titulo = "WHYB map";
+      $titulo = "Mapa Unesco";
       $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu = menu::construye($usuario, '', 'linkActive', '', '');
       $body = mapa::construye();
