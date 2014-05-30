@@ -195,6 +195,8 @@
       var lon = $("#placeslong").val();
       //Ciudad
       var ciudad = $("#placesCity").val();
+      //Situación
+      var situacion = $("#placesSituation").val();
       //Lugar
       var lugar = $("#placesLugar").val();
       //Descripcion
@@ -203,6 +205,8 @@
       if (ciudad == "------")
         alert('Hay que rellenar todos los campos!')
       else if (ciudad == '')
+        alert('Hay que rellenar todos los campos!')
+      else if (situacion == '')
         alert('Hay que rellenar todos los campos!')
       else if (lugar == '')
         alert('Hay que rellenar todos los campos!')
@@ -219,31 +223,21 @@
             lat: lat,
             lon: lon,
             ciudad: ciudad,
+            situacion: situacion,
             comentario: comentario,
             lugar: lugar
           },                
           dataType: 'json',
           success: function(resultado) {
-            /*$('#results').html(resultado[0]);
-            //Paginate
-            $("#paginacion").paginate({
-              count: resultado[1],
-              start: 1,
-              display: resultado[2],
-              border: true,
-              border_color: '#fff',
-              text_color: 'white',
-              background_color: '#34629b',  
-              border_hover_color: '#ccc',
-              text_hover_color: '#34629b',
-              background_hover_color: '#fff', 
-              images: false,
-              mouse: 'press',
-              onChange: function(page){
-                $('._current','#results').removeClass('_current').hide();
-                $('#p'+page).addClass('_current').show();
-              }
-            });*/
+            $("#placesCountryId").val();
+            $("#placesLat").val();
+            $("#placeslong").val();
+            $("#placesCountry").val("------");
+            $("#placesCity").val("------");
+            $("#placesSituation").val("------");
+            $("#placesLugar").val('');
+            $("#placesComentarios").val('');
+            alert(resultado);
           }
         });
       }

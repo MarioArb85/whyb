@@ -2,33 +2,26 @@
 	class modeloSitios {
 
 		//Guarda sitio propio
-		static function alta($countryId, $lat, $lon, $ciudad, $lugar, $comentario, $usuarioId){
+		static function alta($countryId, $lat, $lon, $ciudad, $situacion, $lugar, $comentario, $usuarioId){
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
-      		if (!$conexion){
-      			die('Error de conexión (' . $conexion->connect_errno . ') ' . $conexion->connect_error);
-      		}
-      		else{
-      			//Recuperar id del continente
-	      		$consulta = "SELECT continentId FROM countries WHERE countryId='$countryId'";
-	      		$resultado = $conexion->query($consulta);
-	      		$fila = $resultado->fetch_object();
-	      		$continentid = $fila->continentId;
+      		//Recuperar id del continente
+	      	$consulta = "SELECT continentId FROM countries WHERE countryId='$countryId'";
+	      	$resultado = $conexion->query($consulta);
+	      	$fila = $resultado->fetch_object();
+	      	$continentid = $fila->continentId;
 
-	   			$consulta = "INSERT INTO places (placeId, categoryId, countryId, continentId, latitude, longitude, place, description, city)
-		                 	VALUES (null, 0, '$countryId', $continentid, $lat, $lon, '$lugar', '$comentario', '$ciudad')";
+	   		$consulta = "INSERT INTO places (placeId, categoryId, countryId, continentId, latitude, longitude, place, description, city, situation)
+		                 VALUES (null, 0, '$countryId', $continentid, $lat, $lon, '$lugar', '$comentario', '$ciudad', '$situacion')";
+			$conexion->query($consulta);
+			$placeId = $conexion->insert_id;
 
-				//$result = $conexion->query($consulta);
-				mysql_query($consulta);
-				
-				//$ultimo_id = mysql_insert_id();
-				$id = mysql_insert_id();
-				
-				$firephp->log($id, 'ultimo id');
+			$consulta = "INSERT INTO placesvisited (userId, placeId, visited)
+		                 VALUES ($usuarioId, $placeId, 1)";
+		    $conexion->query($consulta);
 
-				AccesoBBDD::cierraConexionBD($conexion);
-			}
+			AccesoBBDD::cierraConexionBD($conexion);
 		}
 	}
 ?>

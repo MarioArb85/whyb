@@ -16,13 +16,17 @@ class places {
                     <br/><br/>
                     <input type="text" id="placesCity" value="------" readonly/>
                     <br/><br/>
+                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Situación:</span>
+                    <br/><br/>
+                    <input type="text" id="placesSituation" value="------" readonly/>
+                    <br/><br/>
                     <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Lugar:</span>
                     <br/><br/>
                     <input type="text" id="placesLugar"/>
                     <br/><br/>
                     <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Comentarios:</span>
                     <br/><br/>
-                    <textarea id="placesComentarios" rows="10" cols="16" maxlength="256" style="resize:none;">Arrastra la marca del mapa para obtener la localización!</textarea>
+                    <textarea id="placesComentarios" rows="9" cols="16" maxlength="256" style="resize:none;">Arrastra la marca del mapa para obtener la localización!</textarea>
                     <br/><br/><br/>
                     <input type="hidden" id="placesCountryId"/>
                     <input type="hidden" id="placesLat"/>

@@ -35,6 +35,7 @@
       google.maps.event.addListener(marker, 'dragstart', function(evt){
         $('#placesCountry').val('Esperando lugar...');
         $('#placesCity').val('Esperando lugar...');
+        $('#placesSituation').val('Esperando lugar...');
         if ($('#placesComentarios').val() == 'Arrastra la marca del mapa para obtener la localización!')
           $('#placesComentarios').val('');
       });
@@ -44,41 +45,33 @@
           url: 'http://maps.googleapis.com/maps/api/geocode/xml?latlng='+evt.latLng.lat().toFixed(5)+','+evt.latLng.lng().toFixed(5)+'&sensor=false',
           dataType: "xml",
           success: function(xml){
-            var ciudad = '';
-            var pais = '';
-            var paisId = '';
-            var lat = evt.latLng.lat().toFixed(5);
-            var lon = evt.latLng.lng().toFixed(5);
+            $('#placesLat').val(evt.latLng.lat().toFixed(5));
+            $('#placeslong').val(evt.latLng.lng().toFixed(5));
+
             $(xml).find('address_component').each(function(){
-              if ($(this).find('type').text() == "administrative_area_level_2political"){
-                //console.log('nivel 2: ' + $(this).find('long_name').text());
-                ciudad = $(this).find('long_name').text();
-              }
+
+              if ($(this).find('type').text() == "administrative_area_level_2political")
+                $('#placesCity').val($(this).find('long_name').text());
               else if ($(this).find('type').text() == "administrative_area_level_1political"){
-                //console.log('nivel 1: ' + $(this).find('long_name').text());
-                if (ciudad == ''){
-                  ciudad = $(this).find('long_name').text();
-                }
+                if ($('#placesCity').val() == 'Esperando lugar...')
+                  $('#placesCity').val($(this).find('long_name').text());
               }
 
+              if ($(this).find('type').text() == "route")
+                $('#placesSituation').val($(this).find('long_name').text()); 
+              
               if ($(this).find('type').text() == "countrypolitical"){
-                //console.log('Codigo pais: ' + $(this).find('short_name').text());
-                //console.log('Nombre pais: ' + $(this).find('long_name').text());
-                pais = $(this).find('long_name').text();
-                paisId = $(this).find('short_name').text();
+                $('#placesCountry').val($(this).find('long_name').text()); 
+                $('#placesCountryId').val($(this).find('short_name').text());
                 return false;
               }
             });
-            if(ciudad == '')
-              ciudad = "Error al localizar";
-            if(pais == '')
-              pais = "Error al localizar";
-
-            $('#placesCity').val(ciudad);
-            $('#placesCountry').val(pais);
-            $('#placesCountryId').val(paisId);
-            $('#placesLat').val(lat);
-            $('#placeslong').val(lon);
+            if($('#placesCity').val() == 'Esperando lugar...')
+              $('#placesCity').val('Error al localizar!');
+            if($('#placesSituation').val() == 'Esperando lugar...')
+              $('#placesSituation').val('Error al localizar!');
+            if($('#placesCountry').val() == 'Esperando lugar...')
+              $('#placesCountry').val('Error al localizar!');
           },
           error: function() {
             alert("An error occurred while processing XML file.");

@@ -234,26 +234,15 @@
 			$lat = $_POST['lat'];
 			$lon = $_POST['lon'];
 			$ciudad = $_POST['ciudad'];
+			$situacion = $_POST['situacion'];
 			$lugar = $_POST['lugar'];
 			$comentario = $_POST['comentario'];
 
-			modeloSitios::alta($countryId, $lat, $lon, $ciudad, $lugar, $comentario, $userId);
+			modeloSitios::alta($countryId, $lat, $lon, $ciudad, $situacion, $lugar, $comentario, $userId);
 
+			$mensaje = 'El lugar ha sido guardado correctamente.';
 
-
-			$coincide = '';
-			/*
-			$coincide = false;
-
-			$consulta = "SELECT email from users";
-			
-			if ($resultado = $conexion->query($consulta)) {
-					while ($fila = $resultado->fetch_object()) {
-						if($fila->email == $mail)
-							$coincide = true;
-					}
-			}*/
-			echo json_encode($coincide);
+			echo json_encode($mensaje);
 			break;
 
 		default:
