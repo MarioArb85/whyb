@@ -18,6 +18,16 @@
             dataType: 'json',
             success: function(resultado) {
               $('#results').html(resultado[0]);
+
+              $.each(resultado, function(){
+                if($('#'+this.placeId+'').length){
+                  if (this.visited == 0)
+                    $('#'+this.placeId+'').html('<a href="javascript: void(0)">No quiero visitarlo</a>');
+                  else if (this.visited == 1)
+                    $('#'+this.placeId+'').html('<a href="javascript: void(0)">No lo he visitado</a>');
+                }
+              });
+
               //Paginate
               $("#paginacion").paginate({
                 count: resultado[1],

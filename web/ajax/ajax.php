@@ -68,49 +68,50 @@
 				}
 
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
-
+				//$firephp->log($consulta, 'Mensaje');
 				if ($resultado = $conexion->query($consulta)) {
 					//Contadores para paginar
 					$contDiv1 = 0;
 					$contDiv2 = 0;
-
 			        $body = "";
 			        while ($fila = $resultado->fetch_object()) {
-			        		if ($contDiv1 == 0){
-			        			if ($contDivs == 1)
-			        				$body .= "<div id='p".$contDivs."' class='pagedemo _current' style=''>";
-			        			else 
-			        				$body .= "<div id='p".$contDivs."' class='pagedemo' style='display:none;'>";	
-			        		}
-
-			                $body .= "<div class='placeresult'>";
-			                $body .= "<img src='".$fila->unescoimage."' style='position: relative; float:left; height: 80px; width: 80px;'/>";
-			                $body .= "<h3 class='titleresult'>".$fila->unesco_es."</h3>";
-			                $body .= "<div class='textresult'>";
-			                $body .= "<span><b>Categoría: </b>".$fila->categoryName_es."</span>";
-			                $body .= "<br/>";
-			                $body .= "<span><b>País: </b>".$fila->countryName_es."</span>";
-			                $body .= "<br/>";
-			                $body .= "<span><b>Continente: </b>".$fila->continentName_es."</span>";
-			                $body .= "<br/>";
-			                $body .= "<span><b>Web: </b><a href='".$fila->web_es."' class='linkResult' target='_blank'>".$fila->web_es."</a></span>";
-			                $body .= "</div>";
-			                $body .= "<div class='moreresult'>";
-			                $body .= "<a href='javascript: void(0)' style='text-align: none;' class'enlace'>Quiero visitarlo!</a>";
-			                $body .= "<a href='javascript: void(0)' style='padding-left: 50px;' class'enlace'>Ya visitado</a>";
-			                $body .= "</div>";
-			                $body .= "</div>";
-
-			                $contDiv1 = 1;
-			                $contDiv2++;
-
-			                if ($contDiv2 == 12){
-			                	$body .= "</div>";
-			                	$contDiv1 = 0;
-			                	$contDiv2 = 0;
-			                	$contDivs++;
-			                }
-		        	}
+			        	if ($contDiv1 == 0){
+			        		if ($contDivs == 1)
+			        			$body .= "<div id='p".$contDivs."' class='pagedemo _current' style=''>";
+			        		else 
+			        			$body .= "<div id='p".$contDivs."' class='pagedemo' style='display:none;'>";	
+			        	}
+		                $body .= "<div class='placeresult'>";
+		                $body .= "<img src='".$fila->unescoimage."' style='position: relative; float:left; height: 80px; width: 80px;'/>";
+		                $body .= "<h3 class='titleresult'>".$fila->unesco_es."</h3>";
+		                $body .= "<div class='textresult'>";
+		                $body .= "<span><b>Categoría: </b>".$fila->categoryName_es."</span>";
+		                $body .= "<br/>";
+		                $body .= "<span><b>País: </b>".$fila->countryName_es."</span>";
+		                $body .= "<br/>";
+		                $body .= "<span><b>Continente: </b>".$fila->continentName_es."</span>";
+		                $body .= "<br/>";
+		                $body .= "<span><b>Web: </b><a href='".$fila->web_es."' class='linkResult' target='_blank'>".$fila->web_es."</a></span>";
+		                $body .= "</div>";
+		                $body .= "<div id='".$fila->placeId."' class='moreresult'>";
+		                if (isset($_SESSION['user'])){
+		                	$body .= "<a href='javascript: void(0)' style='text-align: none;' class='enlace'>Quiero visitarlo!</a>";
+		                	$body .= "<a href='javascript: void(0)' style='padding-left: 50px;' class='enlace'>Ya visitado</a>";
+		            	}
+		            	else {
+		            		$body .= "<p>¡Inicia sesión para guardalo en tu lista!</p>";
+		            	}
+		                $body .= "</div>";
+		                $body .= "</div>";
+			            $contDiv1 = 1;
+		                $contDiv2++;
+			            if ($contDiv2 == 12){
+		                	$body .= "</div>";
+		                	$contDiv1 = 0;
+		                	$contDiv2 = 0;
+		                	$contDivs++;
+		                }
+	        		}
 
 		        	$body .= '</div>';
 
@@ -122,13 +123,24 @@
 			        // se libera el cursor
 			        $resultado->free();
 
-					$list[0] = $body;
+			        $list[0] = $body;
 					$list[1] = $contDivs;
 					$list[2] = $mostrar;
-		    	}
-			}
-			else{ 
-				$list[0] = 'Elige algún parámetro melón!';
+
+			        //Para comprobar los visitados y los pendientes de visitar
+			        if (isset($_SESSION['user'])){
+			        	$consulta = "SELECT placeId, visited FROM placesvisited WHERE userId=".$_SESSION['userId']." and isUnesco = 1";
+			        	if ($resultado = $conexion->query($consulta)) {
+			        		while ($fila = $resultado->fetch_object()) {
+			        			$result = array('placeId' => $fila->placeId, 'visited' => $fila->visited);
+								$list[] = $result;
+			        		}
+						}
+			    	}
+				}
+				else{ 
+					$list[0] = 'Elige algún parámetro melón!';
+				}
 			}
 
 			echo json_encode($list);
