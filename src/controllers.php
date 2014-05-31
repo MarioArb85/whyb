@@ -84,6 +84,13 @@ $app->get('/places/', function () use ($app) {
 ->bind('places')
 ;
 
+//Show my places
+$app->get('/places/show/', function () use ($app) {
+    return places_controller::myPlaces();
+})
+->bind('show_my_places')
+;
+
 //Menu usuario - mis sitios unesco
 $app->get('/menu/', function () use ($app) {
     return menu_controller::menu();

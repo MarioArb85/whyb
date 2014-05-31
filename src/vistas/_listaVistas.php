@@ -12,5 +12,6 @@
 	require 'inicio.php';
 	require 'menu.php';
 	require 'plantillaPagina.php';
+	require 'sinRegistrar.php'
 	//require 'VistaPaginaInexistente.php';
 ?>

@@ -55,3 +55,6 @@
 
 	//Pagina places
 	define("DIR_PLACES", DIR_RAIZ_APP."web/places/");
+
+	//Pagina places
+	define("DIR_SHOW_PLACES", DIR_RAIZ_APP."web/places/show/");

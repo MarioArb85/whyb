@@ -5,7 +5,7 @@ class header {
     if($usuario=="") {
       $cab = '
           <a href="/whyb/web/form/" class="enlace">Registrarse</a>
-          <a href="/whyb/web/log/" class="enlace" style="margin-left: 50px;">Iniciar sesion</a><br/>';
+          <a href="/whyb/web/log/" class="enlace" style="margin-left: 50px;">Iniciar sesión</a><br/>';
     }
     else
       $cab = "Conectado como:&nbsp;&nbsp;&nbsp;<a href='/whyb/web/menu/' class='enlace'>$usuario</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<a href='/whyb/web/disconnect/' class='enlace'>cerrar sesión</a>";

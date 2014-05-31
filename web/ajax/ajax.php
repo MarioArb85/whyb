@@ -1,7 +1,7 @@
 <?php
-	global $firephp;
 	require '../../src/modelo/_listaModelos.php';
 	require_once '../../vendor/FirePHPCore/FirePHP.class.php';
+	//Cargar firephp
 	ob_start();
 	//instanciar un objeto de la clase FirePHP
 	$firephp = FirePHP::getInstance(true);
@@ -186,7 +186,7 @@
 							$mark = '/whyb/web/img/natural.png';
 						else if ($fila->categoryName_es == 'Cultural')
 							$mark = '/whyb/web/img/cultural.png';
-						else if ($fila->categoryName_es == 'Mixed')
+						else if ($fila->categoryName_es == 'Mixto')
 							$mark = '/whyb/web/img/mixed.png';
 
 						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage);
@@ -250,31 +250,4 @@
 			break;
 	}
 
-
-
-	/**
-	* Asiganado listado de personas
-	*/
-	/*
-	$persona = array('nombre' => 'Paulina', 'edad' => 14);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => 'Michelle', 'edad' => 1);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => 'Dilan', 'edad' => 5);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => 'Susan', 'edad' => 24);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => 'Israel', 'edad' => 26);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => 'Lola Meraz', 'edad' => 20);
-	$listaPersona[] = $persona;
-
-	$persona = array('nombre' => $nombreCliente, 'edad' => $edadCliente);
-	$listaPersona[] = $persona;
-	*/
 ?>

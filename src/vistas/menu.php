@@ -17,7 +17,7 @@ class menu {
           <a href='".DIR_PLACES."' class='link $places'>Mis lugares</a>
         </div>
         <div id='linkRoutes'>
-          <a href='javascript: void(0)' class='link'  id='linkRoutesa' $route'>Mis rutas</a>
+          <a href='".DIR_SHOW_PLACES."' class='link $route'  id='linkShowMyPlaces'>Ver mis lugares</a>
         </div>
       </div>  
     </div>";

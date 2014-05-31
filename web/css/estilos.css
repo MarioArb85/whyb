@@ -257,6 +257,28 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+#sinRegistrarPage {
+	position: relative;
+	height: 450px;
+	width: 1150px;
+	margin: 0px auto;
+	/*border: 1px solid black;*/
+}
+
+#mensajeSinRegistrar {
+	position: relative;
+	width: 400px;
+	margin: 120px auto;
+	/*border: 1px solid black;*/
+	/*text-align: center;*/
+}
+
+#imgSinRegistrar {
+	position: relative;
+	float: left;
+	top: 25px;
+}
+
 #menu {
 	position: relative;
 	margin: 20px auto;
@@ -302,7 +324,7 @@ a:hover {
 	border-bottom-left-radius: 10px;
 }
 
-#linkRoutesa {
+#linkShowMyPlaces {
 	width: 293px;
 	border-bottom-right-radius: 10px;
 }
