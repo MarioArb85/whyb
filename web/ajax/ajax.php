@@ -68,7 +68,7 @@
 				}
 
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
-				$firephp->log($consulta, 'Mensaje');
+				//$firephp->log($consulta, 'Mensaje');
 				if ($resultado = $conexion->query($consulta)) {
 					//Contadores para paginar
 					$contDiv1 = 0;
@@ -139,7 +139,7 @@
 			    	}
 				}
 				else{ 
-					$list[0] = 'Elige algún parámetro melón!';
+					$list[0] = 'Elige algún parámetro!';
 				}
 			}
 
@@ -166,6 +166,17 @@
 				if (isset($_POST['pais']))
 					$country = $_POST['pais'];
 
+				//$visitados = array();
+				//Para comprobar los visitados y los pendientes de visitar
+			    if (isset($_SESSION['user'])){
+			       	$consulta = "SELECT placeId, visited FROM placesvisited WHERE userId=".$_SESSION['userId']." and isUnesco = 1";
+			       	if ($resultado = $conexion->query($consulta)) {
+			       		while ($fila = $resultado->fetch_object()) {
+							$visitados[] = array ('placeId' => $fila->placeId, 'visited' => $fila->visited);
+			       		}
+					}
+			    }
+			    
 			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
 
 				if (isset($cat)){
@@ -201,10 +212,42 @@
 						else if ($fila->categoryName_es == 'Mixto')
 							$mark = '/whyb/web/img/mixed.png';
 
-						$marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage);
-						$list[] = $marca;
-					}
-				}
+						$enlaces = '<div id="'.$fila->placeId.'" class="moreresult">';
+						$entra = false;
+						//comprobar si se quiere visitar o ya se ha visitado
+						if (isset($_SESSION['user'])){
+							foreach ($visitados as $key=>$value) {
+								//$firephp->log($value['placeId'], 'array');
+								if($value['placeId'] == $fila->placeId) {
+				                	if ($value['visited'] == 0) {
+				                		//$firephp->log($fila->placeId, 'result 0');
+				                		$entra = true;
+				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('.$value['placeId'].')">Ya no quiero visitarlo!</a>';
+				                    	break;
+				                    }
+				                	else if ($value['visited'] == 1) {
+				                		//$firephp->log($fila->placeId, 'result 1');
+				                		$entra = true;
+				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="notVisited('.$value['placeId'].')">No lo he visitado!</a>';
+				                    	break;
+				                    }
+				                }
+							}
+							if ($entra == false) {
+				                $enlaces .= '<a href="javascript: void(0)" style="text-align: none;" class="enlace" onclick="wantToVisit('.$fila->placeId.')">Quiero visitarlo!</a>';
+				            	$enlaces .= "<a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited(".$fila->placeId.")'>Ya visitado</a>";
+				            }
+				        }
+				        else {
+				        	$enlaces .= "<p>¡Inicia sesión para guardalo en tu lista!</p>";
+				        }
+				        $enlaces .= '</div>';
+
+				        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es, 'placeId' => $fila->placeId, 'enlaces' => $enlaces);
+				        $sitios[] = $marca;
+			    	}
+			    	$list[] = $sitios;
+			    }
 			}
 
 			echo json_encode($list);

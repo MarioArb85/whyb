@@ -393,6 +393,24 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+.cargando {
+	position: absolute;
+	top: 270px;
+	left: 370px;
+	width: 1000px;
+	height: 940px;
+	opacity: 0.8;
+	z-index: 10;
+	background-color: white;
+	/*border: 1px solid black;*/
+}
+
+.cargandoImg {
+	position: relative;
+	float: left;
+	margin: 350px 450px;
+}
+
 #paginacion {
 	position: relative;
 	margin: 0px auto;

@@ -48,10 +48,15 @@
               });
             },
             beforeSend: function() {
-              $('#results').html('<img src="/whyb/web/img/load.gif" />');
+              //$('#results').html("<div class='cargando'><div class='cargandoImg'><img src='/whyb/web/img/load.gif' height='30px' width='30px'/></div></div>");
+              $('#divCargando').css("display","block");
+            },
+            complete: function() {
+              $('#divCargando').css("display","none");
             }
           });
         }
+
         //Cargar resultados mapa
         if ($('#map').length){
           clearOverlays();
@@ -65,7 +70,7 @@
             },                
             dataType: 'json',
             success: function(resultado) {
-              $.each(resultado, function(){
+              $.each(resultado[0], function(){
                 //Nuevo marcador
                 var marker = new google.maps.Marker({
                   position: new google.maps.LatLng(this.lat, this.lng),
@@ -73,18 +78,35 @@
                   map: map,
                   title: this.title
                 });
-                //Para pasar parametro al onclick
-                var img = this.img;
                 //Meter marker en array de marcadores
                 markersArray.push(marker);
-                //nuevo infowindow
-                infoWindow = new google.maps.InfoWindow();
+                //Variable para datos para infowindow
+                var contentString = '\
+                  <div class="placeresult" style="border:none;">\
+                  <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+                  <h3 class="titleresult">'+this.title+'</h3>\
+                  <div class="textresult">\
+                  <span><b>Categoría: </b>'+this.category+'</span>\
+                  <br/>\
+                  <span><b>País: </b>'+this.country+'</span>\
+                  <br/>\
+                  <span><b>Continente: </b>'+this.continent+'</span>\
+                  <br/>\
+                  <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+                  </div>\
+                  '+this.enlaces;
                 //Onclick
                 google.maps.event.addListener(marker, 'click', function() {
+                  if (infoWindow != null)
+                    closeInfoWindow();
+
                   map.setZoom(5);
                   map.setCenter(marker.getPosition());
+                  //nuevo infowindow
+                  infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
                   infoWindow.open(map, marker);
-                  openInfoWindow(marker, this.title, img);
                 });
               });
               map.setCenter(markersArray[markersArray.length-1].getPosition());
@@ -117,6 +139,16 @@
         dataType: 'json',
         success: function(resultado) {
           $('#results').html(resultado[0]);
+
+          $.each(resultado, function(){
+            if($('#'+this.placeId+'').length){
+              if (this.visited == 0)
+                $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+this.placeId+')">Ya no quiero visitarlo!</a>');
+              else if (this.visited == 1)
+                $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+this.placeId+')">No lo he visitado!</a>');
+            }
+          });
+
           //Paginate
           $("#paginacion").paginate({
             count: resultado[1],
@@ -138,7 +170,10 @@
           });
         },
         beforeSend: function() {
-          $('#results').html('<img src="/whyb/web/img/load.gif" />');
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
         }
       });
     });
@@ -166,7 +201,7 @@
         },                
         dataType: 'json',
         success: function(resultado) {
-          $.each(resultado, function(){
+          $.each(resultado[0], function(){
             //Nuevo marcador
             var marker = new google.maps.Marker({
               position: new google.maps.LatLng(this.lat, this.lng),
@@ -174,23 +209,45 @@
               map: map,
               title: this.title
             });
-            //Para pasar parametro al onclick
-            var img = this.img;
             //Meter marker en array de marcadores
             markersArray.push(marker);
-            //nuevo infowindow
-            infoWindow = new google.maps.InfoWindow();
+            //Variable para datos para infowindow
+            var contentString = '\
+              <div class="placeresult" style="border:none;">\
+              <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+              <h3 class="titleresult">'+this.title+'</h3>\
+              <div class="textresult">\
+              <span><b>Categoría: </b>'+this.category+'</span>\
+              <br/>\
+              <span><b>País: </b>'+this.country+'</span>\
+              <br/>\
+              <span><b>Continente: </b>'+this.continent+'</span>\
+              <br/>\
+              <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+              </div>\
+              '+this.enlaces;
             //Onclick
             google.maps.event.addListener(marker, 'click', function() {
+              if (infoWindow != null)
+                closeInfoWindow();
+
+              map.setZoom(5);
+              map.setCenter(marker.getPosition());
+              //nuevo infowindow
+              infoWindow = new google.maps.InfoWindow({
+                content: contentString
+              });
+              infoWindow.open(map, marker);
+            });
+            //Onclick
+/*            google.maps.event.addListener(marker, 'click', function() {
               //map.setZoom(5);
               map.setCenter(marker.getPosition());
               infoWindow.open(map, marker);
               openInfoWindow(marker, this.title, img);
-            });
+            });*/
           });
           map.setCenter(markersArray[markersArray.length-1].getPosition());
-          console.log(markersArray[markersArray.length-1].getPosition().toString());
-          console.log('valentin cabeza de chucrut');
           map.setZoom(4);
         },
       });
@@ -497,13 +554,20 @@
       },                
       dataType: 'json',
       success: function(resultado) {
+        console.log(resultado);
         if (resultado == true) {
           alert('Se ha eliminado el lugar de tu lista correctamente');
           $('#'+placeId+'').html("<a href='javascript: void(0)' style='text-align: none;' class='enlace' onclick='wantToVisit("+placeId+")'>Quiero visitarlo!</a><a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited("+placeId+")'>Ya visitado</a>");
         }
         else
           alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
-      }
+      },
+        beforeSend: function() {
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
+        }
     });
   }
 
@@ -518,13 +582,20 @@
       },                
       dataType: 'json',
       success: function(resultado) {
+        console.log(resultado);
         if (resultado == true) {
           alert('El lugar se ha eliminado de tu lista correctamente');
           $('#'+placeId+'').html("<a href='javascript: void(0)' style='text-align: none;' class='enlace' onclick='wantToVisit("+placeId+")'>Quiero visitarlo!</a><a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited("+placeId+")'>Ya visitado</a>");
         }
         else
           alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
-      }
+      },
+        beforeSend: function() {
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
+        }
     });
   }
 
@@ -539,13 +610,20 @@
       },                
       dataType: 'json',
       success: function(resultado) {
+        console.log(resultado);
         if (resultado == true) {
           alert('¡El lugar se ha agregado a tu lista correctamente!');
           $('#'+placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+placeId+')">Ya no quiero visitarlo!</a>');
         }
         else
           alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
-      }
+      },
+        beforeSend: function() {
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
+        }
     });
   }
 
@@ -560,12 +638,19 @@
       },                
       dataType: 'json',
       success: function(resultado) {
+        console.log(resultado);
         if (resultado == true) {
           alert('¡El lugar se ha agregado a tu lista correctamente!');
           $('#'+placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+placeId+')">No lo he visitado!</a>');
         }
         else
           alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
-      }
+      },
+        beforeSend: function() {
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
+        }
     });
   }
