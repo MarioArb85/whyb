@@ -6,7 +6,6 @@
       
         //Cargar resultados listado
         if ($('#results').length){
-          //alert($("#selCountries").val());
           //Funcion ajax        
           $.ajax({
             url: '/whyb/web/ajax/ajax.php',
@@ -22,9 +21,9 @@
               $.each(resultado, function(){
                 if($('#'+this.placeId+'').length){
                   if (this.visited == 0)
-                    $('#'+this.placeId+'').html('<a href="javascript: void(0)">No quiero visitarlo</a>');
+                    $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+this.placeId+')">Ya no quiero visitarlo!</a>');
                   else if (this.visited == 1)
-                    $('#'+this.placeId+'').html('<a href="javascript: void(0)">No lo he visitado</a>');
+                    $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+this.placeId+')">No lo he visitado!</a>');
                 }
               });
 
@@ -139,7 +138,7 @@
           });
         },
         beforeSend: function() {
-          $('#results').html('Cargando...');
+          $('#results').html('<img src="/whyb/web/img/load.gif" />');
         }
       });
     });
@@ -190,6 +189,8 @@
             });
           });
           map.setCenter(markersArray[markersArray.length-1].getPosition());
+          console.log(markersArray[markersArray.length-1].getPosition().toString());
+          console.log('valentin cabeza de chucrut');
           map.setZoom(4);
         },
       });
@@ -483,4 +484,88 @@
   function getCountry(){
     if ($('#placesCountry').css('display') != 'none' && $("#selCountries").val()!= 'noCountry')
         return $("#selCountries").val();
+  }
+
+  function dontWantToVisit(placeId){
+    //Funcion ajax        
+    $.ajax({
+      url: '/whyb/web/ajax/ajax.php',
+      type: 'POST',
+      data: {
+      func: 'dontWantToVisit',
+      placeId: placeId
+      },                
+      dataType: 'json',
+      success: function(resultado) {
+        if (resultado == true) {
+          alert('Se ha eliminado el lugar de tu lista correctamente');
+          $('#'+placeId+'').html("<a href='javascript: void(0)' style='text-align: none;' class='enlace' onclick='wantToVisit("+placeId+")'>Quiero visitarlo!</a><a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited("+placeId+")'>Ya visitado</a>");
+        }
+        else
+          alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+      }
+    });
+  }
+
+  function notVisited(placeId){
+    //Funcion ajax        
+    $.ajax({
+      url: '/whyb/web/ajax/ajax.php',
+      type: 'POST',
+      data: {
+      func: 'notVisited',
+      placeId: placeId
+      },                
+      dataType: 'json',
+      success: function(resultado) {
+        if (resultado == true) {
+          alert('El lugar se ha eliminado de tu lista correctamente');
+          $('#'+placeId+'').html("<a href='javascript: void(0)' style='text-align: none;' class='enlace' onclick='wantToVisit("+placeId+")'>Quiero visitarlo!</a><a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited("+placeId+")'>Ya visitado</a>");
+        }
+        else
+          alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+      }
+    });
+  }
+
+  function wantToVisit(placeId){
+    //Funcion ajax        
+    $.ajax({
+      url: '/whyb/web/ajax/ajax.php',
+      type: 'POST',
+      data: {
+      func: 'wantToVisit',
+      placeId: placeId
+      },                
+      dataType: 'json',
+      success: function(resultado) {
+        if (resultado == true) {
+          alert('¡El lugar se ha agregado a tu lista correctamente!');
+          $('#'+placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+placeId+')">Ya no quiero visitarlo!</a>');
+        }
+        else
+          alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+      }
+    });
+  }
+
+  function alreadyVisited(placeId){
+    //Funcion ajax        
+    $.ajax({
+      url: '/whyb/web/ajax/ajax.php',
+      type: 'POST',
+      data: {
+      func: 'alreadyVisited',
+      placeId: placeId
+      },                
+      dataType: 'json',
+      success: function(resultado) {
+        if (resultado == true) {
+          alert('¡El lugar se ha agregado a tu lista correctamente!');
+          $('#'+placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+placeId+')">No lo he visitado!</a>');
+        }
+        else
+          alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+      }
+    });
   }

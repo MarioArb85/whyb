@@ -68,7 +68,7 @@
 				}
 
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
-				//$firephp->log($consulta, 'Mensaje');
+				$firephp->log($consulta, 'Mensaje');
 				if ($resultado = $conexion->query($consulta)) {
 					//Contadores para paginar
 					$contDiv1 = 0;
@@ -94,9 +94,9 @@
 		                $body .= "<span><b>Web: </b><a href='".$fila->web_es."' class='linkResult' target='_blank'>".$fila->web_es."</a></span>";
 		                $body .= "</div>";
 		                $body .= "<div id='".$fila->placeId."' class='moreresult'>";
-		                if (isset($_SESSION['user'])){
-		                	$body .= "<a href='javascript: void(0)' style='text-align: none;' class='enlace'>Quiero visitarlo!</a>";
-		                	$body .= "<a href='javascript: void(0)' style='padding-left: 50px;' class='enlace'>Ya visitado</a>";
+		                if (isset($_SESSION['user'])){  	
+		                	$body .= '<a href="javascript: void(0)" style="text-align: none;" class="enlace" onclick="wantToVisit('.$fila->placeId.')">Quiero visitarlo!</a>';
+		                	$body .= "<a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited(".$fila->placeId.")'>Ya visitado</a>";
 		            	}
 		            	else {
 		            		$body .= "<p>¡Inicia sesión para guardalo en tu lista!</p>";
@@ -255,6 +255,34 @@
 			$mensaje = 'El lugar ha sido guardado correctamente.';
 
 			echo json_encode($mensaje);
+			break;
+
+		case 'dontWantToVisit':
+			$userId = $_SESSION['userId'];
+			$placeId = $_POST['placeId'];
+			$resultado = modeloSitios::noQuieroVisitarlo($placeId, $userId);
+			echo json_encode($resultado);
+			break;
+
+		case 'notVisited':
+			$userId = $_SESSION['userId'];
+			$placeId = $_POST['placeId'];
+			$resultado = modeloSitios::notVisited($placeId, $userId);
+			echo json_encode($resultado);
+			break;
+
+		case 'wantToVisit':
+			$userId = $_SESSION['userId'];
+			$placeId = $_POST['placeId'];
+			$resultado = modeloSitios::wantToVisit($placeId, $userId);
+			echo json_encode($resultado);
+			break;
+
+		case 'alreadyVisited':
+			$userId = $_SESSION['userId'];
+			$placeId = $_POST['placeId'];
+			$resultado = modeloSitios::alreadyVisited($placeId, $userId);
+			echo json_encode($resultado);
 			break;
 
 		default:
