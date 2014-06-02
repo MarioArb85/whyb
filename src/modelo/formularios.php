@@ -88,15 +88,15 @@
 		}
 
 		//Pinta select mio unesco/propio
-		static function buildMyCountries($unesco){
+		static function buildMyCountries($unesco, $visited){
 			global $firephp;
 			$conexion = AccesoBBDD::abreConexionBD();
 
-			$consulta = "SELECT DISTINCT  p.countryId, c.countryName_es FROM places p ,placesvisited v, countries c WHERE v.userId= ".$_SESSION['userId']." and v.isUnesco = $unesco and p.placeId = v.placeId and c.countryId = p.countryId ORDER BY c.countryname_es;";
-			$firephp->log($consulta, 'Mensaje');
+			$consulta = "SELECT DISTINCT  p.countryId, c.countryName_es FROM places p ,placesvisited v, countries c WHERE v.userId= ".$_SESSION['userId']." and v.isUnesco = $unesco and v.visited = $visited and p.placeId = v.placeId and c.countryId = p.countryId ORDER BY c.countryname_es;";
+
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
-		        $countries .= "<option value='0'>Elige un país</option>";
+		        $countries .= "<option value='0' selected>Todos</option>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryName_es."</option>";
 		        }       

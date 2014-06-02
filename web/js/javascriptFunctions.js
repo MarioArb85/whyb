@@ -19,6 +19,18 @@
       });
     }
 
+    if (document.getElementById("mapMyPlaces")){
+      var mapOptions = {
+        center: new google.maps.LatLng(20, 10),
+        zoom: 2,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("mapMyPlaces"), mapOptions);
+      google.maps.event.addListener(map, 'click', function(){
+        closeInfoWindow();
+      });
+    }
+
     if (document.getElementById("mapPlaces")){
       var mapOptions = {
         center: new google.maps.LatLng(50, 30),

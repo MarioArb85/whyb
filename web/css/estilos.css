@@ -246,7 +246,6 @@ a:hover {
 	height: 600px;
 	width: 1200px;
 	margin: 0px auto;
-	border: 1px solid black;
 }
 
 #unescoPage {
@@ -343,7 +342,6 @@ a:hover {
 	margin: 25px;
 	width: 150px;
 	height: 440px;
-	/*border: 1px solid black;*/
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
@@ -353,10 +351,18 @@ a:hover {
 	float: left;
 	height: 20px;
 	width: 140px;
-	/*border: 1px solid black;*/
-	/*font-weight: bold;*/
 	color: white;
 	background-color: #34629b;
+}
+
+.linkTitle {
+	position: relative;
+	float: left;
+	height: 20px;
+	width: 140px;
+	color: white;
+	margin-bottom: 10px;
+	background-color: #0099ff;
 }
 
 .linkFilter:hover {
@@ -381,6 +387,14 @@ a:hover {
 	float: left;
 	margin: 25px 0px;
 	width: 975px;
+	height: 500px;
+}
+
+#mapMyPlaces {
+	position: relative;
+	float: left;
+	margin: 25px 0px;
+	width: 804px;
 	height: 500px;
 }
 
