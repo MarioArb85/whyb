@@ -127,11 +127,11 @@
     //Actualizar por ajax sitios Unesco
     $('#updateListBtn').click(function(){
       //Seleccionar categoria
-      var category = getCategory();
+      var category = getCategory('placesCategory', 'checkCat');
       //Seleccionar continente
       var continent = getContinent();
       //Seleccionar pais
-      var country = getCountry();
+      var country = getCountry('placesCountry', 'selCountries');
 
       //Funcion ajax        
       $.ajax({
@@ -190,11 +190,11 @@
       clearOverlays();
 
       //Seleccionar categoria
-      var category = getCategory();
+      var category = getCategory('placesCategory', 'checkCat');
       //Seleccionar continente
       var continent = getContinent();
       //Seleccionar pais
-      var country = getCountry();
+      var country = getCountry('placesCountry', 'selCountries');
 
       //Funcion ajax        
       $.ajax({
@@ -204,6 +204,79 @@
           func: 'map',
           categoria: category,
           continente: continent,
+          pais: country
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          infoArray = resultado;
+          $.each(resultado[0], function(){
+            //Nuevo marcador
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(this.lat, this.lng),
+              icon: this.icon,
+              map: map,
+              title: this.title
+            });
+            //Meter marker en array de marcadores
+            //markersArray.push(marker);
+            markersArray[this.placeId] = marker;
+            //Variable para datos para infowindow
+            var contentString = '\
+              <div class="placeresult" style="border:none;">\
+              <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+              <h3 class="titleresult">'+this.title+'</h3>\
+              <div class="textresult">\
+              <span><b>Categoría: </b>'+this.category+'</span>\
+              <br/>\
+              <span><b>País: </b>'+this.country+'</span>\
+              <br/>\
+              <span><b>Continente: </b>'+this.continent+'</span>\
+              <br/>\
+              <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+              </div>\
+              '+this.enlaces;
+            //Onclick
+            google.maps.event.addListener(marker, 'click', function() {
+              if (infoWindow != null)
+                closeInfoWindow();
+
+              map.setZoom(5);
+              map.setCenter(marker.getPosition());
+              //nuevo infowindow
+              infoWindow = new google.maps.InfoWindow({
+                content: contentString
+              });
+              infoWindow.open(map, marker);
+            });
+          });
+          map.setCenter(markersArray[markersArray.length-1].getPosition());
+          map.setZoom(4);
+        },
+        beforeSend: function() {
+          $('#divCargandoMap').css("display","block");
+        },
+        complete: function() {
+          $('#divCargandoMap').css("display","none");
+        }
+      });
+    });
+
+  //Actualizar por ajax sitios que quiero visitar
+      $('#btnQuieroVisitar').click(function(){
+      clearOverlays();
+
+      //Seleccionar categoria
+      var category = getCategory('quieroVisitarCategory', 'quieroVisitar');
+      //Seleccionar pais
+      var country = getCountry('quieroVisitarCountry', 'selQuieroVisitarUnesco');
+
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'quieroVisitar',
+          categoria: category,
           pais: country
         },                
         dataType: 'json',
@@ -508,16 +581,16 @@
     }
   });
 
-  function getCategory(){
+  function getCategory(div,check){
       var category = [];
-      if ($('#placesCategory').css('display') != 'none') {
-        if ($('#checkCat1').is(":checked")) {
+      if ($('#'+div).css('display') != 'none') {
+        if ($('#'+check+'1').is(":checked")) {
           category.push($("#checkCat1").val());
         }
-        if ($('#checkCat2').is(":checked")) {
+        if ($('#'+check+'2').is(":checked")) {
           category.push($("#checkCat2").val());
         }
-        if ($('#checkCat3').is(":checked")) {
+        if ($('#'+check+'3').is(":checked")) {
           category.push($("#checkCat3").val());
         }
       }
@@ -552,9 +625,9 @@
     return continent;
   }
 
-  function getCountry(){
-    if ($('#placesCountry').css('display') != 'none' && $("#selCountries").val()!= 'noCountry')
-        return $("#selCountries").val();
+  function getCountry(div,select){
+    if ($('#'+div).css('display') != 'none' && $("#selCountries").val()!= 'noCountry')
+        return $("#"+select).val();
   }
 
   //FUNCIONES ACTUALIZAR LISTADO

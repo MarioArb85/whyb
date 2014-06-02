@@ -6,7 +6,7 @@ class mapa {
   	global $firephp;
 
   	//pinta categorias
-    $checkCat = formularios::buildCategories();
+    $checkCat = formularios::buildCategories('checkCat');
     //pinta select
     $select = formularios::buildCountries();
     //Pinta continentes

@@ -204,7 +204,7 @@
 				}
 
 				$consulta .= " t.categoryId != 0 and";
-
+				
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
 				$firephp->log($consulta, 'consulta');
 				if ($resultado = $conexion->query($consulta)) {
@@ -250,6 +250,62 @@
 				        	$enlaces .= "<p>¡Inicia sesión para guardalo en tu lista!</p>";
 				        }
 				        $enlaces .= '</div>';
+
+				        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es, 'placeId' => $fila->placeId, 'enlaces' => $enlaces);
+				        $sitios[$fila->placeId] = $marca;
+			    	}
+			    	$list[] = $sitios;
+			    }
+			}
+
+			echo json_encode($list);
+			break;
+
+		case 'quieroVisitar':
+			//Para pasar parámetros de vuelta
+			$list = array();
+
+			if(isset($_POST['categoria']) || isset($_POST['pais'])) {
+				//Recoger datos para filtrar
+				if (isset($_POST['categoria']))
+					$cat = $_POST['categoria'];
+				
+				if (isset($_POST['pais']))
+					$country = $_POST['pais'];
+			    
+			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
+
+				if (isset($cat)){
+					$consulta .= "(";
+					foreach ($cat as $cat) {
+						$consulta .= " t.categoryId = ".$cat." or"; 
+					}
+					$consulta = substr($consulta, 0, -2);
+					$consulta .= ") and ";
+				}
+
+				if (isset($country)){
+					$consulta .= " c.countryId = '".$country."' and";
+				}
+
+				$consulta .= " t.categoryId != 0 and";
+
+				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
+				$firephp->log($consulta, 'consulta');
+				if ($resultado = $conexion->query($consulta)) {
+					$mark='';
+					while ($fila = $resultado->fetch_object()) {
+						if ($fila->categoryName_es == 'Natural')
+							$mark = '/whyb/web/img/natural.png';
+						else if ($fila->categoryName_es == 'Cultural')
+							$mark = '/whyb/web/img/cultural.png';
+						else if ($fila->categoryName_es == 'Mixto')
+							$mark = '/whyb/web/img/mixed.png';
+
+						$imagen = str_replace("http://","",$fila->unescoimage);
+						$web = str_replace("http://","",$fila->web_es);
+
+						$enlaces = '<div id="'.$fila->placeId.'" class="moreresult">';
 
 				        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es, 'placeId' => $fila->placeId, 'enlaces' => $enlaces);
 				        $sitios[$fila->placeId] = $marca;

@@ -5,8 +5,10 @@ class myMapPlaces {
   static function construye() {
     global $firephp;
 
-    //pinta categorias
-    $checkCat = formularios::buildCategories();
+    //pinta categorias quiero visitar
+    $checkCat = formularios::buildCategories('quieroVisitar');
+    //pinta categorias quiero visitar
+    $checkCatUnesco = formularios::buildCategories('myUnescoCategory');
     //pinta formulario sitios unesco quiero visitar
     $quieroVisitarUnesco = formularios::buildMyCountries(1, 0);
     //pinta formulario sitios unesco he visitado
@@ -35,6 +37,9 @@ class myMapPlaces {
                         $quieroVisitarUnesco
                     </div>
                     <br/>
+                    <div id='updateList'>          
+                        <a href='javascript: void(0)' id='btnQuieroVisitar' name='btnQuieroVisitar' class='formularioBtn enlace'>Actualizar</a>
+                    </div>
                 </div>
                 <div id='mapMyPlaces'>
                 </div>
@@ -42,14 +47,18 @@ class myMapPlaces {
                     <span class='linkTitle linkPlaces'>&nbsp;&nbsp;Unesco visitados...</span>
                     <span class='linkFilter linkPlaces'>&nbsp;&nbsp;Categoría:</span>
                     <br/><br/><br/><br/>
-                    <div id='quieroVisitarCategory' class='sangria'>          
-                        $checkCat
+                    <div id='myUnescoCategory' class='sangria'>          
+                        $checkCatUnesco
                     </div>  
                     <br/>
                     <span class='linkFilter linkPlaces'>&nbsp;&nbsp;País:</span>
                     <br/><br/>
-                    <div id='quieroVisitarCountry' class='sangria'>          
+                    <div id='myUnescoCategory' class='sangria'>          
                         $heVisitadoUnesco
+                    </div>
+                    <br/>
+                    <div id='updateList'>          
+                        <a href='javascript: void(0)' id='btnVisitadoUnesco' name='btnVisitadoUnesco' class='formularioBtn enlace'>Actualizar</a>
                     </div>
                     <span class='linkTitle linkPlaces' style='margin-top: 30px;'>&nbsp;&nbsp;Mis lugares visitados</span>
                     <span class='linkFilter linkPlaces'>&nbsp;&nbsp;País:</span>
@@ -66,6 +75,9 @@ class myMapPlaces {
                         </select>         
                     </div>
                     <br/>
+                    <div id='updateList'>          
+                        <a href='javascript: void(0)' id='btnVisitadoMios' name='btnVisitadoMios' class='formularioBtn enlace'>Actualizar</a>
+                    </div>
                 </div>
             </div>
             ";

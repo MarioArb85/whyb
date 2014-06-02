@@ -21,7 +21,7 @@
 		}
 
 		//Pinta categorias
-		static function buildCategories(){
+		static function buildCategories($nombre){
 			$conexion = AccesoBBDD::abreConexionBD();
 
 		    $consulta = "SELECT categoryId, categoryName_es FROM category";
@@ -30,7 +30,7 @@
 		        $checkCat = "";
 		        while ($fila = $resultado->fetch_object()) {
 		            if($fila->categoryId != 0)
-		                $checkCat .= "<input type='checkbox' id='checkCat".$fila->categoryId."' value='".$fila->categoryId."'/>".$fila->categoryName_es."<br/>";
+		                $checkCat .= "<input type='checkbox' id='$nombre".$fila->categoryId."' value='".$fila->categoryId."'/>".$fila->categoryName_es."<br/>";
 		        }       
 		        // se libera el cursor
 		        $resultado->free();
@@ -92,11 +92,20 @@
 			global $firephp;
 			$conexion = AccesoBBDD::abreConexionBD();
 
+			if ($unesco == 1){
+				if($visited == 0)
+					$idSelect = 'selQuieroVisitarUnesco';
+				else
+					$idSelect = 'selHeVisitadoUnesco';
+			}
+			else
+				$idSelect = 'selMyPlaces';
+
 			$consulta = "SELECT DISTINCT  p.countryId, c.countryName_es FROM places p ,placesvisited v, countries c WHERE v.userId= ".$_SESSION['userId']." and v.isUnesco = $unesco and v.visited = $visited and p.placeId = v.placeId and c.countryId = p.countryId ORDER BY c.countryname_es;";
 
 	   		if($resultado = $conexion->query($consulta)) {
-		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
-		        $countries .= "<option value='0' selected>Todos</option>";
+		        $countries = "<select id='".$idSelect."' name='".$idSelect."' style='width:120px;'>";
+		        $countries .= "<option value='0'>Todos</option>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryName_es."</option>";
 		        }       
