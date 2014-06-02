@@ -67,6 +67,8 @@
 					$consulta .= " c.countryId = '".$country."' and";
 				}
 
+				$consulta .= " t.categoryId != 0 and";
+
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
 				//$firephp->log($consulta, 'Mensaje');
 				if ($resultado = $conexion->query($consulta)) {
@@ -201,9 +203,12 @@
 					$consulta .= " c.countryId = '".$country."' and";
 				}
 
-				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
+				$consulta .= " t.categoryId != 0 and";
 
+				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
+				$firephp->log($consulta, 'consulta');
 				if ($resultado = $conexion->query($consulta)) {
+					$mark='';
 					while ($fila = $resultado->fetch_object()) {
 						if ($fila->categoryName_es == 'Natural')
 							$mark = '/whyb/web/img/natural.png';
@@ -211,6 +216,9 @@
 							$mark = '/whyb/web/img/cultural.png';
 						else if ($fila->categoryName_es == 'Mixto')
 							$mark = '/whyb/web/img/mixed.png';
+
+						$imagen = str_replace("http://","",$fila->unescoimage);
+						$web = str_replace("http://","",$fila->web_es);
 
 						$enlaces = '<div id="'.$fila->placeId.'" class="moreresult">';
 						$entra = false;
@@ -222,20 +230,20 @@
 				                	if ($value['visited'] == 0) {
 				                		//$firephp->log($fila->placeId, 'result 0');
 				                		$entra = true;
-				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('.$value['placeId'].')">Ya no quiero visitarlo!</a>';
+				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisitMap('.$value['placeId'].')">Ya no quiero visitarlo!</a>';
 				                    	break;
 				                    }
 				                	else if ($value['visited'] == 1) {
 				                		//$firephp->log($fila->placeId, 'result 1');
 				                		$entra = true;
-				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="notVisited('.$value['placeId'].')">No lo he visitado!</a>';
+				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="notVisitedMap('.$value['placeId'].')">No lo he visitado!</a>';
 				                    	break;
 				                    }
 				                }
 							}
 							if ($entra == false) {
-				                $enlaces .= '<a href="javascript: void(0)" style="text-align: none;" class="enlace" onclick="wantToVisit('.$fila->placeId.')">Quiero visitarlo!</a>';
-				            	$enlaces .= "<a href='javascript: void(0)' style='padding-left: 50px;' class='enlace' onclick='alreadyVisited(".$fila->placeId.")'>Ya visitado</a>";
+				                $enlaces .= '<a href="javascript: void(0)" style="text-align: none;" class="enlace" onclick="wantToVisitMap('.$fila->placeId.')">Quiero visitarlo!</a>';
+				            	$enlaces .= '<a href="javascript: void(0)" style="padding-left: 50px;" class="enlace" onclick="alreadyVisitedMap('.$fila->placeId.')">Ya visitado</a>';
 				            }
 				        }
 				        else {
@@ -244,7 +252,7 @@
 				        $enlaces .= '</div>';
 
 				        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es, 'placeId' => $fila->placeId, 'enlaces' => $enlaces);
-				        $sitios[] = $marca;
+				        $sitios[$fila->placeId] = $marca;
 			    	}
 			    	$list[] = $sitios;
 			    }

@@ -7,14 +7,17 @@ class mapa {
 
   	//pinta categorias
     $checkCat = formularios::buildCategories();
-
     //pinta select
     $select = formularios::buildCountries();
-
     //Pinta continentes
     $checkCont = formularios::buildContinents();
 
   	$body = "
+        <div id='divCargandoMap' class='cargandoMap' display='none'>
+            <div class='cargandoImg'>
+                <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
+            </div>
+        </div>
 		<div id='mapPage'>
 			<div id='filters'>
                 <a href='#' onclick='ocultar(\"placesCategory\",\"imgCategory\")' class='linkFilter'>&nbsp;<img id='imgCategory' src='/whyb/web/img/flecha_abajo.png'/>&nbsp;&nbsp;Categoría:</a>
@@ -43,7 +46,7 @@ class mapa {
             </div>
 		</div>
   	";
-	
+
     return $body;
   }
 }

@@ -30,12 +30,12 @@
       if ($user == "")
         $body = sinRegistrar::construye();
       else
-        $body = places::construye();
+        $body = myMapPlaces::construye();
 
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header, $menu, $body, $footer);
       $pagina = $paginaDetalle->mostrar();
-      //$firephp->log($paco, 'Mensaje');
+
       return $pagina;
     }
 

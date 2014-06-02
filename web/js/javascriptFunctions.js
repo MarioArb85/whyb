@@ -2,6 +2,7 @@
   var map = null;
   var mapMio = null;
   var markersArray = new Array();
+  var infoArray = new Array();
   var infoWindow = null; 
   //var marker = null;
 
@@ -83,9 +84,11 @@
 
   function clearOverlays() {
     for (var i = 0; i < markersArray.length; i++ ) {
-      markersArray[i].setMap(null);
+      if( markersArray[i] != undefined)
+        markersArray[i].setMap(null);
     }
     markersArray.length = 0;
+    infoArray.length = 0;
   }
 
   function closeInfoWindow() {

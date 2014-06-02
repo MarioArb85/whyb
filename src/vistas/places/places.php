@@ -6,6 +6,11 @@ class places {
     global $firephp;
 
     $body = '
+            <div id="divCargandoMap" class="cargandoMap" style="display: none;">
+                <div class="cargandoImg">
+                    <img src="/whyb/web/img/load.gif" height="30px" width="30px"/>
+                </div>
+            </div>
             <div id="mapPage">  
                 <div id="filters">
                     <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;País:</span>

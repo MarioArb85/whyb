@@ -241,6 +241,14 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+#myMapPage {
+	position: relative;
+	height: 600px;
+	width: 1200px;
+	margin: 0px auto;
+	border: 1px solid black;
+}
+
 #unescoPage {
 	position: relative;
 	height: 1000px;
@@ -399,6 +407,18 @@ a:hover {
 	left: 370px;
 	width: 1000px;
 	height: 940px;
+	opacity: 0.8;
+	z-index: 10;
+	background-color: white;
+	/*border: 1px solid black;*/
+}
+
+.cargandoMap {
+	position: absolute;
+	top: 270px;
+	left: 370px;
+	width: 1000px;
+	height: 540px;
 	opacity: 0.8;
 	z-index: 10;
 	background-color: white;
