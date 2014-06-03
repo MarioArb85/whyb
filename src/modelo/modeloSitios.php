@@ -118,7 +118,7 @@
 				$consulta .= "and p.countryId = '$country'
 								and p.city = '$city';";
 			}
-			$firephp->log($consulta, 'Mensaje');
+
 			if ($resultado = $conexion->query($consulta)) {
 				if ($conexion->affected_rows == 0)
 					$sitios = '';

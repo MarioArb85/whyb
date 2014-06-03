@@ -361,50 +361,54 @@
         },                
         dataType: 'json',
         success: function(resultado) {
-          $.each(resultado[0], function(){
-            //Nuevo marcador
-            var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(this.lat, this.lng),
-              icon: this.icon,
-              map: map,
-              title: this.title
-            });
-            //Meter marker en array de marcadores
-            markersArray[this.placeId] = marker;
-            //Variable para datos para infowindow
-            var contentString = '\
-              <div class="placeresult" style="border:none;">\
-              <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
-              <h3 class="titleresult">'+this.title+'</h3>\
-              <div class="textresult">\
-              <span><b>Categoría: </b>'+this.category+'</span>\
-              <br/>\
-              <span><b>País: </b>'+this.country+'</span>\
-              <br/>\
-              <span><b>Continente: </b>'+this.continent+'</span>\
-              <br/>\
-              <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
-              </div>\
-              <div id="'+this.placeId+'" class="moreresult">\
-              <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar de la lista de sitios que he visitado</a>\
-              </div>\
-              ';
-            //Onclick
-            google.maps.event.addListener(marker, 'click', function() {
-              if (infoWindow != null)
-                closeInfoWindow();
-
-              map.setZoom(5);
-              map.setCenter(marker.getPosition());
-              //nuevo infowindow
-              infoWindow = new google.maps.InfoWindow({
-                content: contentString
+          if (resultado != ''){
+            $.each(resultado[0], function(){
+              //Nuevo marcador
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(this.lat, this.lng),
+                icon: this.icon,
+                map: map,
+                title: this.title
               });
-              infoWindow.open(map, marker);
+              //Meter marker en array de marcadores
+              markersArray[this.placeId] = marker;
+              //Variable para datos para infowindow
+              var contentString = '\
+                <div class="placeresult" style="border:none;">\
+                <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+                <h3 class="titleresult">'+this.title+'</h3>\
+                <div class="textresult">\
+                <span><b>Categoría: </b>'+this.category+'</span>\
+                <br/>\
+                <span><b>País: </b>'+this.country+'</span>\
+                <br/>\
+                <span><b>Continente: </b>'+this.continent+'</span>\
+                <br/>\
+                <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+                </div>\
+                <div id="'+this.placeId+'" class="moreresult">\
+                <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar de la lista de sitios que he visitado</a>\
+                </div>\
+                ';
+              //Onclick
+              google.maps.event.addListener(marker, 'click', function() {
+                if (infoWindow != null)
+                  closeInfoWindow();
+
+                map.setZoom(5);
+                map.setCenter(marker.getPosition());
+                //nuevo infowindow
+                infoWindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                infoWindow.open(map, marker);
+              });
             });
-          });
-          map.setCenter(new google.maps.LatLng(20,10));
-          map.setZoom(2);
+            map.setCenter(new google.maps.LatLng(20,10));
+            map.setZoom(2);
+          }
+          else
+            alert('No se ha encontrado ningún resultado');
         },
         beforeSend: function() {
           $('#divCargandoMap').css("display","block");
@@ -489,7 +493,7 @@
               <br/>\
               <span><b>Descripción: </b>'+this.description+'</span>\
               <div id="'+this.placeId+'" class="moreresult" style="margin: 15px 30px;">\
-              <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar este lugar</a>\
+              <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'true\')">Eliminiar este lugar</a>\
               </div>\
               </div>';
             //Onclick
