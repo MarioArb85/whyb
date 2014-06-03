@@ -261,7 +261,7 @@
       });
     });
 
-  //Actualizar por ajax sitios que quiero visitar
+    //Actualizar por ajax sitios que quiero visitar
       $('#btnQuieroVisitar').click(function(){
       clearOverlays();
 
@@ -277,11 +277,90 @@
         data: {
           func: 'quieroVisitar',
           categoria: category,
-          pais: country
+          pais: country,
+          visited: 0
         },                
         dataType: 'json',
         success: function(resultado) {
-          infoArray = resultado;
+          if (resultado != ''){
+            $.each(resultado[0], function(){
+              //Nuevo marcador
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(this.lat, this.lng),
+                icon: this.icon,
+                map: map,
+                title: this.title
+              });
+              //Meter marker en array de marcadores
+              markersArray[this.placeId] = marker;
+              //Variable para datos para infowindow
+              var contentString = '\
+                <div class="placeresult" style="border:none;">\
+                <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+                <h3 class="titleresult">'+this.title+'</h3>\
+                <div class="textresult">\
+                <span><b>Categoría: </b>'+this.category+'</span>\
+                <br/>\
+                <span><b>País: </b>'+this.country+'</span>\
+                <br/>\
+                <span><b>Continente: </b>'+this.continent+'</span>\
+                <br/>\
+                <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+                </div>\
+                <div id="'+this.placeId+'" class="moreresult">\
+                <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar de la lista de sitios que quiero visitar</a>\
+                </div>\
+                ';
+              //Onclick
+              google.maps.event.addListener(marker, 'click', function() {
+                if (infoWindow != null)
+                  closeInfoWindow();
+
+                map.setZoom(5);
+                map.setCenter(marker.getPosition());
+                //nuevo infowindow
+                infoWindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                infoWindow.open(map, marker);
+              });
+            });
+            map.setCenter(new google.maps.LatLng(20,10));
+            map.setZoom(2);
+          }
+          else
+            alert('No se ha encontrado ningún resultado');
+        },
+        beforeSend: function() {
+          $('#divCargandoMap').css("display","block");
+        },
+        complete: function() {
+          $('#divCargandoMap').css("display","none");
+        }
+      });
+    });
+
+    //Actualizar por ajax sitios Unesco que he visitado
+      $('#btnVisitadoUnesco').click(function(){
+      clearOverlays();
+
+      //Seleccionar categoria
+      var category = getCategory('myUnescoCategory', 'myUnescoCategory');
+      //Seleccionar pais
+      var country = getCountry('myUnescoSelect', 'selHeVisitadoUnesco');
+
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'quieroVisitar',
+          categoria: category,
+          pais: country,
+          visited: 1
+        },                
+        dataType: 'json',
+        success: function(resultado) {
           $.each(resultado[0], function(){
             //Nuevo marcador
             var marker = new google.maps.Marker({
@@ -291,7 +370,6 @@
               title: this.title
             });
             //Meter marker en array de marcadores
-            //markersArray.push(marker);
             markersArray[this.placeId] = marker;
             //Variable para datos para infowindow
             var contentString = '\
@@ -307,7 +385,10 @@
               <br/>\
               <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
               </div>\
-              '+this.enlaces;
+              <div id="'+this.placeId+'" class="moreresult">\
+              <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar de la lista de sitios que he visitado</a>\
+              </div>\
+              ';
             //Onclick
             google.maps.event.addListener(marker, 'click', function() {
               if (infoWindow != null)
@@ -322,8 +403,114 @@
               infoWindow.open(map, marker);
             });
           });
-          map.setCenter(markersArray[markersArray.length-1].getPosition());
-          map.setZoom(4);
+          map.setCenter(new google.maps.LatLng(20,10));
+          map.setZoom(2);
+        },
+        beforeSend: function() {
+          $('#divCargandoMap').css("display","block");
+        },
+        complete: function() {
+          $('#divCargandoMap').css("display","none");
+        }
+      });
+    });
+
+    //Cargar ciduades dependiendo del país
+    $("#selMyPlaces").change(function(){
+      if (this.value == 0) {
+        var mandando = "<select id='selMyPlacesCities' name='selMyPlacesCities' style='width:120px;'>\
+                            <option value=''>Selecciona país</option>\
+                        </select>";
+        $("#myCitiesSelect").html(mandando);
+      }
+      else {
+        //Funcion ajax        
+        $.ajax({
+          url: '/whyb/web/ajax/ajax.php',
+          type: 'POST',
+          data: {
+            func: 'ciudad',
+            pais: this.value
+          },                
+          dataType: 'json',
+          success: function(resultado) {
+            $("#myCitiesSelect").html(resultado);
+          },
+          beforeSend: function() {
+            var mandando = "<select id='selMyPlacesCities' name='selMyPlacesCities' style='width:120px;'>\
+                              <option value=''>Obteniendo...</option>\
+                          </select>"; 
+            $("#myCitiesSelect").html(mandando);
+          },
+        });
+      }
+    });
+
+    //Actualizar por ajax mis sitios visitados
+      $('#btnVisitadoMios').click(function(){
+      //Limpiar mapa de marcadores
+      clearOverlays();
+      //Seleccionar pais
+      var country = getCountry('myPlacesSelect', 'selMyPlaces');
+      //Seleccionar ciudad
+      var city = $("#selMyPlacesCities").val();
+
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'mapaMisLugares',
+          country: country,
+          city: city
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          if (resultado != ''){
+          $.each(resultado, function(){
+            //Nuevo marcador
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(this.lat, this.lng),
+              map: map,
+              title: this.title,
+            });
+            //Meter marker en array de marcadores
+            markersArray[this.placeId] = marker;
+            //Variable para datos para infowindow
+            var contentString = '\
+              <div style="height: 140px; width: 370px;">\
+              <h1 style="width:100px;">'+this.place+'</h1>\
+              <br/>\
+              <span><b>Situación: </b>'+this.situation+'</span>\
+              <br/>\
+              <span><b>Ciudad: </b>'+this.city+'</span>\
+              <br/>\
+              <span><b>País: </b>'+this.country+'</span>\
+              <br/>\
+              <span><b>Descripción: </b>'+this.description+'</span>\
+              <div id="'+this.placeId+'" class="moreresult" style="margin: 15px 30px;">\
+              <a href="javascript: void(0)" class="enlace" onclick="deletePlace('+this.placeId+',\'false\')">Eliminiar este lugar</a>\
+              </div>\
+              </div>';
+            //Onclick
+            google.maps.event.addListener(marker, 'click', function() {
+              if (infoWindow != null)
+                closeInfoWindow();
+
+              map.setZoom(5);
+              map.setCenter(marker.getPosition());
+              //nuevo infowindow
+              infoWindow = new google.maps.InfoWindow({
+                content: contentString
+              });
+              infoWindow.open(map, marker);
+            });
+          });
+          map.setCenter(new google.maps.LatLng(20,10));
+          map.setZoom(2);
+          }
+          else
+            alert('No se ha encontrado ningún resultado');
         },
         beforeSend: function() {
           $('#divCargandoMap').css("display","block");
@@ -584,15 +771,12 @@
   function getCategory(div,check){
       var category = [];
       if ($('#'+div).css('display') != 'none') {
-        if ($('#'+check+'1').is(":checked")) {
-          category.push($("#checkCat1").val());
-        }
-        if ($('#'+check+'2').is(":checked")) {
-          category.push($("#checkCat2").val());
-        }
-        if ($('#'+check+'3').is(":checked")) {
-          category.push($("#checkCat3").val());
-        }
+        if ($('#'+check+'1').is(":checked")) 
+          category.push($("#"+check+"1").val());
+        if ($('#'+check+'2').is(":checked")) 
+          category.push($("#"+check+"2").val());
+        if ($('#'+check+'3').is(":checked")) 
+          category.push($("#"+check+"3").val());
       }
     return category;
   }
@@ -919,19 +1103,47 @@
   //Funcion para pintar nuevo infowindow
   function nuevoClick(placeId, contentString){
     google.maps.event.addListener(markersArray[placeId], 'click', function() {
-        console.log('entra1');
         if (infoWindow != null)
           closeInfoWindow();
 
-        console.log('entra2');
         map.setZoom(5);
         map.setCenter(markersArray[placeId].getPosition());
-        console.log('entra3');
         //nuevo infowindow
         infoWindow = new google.maps.InfoWindow({
           content: contentString
         });
-        console.log('entra4');
         infoWindow.open(map, markersArray[placeId]);
       });
+  }
+
+  function deletePlace(placeId, isUnesco){
+    var segurir = confirm ('¿Seguro que deseas elimiar este lugar?');
+    if (segurir == true) {
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'deleteWU',
+          placeId: placeId,
+          isUnesco: isUnesco
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          console.log(resultado);
+          if (resultado == true) {
+            markersArray[placeId].setMap(null);
+            alert('¡El lugar se ha eliminado correctamente!');
+          }
+          else
+            alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+        },
+          beforeSend: function() {
+            $('#divCargandoMap').css("display","block");
+          },
+          complete: function() {
+            $('#divCargandoMap').css("display","none");
+          }
+      });
+    }
   }

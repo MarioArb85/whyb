@@ -105,7 +105,7 @@
 
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='".$idSelect."' name='".$idSelect."' style='width:120px;'>";
-		        $countries .= "<option value='0'>Todos</option>";
+		        $countries .= "<option value=''>Todos</option>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryName_es."</option>";
 		        }       
@@ -115,6 +115,32 @@
 		    }
 
 			return $countries;
+		}
+
+		//Pinta select ciudades
+		static function buildCities($country){
+			global $firephp;
+			$conexion = AccesoBBDD::abreConexionBD();
+
+			$consulta = "select city
+						from places
+						where placeId in (select placeId		
+											from  placesvisited
+											where userId = 10
+											and isUnesco = 0
+											and visited = 1)
+						and countryId = '$country';";
+
+	   		if($resultado = $conexion->query($consulta)) {
+	   			$cities = "<select id='selMyPlacesCities' name='selMyPlacesCities' style='width:120px;'>";
+                while ($fila = $resultado->fetch_object()) {
+                	$cities .= "<option value='".$fila->city."'>".$fila->city."</option>";
+		        }    
+		        $cities .= "</select> ";
+		        // se libera el cursor
+		        $resultado->free();
+		    }
+			return $cities;
 		}
 	}
 ?>

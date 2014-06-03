@@ -17,7 +17,7 @@ class myMapPlaces {
     $formularioMisSitios = formularios::buildMyCountries(0, 1);
 
     $body = "
-            <div id='divCargandoMap' class='cargandoMap' style='display: none;'>
+            <div id='divCargandoMap' class='cargandoMap' style='display: none; width: 840px;'>
                 <div class='cargandoImg'>
                     <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
                 </div>
@@ -53,7 +53,7 @@ class myMapPlaces {
                     <br/>
                     <span class='linkFilter linkPlaces'>&nbsp;&nbsp;País:</span>
                     <br/><br/>
-                    <div id='myUnescoCategory' class='sangria'>          
+                    <div id='myUnescoSelect' class='sangria'>          
                         $heVisitadoUnesco
                     </div>
                     <br/>
@@ -67,11 +67,11 @@ class myMapPlaces {
                         $formularioMisSitios
                     </div>  
                     <br/>
-                    <a<span class='linkFilter linkPlaces'>&nbsp;&nbsp;Ciudad:</span>
+                    <a<span class='linkFilter linkPlaces'>&nbsp;&nbsp;Sitio:</span>
                     <br/><br/>
                     <div id='myCitiesSelect' class='sangria' style='margin-top:0px;'>
-                        <select id='selMyPlacesCountries' name='selMyPlacesCountries' style='width:120px;'>
-                            <option value='ciudad'>Ciudad</option>
+                        <select id='selMyPlacesCities' name='selMyPlacesCities' style='width:120px;'>
+                            <option value=''>Selecciona país</option>
                         </select>         
                     </div>
                     <br/>

@@ -146,7 +146,6 @@
 			}
 
 			echo json_encode($list);
-
 			break;
 
 		case 'map':
@@ -206,7 +205,7 @@
 				$consulta .= " t.categoryId != 0 and";
 				
 				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
-				$firephp->log($consulta, 'consulta');
+				
 				if ($resultado = $conexion->query($consulta)) {
 					$mark='';
 					while ($fila = $resultado->fetch_object()) {
@@ -216,9 +215,6 @@
 							$mark = '/whyb/web/img/cultural.png';
 						else if ($fila->categoryName_es == 'Mixto')
 							$mark = '/whyb/web/img/mixed.png';
-
-						$imagen = str_replace("http://","",$fila->unescoimage);
-						$web = str_replace("http://","",$fila->web_es);
 
 						$enlaces = '<div id="'.$fila->placeId.'" class="moreresult">';
 						$entra = false;
@@ -265,55 +261,66 @@
 			//Para pasar parámetros de vuelta
 			$list = array();
 
+			$userId = $_SESSION['userId'];
+
 			if(isset($_POST['categoria']) || isset($_POST['pais'])) {
 				//Recoger datos para filtrar
 				if (isset($_POST['categoria']))
 					$cat = $_POST['categoria'];
+
+				if (isset($_POST['visited']))
+					$visited = $_POST['visited'];
 				
-				if (isset($_POST['pais']))
+				if ($_POST['pais'] != '0')
 					$country = $_POST['pais'];
 			    
-			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
+			    $consulta = "select placeId, unescoimage, unesco_es, web_es, latitude, longitude, categoryName_es, t.countryName_es, s.continentName_es 
+								from places p
+								join category c
+								on p.categoryId = c.categoryId
+								join countries t
+								on p.countryId = t.countryId
+								join continents s
+								on p.continentId = s.continentId
+								where p.placeId in (select placeId		
+													from  placesvisited
+													where userId = $userId
+													and isUnesco = 1
+													and visited = $visited) ";
 
 				if (isset($cat)){
-					$consulta .= "(";
+					$consulta .= "and (";
 					foreach ($cat as $cat) {
-						$consulta .= " t.categoryId = ".$cat." or"; 
+						$consulta .= " p.categoryId = ".$cat." or"; 
 					}
 					$consulta = substr($consulta, 0, -2);
-					$consulta .= ") and ";
+					$consulta .= ")";
 				}
 
-				if (isset($country)){
-					$consulta .= " c.countryId = '".$country."' and";
-				}
-
-				$consulta .= " t.categoryId != 0 and";
-
-				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
-				$firephp->log($consulta, 'consulta');
+				if ($country != '')
+					$consulta .= " and p.countryId = '".$country."'";
+				
 				if ($resultado = $conexion->query($consulta)) {
-					$mark='';
-					while ($fila = $resultado->fetch_object()) {
-						if ($fila->categoryName_es == 'Natural')
-							$mark = '/whyb/web/img/natural.png';
-						else if ($fila->categoryName_es == 'Cultural')
-							$mark = '/whyb/web/img/cultural.png';
-						else if ($fila->categoryName_es == 'Mixto')
-							$mark = '/whyb/web/img/mixed.png';
+					if ($conexion->affected_rows == 0)
+						$list[] = '';
+					else {
+						$mark='';
+						while ($fila = $resultado->fetch_object()) {
+							if ($fila->categoryName_es == 'Natural')
+								$mark = '/whyb/web/img/natural.png';
+							else if ($fila->categoryName_es == 'Cultural')
+								$mark = '/whyb/web/img/cultural.png';
+							else if ($fila->categoryName_es == 'Mixto')
+								$mark = '/whyb/web/img/mixed.png';
 
-						$imagen = str_replace("http://","",$fila->unescoimage);
-						$web = str_replace("http://","",$fila->web_es);
-
-						$enlaces = '<div id="'.$fila->placeId.'" class="moreresult">';
-
-				        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es, 'placeId' => $fila->placeId, 'enlaces' => $enlaces);
-				        $sitios[$fila->placeId] = $marca;
-			    	}
-			    	$list[] = $sitios;
+							
+					        $marca = array('lat' => $fila->latitude, 'lng' => $fila->longitude, 'icon' => $mark,'title' => $fila->unesco_es, 'img' => $fila->unescoimage, 'country' => $fila->countryName_es, 'continent' => $fila->continentName_es, 'category' => $fila->categoryName_es, 'web' => $fila->web_es, 'placeId' => $fila->placeId);
+					        $sitios[$fila->placeId] = $marca;
+				    	}
+				    	$list[] = $sitios;
+				    }
 			    }
 			}
-
 			echo json_encode($list);
 			break;
 
@@ -390,6 +397,30 @@
 			$placeId = $_POST['placeId'];
 			$resultado = modeloSitios::alreadyVisited($placeId, $userId);
 			echo json_encode($resultado);
+			break;
+
+		case 'deleteWU':
+			$userId = $_SESSION['userId'];
+			$placeId = $_POST['placeId'];
+			$isUnesco = $_POST['isUnesco'];
+			$resultado = modeloSitios::deletePlace($placeId, $userId, $isUnesco);
+			echo json_encode($resultado);
+			break;
+
+		case 'ciudad':
+			$country = $_POST['pais'];
+			$resultado = formularios::buildCities($country);
+			echo json_encode($resultado);
+			break;
+
+		case 'mapaMisLugares':
+			$list = array();
+			$userId = $_SESSION['userId'];
+			$country = $_POST['country'];
+			$city = $_POST['city'];
+			$list = modeloSitios::myPlaces($userId, $country, $city);
+
+			echo json_encode($list);
 			break;
 
 		default:

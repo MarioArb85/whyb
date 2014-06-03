@@ -29,7 +29,6 @@
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
-      		//Recuperar id del continente
 	      	$consulta = "DELETE FROM placesvisited WHERE userId = $userId and placeid = $placeId and visited = 0";
 	      	$resultado = $conexion->query($consulta);
 
@@ -43,7 +42,6 @@
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
-      		//Recuperar id del continente
 	      	$consulta = "DELETE FROM placesvisited WHERE userId = $userId and placeid = $placeId and visited = 1";
 	      	$resultado = $conexion->query($consulta);
 
@@ -57,7 +55,6 @@
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
-      		//Recuperar id del continente
 	      	$consulta = "INSERT INTO placesvisited (userId, placeId, visited, isUnesco)
 	      				VALUES ($userId, $placeId, 0, 1)";
 	      	$resultado = $conexion->query($consulta);
@@ -72,7 +69,6 @@
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
-      		//Recuperar id del continente
 	      	$consulta = "INSERT INTO placesvisited (userId, placeId, visited, isUnesco)
 	      				VALUES ($userId, $placeId, 1, 1)";
 	      	$resultado = $conexion->query($consulta);
@@ -80,6 +76,61 @@
 			AccesoBBDD::cierraConexionBD($conexion);
 
 			return $resultado;
+		}
+
+		//Borrar sitio UNESCO
+		static function deletePlace($placeId, $userId, $isUnesco){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "DELETE FROM placesvisited WHERE userId = $userId and placeId = $placeId";
+	      	$resultado = $conexion->query($consulta);
+
+	      	//CIUDADO!!!! BORRA SITIO DE LA UNESCO!!
+	      	if ($isUnesco == 'true'){
+	      		$consulta = "DELETE FROM places WHERE placeId = $placeId";
+	      		$resultado = $conexion->query($consulta);
+	      	}
+
+			AccesoBBDD::cierraConexionBD($conexion);
+
+			return $resultado;
+		}
+
+		//Consultar mis Lugares
+		static function myPlaces($userId, $country, $city){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "select placeId, t.countryName_es, city, situation, place, description, latitude, longitude
+							from places p
+							join category c
+							on p.categoryId = c.categoryId
+							join countries t
+							on p.countryId = t.countryId
+							where p.placeId in (select placeId		
+												from  placesvisited
+												where userId = $userId
+												and isUnesco = 0
+												and visited = 1)";
+
+			if ($country != ''){
+				$consulta .= "and p.countryId = '$country'
+								and p.city = '$city';";
+			}
+			$firephp->log($consulta, 'Mensaje');
+			if ($resultado = $conexion->query($consulta)) {
+				if ($conexion->affected_rows == 0)
+					$sitios = '';
+				else {
+					while ($fila = $resultado->fetch_object()) {	
+				        $marca = array( 'placeId' => $fila->placeId, 'country' => $fila->countryName_es, 'city' => $fila->city, 'situation' => $fila->situation, 'place' => $fila->place, 'description' => $fila->description, 'lat' => $fila->latitude, 'lng' => $fila->longitude, );
+				        $sitios[$fila->placeId] = $marca;
+			    	}
+			    }
+		    }
+			AccesoBBDD::cierraConexionBD($conexion);
+			return $sitios;
 		}
 	}
 ?>
