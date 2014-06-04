@@ -133,6 +133,11 @@
       //Seleccionar pais
       var country = getCountry('placesCountry', 'selCountries');
 
+      //Comprobar si están todos los campos vacíos antes de enviar la consulta
+      if(country == undefined && category == '' && continent == ''){
+        alert('Tienes que elegir algún parámetro!')
+        return false;
+      }
       //Funcion ajax        
       $.ajax({
         url: '/whyb/web/ajax/ajax.php',
@@ -145,36 +150,40 @@
         },                
         dataType: 'json',
         success: function(resultado) {
-          $('#results').html(resultado[0]);
+          if (resultado[3] != 'false'){
+            $('#results').html(resultado[0]);
 
-          $.each(resultado, function(){
-            if($('#'+this.placeId+'').length){
-              if (this.visited == 0)
-                $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+this.placeId+')">Ya no quiero visitarlo!</a>');
-              else if (this.visited == 1)
-                $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+this.placeId+')">No lo he visitado!</a>');
-            }
-          });
+            $.each(resultado, function(){
+              if($('#'+this.placeId+'').length){
+                if (this.visited == 0)
+                  $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisit('+this.placeId+')">Ya no quiero visitarlo!</a>');
+                else if (this.visited == 1)
+                  $('#'+this.placeId+'').html('<a href="javascript: void(0)" class="enlace" onclick="notVisited('+this.placeId+')">No lo he visitado!</a>');
+              }
+            });
 
-          //Paginate
-          $("#paginacion").paginate({
-            count: resultado[1],
-            start: 1,
-            display: resultado[2],
-            border: true,
-            border_color: '#fff',
-            text_color: 'white',
-            background_color: '#34629b',  
-            border_hover_color: '#ccc',
-            text_hover_color: '#34629b',
-            background_hover_color: '#fff', 
-            images: false,
-            mouse: 'press',
-            onChange: function(page){
-              $('._current','#results').removeClass('_current').hide();
-              $('#p'+page).addClass('_current').show();
-            }
-          });
+            //Paginate
+            $("#paginacion").paginate({
+              count: resultado[1],
+              start: 1,
+              display: resultado[2],
+              border: true,
+              border_color: '#fff',
+              text_color: 'white',
+              background_color: '#34629b',  
+              border_hover_color: '#ccc',
+              text_hover_color: '#34629b',
+              background_hover_color: '#fff', 
+              images: false,
+              mouse: 'press',
+              onChange: function(page){
+                $('._current','#results').removeClass('_current').hide();
+                $('#p'+page).addClass('_current').show();
+              }
+            });
+          }
+          else
+            alert('No se ha encontrado ningún resultado');
         },
         beforeSend: function() {
           $('#divCargando').css("display","block");
@@ -196,6 +205,12 @@
       //Seleccionar pais
       var country = getCountry('placesCountry', 'selCountries');
 
+      //Comprobar si están todos los campos vacíos antes de enviar la consulta
+      if(country == undefined && category == '' && continent == ''){
+        alert('Tienes que elegir algún parámetro!')
+        return false;
+      }
+      
       //Funcion ajax        
       $.ajax({
         url: '/whyb/web/ajax/ajax.php',
@@ -208,49 +223,53 @@
         },                
         dataType: 'json',
         success: function(resultado) {
-          infoArray = resultado;
-          $.each(resultado[0], function(){
-            //Nuevo marcador
-            var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(this.lat, this.lng),
-              icon: this.icon,
-              map: map,
-              title: this.title
-            });
-            //Meter marker en array de marcadores
-            //markersArray.push(marker);
-            markersArray[this.placeId] = marker;
-            //Variable para datos para infowindow
-            var contentString = '\
-              <div class="placeresult" style="border:none;">\
-              <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
-              <h3 class="titleresult">'+this.title+'</h3>\
-              <div class="textresult">\
-              <span><b>Categoría: </b>'+this.category+'</span>\
-              <br/>\
-              <span><b>País: </b>'+this.country+'</span>\
-              <br/>\
-              <span><b>Continente: </b>'+this.continent+'</span>\
-              <br/>\
-              <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
-              </div>\
-              '+this.enlaces;
-            //Onclick
-            google.maps.event.addListener(marker, 'click', function() {
-              if (infoWindow != null)
-                closeInfoWindow();
-
-              map.setZoom(5);
-              map.setCenter(marker.getPosition());
-              //nuevo infowindow
-              infoWindow = new google.maps.InfoWindow({
-                content: contentString
+          if (resultado[0] != ''){
+            infoArray = resultado;
+            $.each(resultado[0], function(){
+              //Nuevo marcador
+              var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(this.lat, this.lng),
+                icon: this.icon,
+                map: map,
+                title: this.title
               });
-              infoWindow.open(map, marker);
+              //Meter marker en array de marcadores
+              //markersArray.push(marker);
+              markersArray[this.placeId] = marker;
+              //Variable para datos para infowindow
+              var contentString = '\
+                <div class="placeresult" style="border:none;">\
+                <img src="'+this.img+'" style="position: relative; float:left; height: 80px; width: 80px;"/>\
+                <h3 class="titleresult">'+this.title+'</h3>\
+                <div class="textresult">\
+                <span><b>Categoría: </b>'+this.category+'</span>\
+                <br/>\
+                <span><b>País: </b>'+this.country+'</span>\
+                <br/>\
+                <span><b>Continente: </b>'+this.continent+'</span>\
+                <br/>\
+                <span><b>Web: </b><a href="'+this.web+'" class="linkResult" target="_blank">'+this.web+'</a></span>\
+                </div>\
+                '+this.enlaces;
+              //Onclick
+              google.maps.event.addListener(marker, 'click', function() {
+                if (infoWindow != null)
+                  closeInfoWindow();
+
+                map.setZoom(5);
+                map.setCenter(marker.getPosition());
+                //nuevo infowindow
+                infoWindow = new google.maps.InfoWindow({
+                  content: contentString
+                });
+                infoWindow.open(map, marker);
+              });
             });
-          });
-          map.setCenter(markersArray[markersArray.length-1].getPosition());
-          map.setZoom(4);
+            map.setCenter(markersArray[markersArray.length-1].getPosition());
+            map.setZoom(4);
+          }
+          else
+            alert('No se ha encontrado ningún resultado');
         },
         beforeSend: function() {
           $('#divCargandoMap').css("display","block");
@@ -438,6 +457,7 @@
           },                
           dataType: 'json',
           success: function(resultado) {
+            $("#btnVisitadoMios").css('display','block');
             $("#myCitiesSelect").html(resultado);
           },
           beforeSend: function() {
@@ -445,6 +465,7 @@
                               <option value=''>Obteniendo...</option>\
                           </select>"; 
             $("#myCitiesSelect").html(mandando);
+            $("#btnVisitadoMios").css('display','none');
           },
         });
       }

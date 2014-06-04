@@ -57,10 +57,11 @@
             $_SESSION['user'] = $request->get('txtUserNameReg');
             $_SESSION['userId'] = $resultado->getUserId();
 
-            header('Location: /whyb/web/menu/');
+            header('Location: /whyb/web/places/show/');
             die();
           }
           else{
+            $_SESSION['error'] = 'Error al logearse';
             $dire = '/whyb/web/log/';
             header('Location: '.$dire);
             die();
@@ -68,6 +69,7 @@
           return 'Redirigiendo...';
         }
         else{
+          $_SESSION['error'] = 'Error al logearse';
           $dire = '/whyb/web/log/';
           header('Location: '.$dire);
           die();

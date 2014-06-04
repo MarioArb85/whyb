@@ -23,7 +23,7 @@
 		case 'result':
 			//Para pasar parámetros de vuelta
 			$list = array();
-
+			$list[3] = 'false';
 			//Contadores para paginar
 			$contDivs = 1;
 			$mostrar = 1;
@@ -113,6 +113,7 @@
 		                	$contDiv2 = 0;
 		                	$contDivs++;
 		                }
+		                $list[3] = 'true';
 	        		}
 
 		        	$body .= '</div>';
@@ -128,21 +129,19 @@
 			        $list[0] = $body;
 					$list[1] = $contDivs;
 					$list[2] = $mostrar;
+					
+				}
 
-			        //Para comprobar los visitados y los pendientes de visitar
-			        if (isset($_SESSION['user'])){
-			        	$consulta = "SELECT placeId, visited FROM placesvisited WHERE userId=".$_SESSION['userId']." and isUnesco = 1";
-			        	if ($resultado = $conexion->query($consulta)) {
-			        		while ($fila = $resultado->fetch_object()) {
-			        			$result = array('placeId' => $fila->placeId, 'visited' => $fila->visited);
-								$list[] = $result;
-			        		}
-						}
-			    	}
-				}
-				else{ 
-					$list[0] = 'Elige algún parámetro!';
-				}
+				//Para comprobar los visitados y los pendientes de visitar
+			    if (isset($_SESSION['user'])){
+			      	$consulta = "SELECT placeId, visited FROM placesvisited WHERE userId=".$_SESSION['userId']." and isUnesco = 1";
+			       	if ($resultado = $conexion->query($consulta)) {
+			       		while ($fila = $resultado->fetch_object()) {
+			       			$result = array('placeId' => $fila->placeId, 'visited' => $fila->visited);
+							$list[] = $result;
+			       		}
+					}
+			    }
 			}
 
 			echo json_encode($list);
@@ -151,6 +150,7 @@
 		case 'map':
 			//Para pasar parámetros de vuelta
 			$list = array();
+			$sitios = array();
 
 			if(isset($_POST['categoria']) || isset($_POST['continente']) || isset($_POST['pais'])) {
 				//Recoger datos para filtrar

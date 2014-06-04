@@ -75,7 +75,7 @@ class myMapPlaces {
                         </select>         
                     </div>
                     <br/>
-                    <div id='updateList'>          
+                    <div id='updateList'>       
                         <a href='javascript: void(0)' id='btnVisitadoMios' name='btnVisitadoMios' class='formularioBtn enlace'>Actualizar</a>
                     </div>
                 </div>

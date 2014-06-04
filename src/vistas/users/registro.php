@@ -2,13 +2,20 @@
 	class registro{
 
 		static function construye() {
+			if ($_SESSION['error'] == 'Error al logearse')
+				$error = '';
+			else
+				$error = 'style="display:none;"';
+
+			$_SESSION['error'] = '';
+
 			$cuerpo = "
 		    <div class='divRegForm'>
 		        <img src='/whyb/web/img/img_registro.png' id='imgReg' class='imgFormReg'/>
 		        <div id='divIniSesion'>
 					<h1>Iniciar Sesión</h1>
 					<br/><br/>
-					<span id='iniSesionError' class='required' hidden='true'>Nombre de usuario o contraseña incorrectos.</span>
+					<span id='iniSesionError' class='required' $error>Nombre de usuario o contraseña incorrectos.</span>
 					<br/><br/>
 					<form id='iniSesionForm' action='/whyb/web/log/result/' method='post'>
 					<table>
