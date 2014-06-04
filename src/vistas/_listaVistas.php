@@ -2,6 +2,7 @@
 	require 'maps/mapa.php';
 	require 'menu/userMenu.php';
 	require 'menu/cabecera.php';
+	require 'menu/userBaja.php';
 	require 'places/places.php';
 	require 'places/myMapPlaces.php';
 	require 'unesco/unesco.php';

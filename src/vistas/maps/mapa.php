@@ -14,7 +14,7 @@ class mapa {
 
   	$body = "
         <div id='divCargandoMap' class='cargandoMap' display='none'>
-            <div class='cargandoImg'>
+            <div class='cargandoImgMap'>
                 <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
             </div>
         </div>
@@ -34,7 +34,7 @@ class mapa {
                 <br/>
                 <a href='javascript: void(0)' onclick='ocultar(\"placesContinent\",\"imgContinent\")' class='linkFilter'>&nbsp;<img id='imgContinent' src='/whyb/web/img/flecha_derecha.png'/>&nbsp;&nbsp;Continente:</a>
                 <br/><br/>
-                <div id='placesContinent' class='sangria' style='display: none;'>          
+                <div id='placesContinent' class='sangria' style='display: none; width: 150px;'>          
                     $checkCont
                 </div>
                 <br/><br/>

@@ -14,7 +14,7 @@ class menu {
           <a href='".DIR_MAP."' class='link $map'>Mapa Unesco</a>
         </div>
         <div id='linkPlaces'>
-          <a href='".DIR_PLACES."' class='link $places'>Mis lugares</a>
+          <a href='".DIR_PLACES."' class='link $places'>Guardar mis lugares</a>
         </div>
         <div id='linkRoutes'>
           <a href='".DIR_SHOW_PLACES."' class='link $route'  id='linkShowMyPlaces'>Ver mis lugares</a>

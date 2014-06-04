@@ -425,8 +425,9 @@
 			break;
 
 		case 'ciudad':
+			$userId = $_SESSION['userId'];
 			$country = $_POST['pais'];
-			$resultado = formularios::buildCities($country);
+			$resultado = formularios::buildCities($country,$userId);
 			echo json_encode($resultado);
 			break;
 

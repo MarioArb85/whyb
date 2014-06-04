@@ -131,7 +131,7 @@
 		}
 
 		//Pinta select ciudades
-		static function buildCities($country){
+		static function buildCities($country,$userId){
 			global $firephp;
 			$conexion = AccesoBBDD::abreConexionBD();
 
@@ -139,7 +139,7 @@
 						from places
 						where placeId in (select placeId		
 											from  placesvisited
-											where userId = 10
+											where userId = $userId
 											and isUnesco = 0
 											and visited = 1)
 						and countryId = '$country';";

@@ -450,7 +450,7 @@ a:hover {
 
 #divCargandoUserMenu {
 	position: absolute;
-	left: 250px;
+	left: 450px;
 	width: 450px;
 	height: 400px;
 	opacity: 0.8;
@@ -465,7 +465,25 @@ a:hover {
 	margin: 350px 450px;
 }
 
-#cargandoImguserMenu {
+.cargandoImgMap {
+	position: relative;
+	float: left;
+	margin: 250px 450px;
+}
+
+.cargandoImgUserMap {
+	position: relative;
+	float: left;
+	margin: 225px 425px;
+}
+
+#cargandoImgUserMenu {
+	position: relative;
+	float: left;
+	margin: 180px 200px;
+}
+
+#cargandoImgMapMyPlaces {
 	position: relative;
 	float: left;
 	margin: 180px 200px;
@@ -577,9 +595,9 @@ a:hover {
 #menuResults {
 	position: relative;
 	float: left;
-	margin: 35px 25px;
+	margin: 35px 250px;
 	height: 600px;
-	width: 895px;
+	width: 395px;
 	padding-left: 50px;
 	/*border: 1px solid black;*/
 }

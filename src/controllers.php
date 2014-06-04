@@ -100,7 +100,7 @@ $app->get('/menu/data/', function () use ($app) {
 
 //Menu usuario - baja usuario
 $app->get('/menu/delete/', function () use ($app) {
-    return 'chipiron';
+    return menu_controller::baja();
 })
 ->bind('menu_delete')
 ;

@@ -28,7 +28,7 @@
       	$body = "
         <div id='menuPage'>
           <div id='divCargandoUserMenu'>
-            <div id='cargandoImguserMenu'>
+            <div id='cargandoImgUserMenu'>
               <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
             </div>
           </div>
@@ -38,7 +38,7 @@
             <span class='linkTitle linkPlaces' style='margin-top: 50px; width: 170px; padding-left: 10px;'>Ir a...</span>
             <a href='".DIR_UNESCO."' id='menuUnesco' class='linkMenu' style='margin-top: 0px;''>Sitios Unesco</a>
             <a href='".DIR_MAP."' id='menuUnesco' class='linkMenu'>Mapa Unesco</a>
-            <a href='".DIR_PLACES."' id='menuUnesco' class='linkMenu'>Mis lugares</a>
+            <a href='".DIR_PLACES."' id='menuUnesco' class='linkMenu'>Guardar mis lugares</a>
             <a href='".DIR_SHOW_PLACES."' id='menuUnesco' class='linkMenu'>Ver mis lugares</a>
           </div>
           <div id='menuResults'/>
@@ -76,10 +76,9 @@
               </tr>
             </table>
             <br/><br/><br/><br/>
-            <a id='UserMenuBtn' class='enlace' style='padding-left: 100px; cursor:pointer;'>Actualizar datos</a>      
+            <a href='javascript: void(0)' id='UserMenuBtn' class='enlace' style='padding-left: 100px; cursor:pointer;'>Actualizar datos</a>      
           </div>    	
-        </div>
-        <div id='paginacion'></div>";
+        </div>";
     	
         return $body;
       }

@@ -36,7 +36,7 @@ class unesco {
                 <br/>
                 <a href='javascript: void(0)' onclick='ocultar(\"placesContinent\",\"imgContinent\")' class='linkFilter'>&nbsp;<img id='imgContinent' src='/whyb/web/img/flecha_derecha.png'/>&nbsp;&nbsp;Continente:</a>
                 <br/><br/>
-                <div id='placesContinent' class='sangria' style='display: none;'>          
+                <div id='placesContinent' class='sangria' style='display: none; width: 150px;'>          
                     $checkCont
                 </div>
                 <br/><br/>
