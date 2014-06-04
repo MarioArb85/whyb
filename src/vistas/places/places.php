@@ -13,25 +13,25 @@ class places {
             </div>
             <div id="mapPage">  
                 <div id="filters">
-                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;País:</span>
+                    <span class="linkFilter linkPlaces cursor">&nbsp;&nbsp;&nbsp;País:</span>
                     <br/><br/>
-                    <input type="text" id="placesCountry" value="------" readonly/>
+                    <input type="text" id="placesCountry" value="------" class="cursor" style="background-color: LightGray; width: 130px;" readonly/>
                     <br/><br/>
-                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Ciudad:</span>
+                    <span class="linkFilter linkPlaces cursor" >&nbsp;&nbsp;&nbsp;Ciudad:</span>
                     <br/><br/>
-                    <input type="text" id="placesCity" value="------" readonly/>
+                    <input type="text" id="placesCity" value="------" class="cursor" style="background-color: LightGray; width: 130px;" readonly/>
                     <br/><br/>
-                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Situación:</span>
+                    <span class="linkFilter linkPlaces cursor">&nbsp;&nbsp;&nbsp;Situación:</span>
                     <br/><br/>
-                    <input type="text" id="placesSituation" value="------" readonly/>
+                    <input type="text" id="placesSituation" value="------" class="cursor" style="background-color: LightGray; width: 130px;" readonly/>
                     <br/><br/>
-                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Lugar:</span>
+                    <span class="linkFilter linkPlaces cursor">&nbsp;&nbsp;&nbsp;Lugar:</span>
                     <br/><br/>
-                    <input type="text" id="placesLugar"/>
+                    <input type="text" id="placesLugar" style="width: 130px;"/>
                     <br/><br/>
-                    <span class="linkFilter linkPlaces">&nbsp;&nbsp;&nbsp;Comentarios:</span>
+                    <span class="linkFilter linkPlaces cursor">&nbsp;&nbsp;&nbsp;Comentarios:</span>
                     <br/><br/>
-                    <textarea id="placesComentarios" rows="9" cols="16" maxlength="256" style="resize:none;">Arrastra la marca del mapa para obtener la localización!</textarea>
+                    <textarea id="placesComentarios" rows="9" cols="14" maxlength="256" style="resize:none;">Arrastra la marca del mapa para obtener la localización!</textarea>
                     <br/><br/><br/>
                     <input type="hidden" id="placesCountryId"/>
                     <input type="hidden" id="placesLat"/>

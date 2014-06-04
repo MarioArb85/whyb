@@ -1,6 +1,6 @@
   $(document).ready(function(){
     //Recoge pais por ip y hace la busqueda al cargar la pagina
-    if ($('#formulario').length){
+    if ($('#selCountries').length){
       $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
         $('#selCountries > option[value="'+data.address.country_code+'"]').attr('selected', 'selected');
       
@@ -723,6 +723,12 @@
         dataType: 'json',
         success: function(resultado) {
           alert(resultado);
+        },
+        beforeSend: function() {
+          $('#divCargandoUserMenu').css("display","block");
+        },
+        complete: function() {
+          $('#divCargandoUserMenu').css("display","none");
         }
       });
     });

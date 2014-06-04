@@ -355,6 +355,10 @@ a:hover {
 	background-color: #34629b;
 }
 
+.cursor{
+	cursor: default;
+}
+
 .linkTitle {
 	position: relative;
 	float: left;
@@ -363,6 +367,11 @@ a:hover {
 	color: white;
 	margin-bottom: 10px;
 	background-color: #0099ff;
+	cursor: default;
+}
+
+.linkTitle.hover {
+	text-decoration: none;
 }
 
 .linkFilter:hover {
@@ -439,10 +448,27 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+#divCargandoUserMenu {
+	position: absolute;
+	left: 250px;
+	width: 450px;
+	height: 400px;
+	opacity: 0.8;
+	z-index: 10;
+	background-color: white;
+	display: none;
+}
+
 .cargandoImg {
 	position: relative;
 	float: left;
 	margin: 350px 450px;
+}
+
+#cargandoImguserMenu {
+	position: relative;
+	float: left;
+	margin: 180px 200px;
 }
 
 #paginacion {
@@ -561,7 +587,7 @@ a:hover {
 .linkMenu{
 	position: relative;
 	float: left;
-	height:25px;
+	height: 20px;
 	width: 170px;
 	padding-left: 10px;
 	margin-top: 10px;

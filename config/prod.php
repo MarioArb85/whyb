@@ -56,5 +56,11 @@
 	//Pagina places
 	define("DIR_PLACES", DIR_RAIZ_APP."web/places/");
 
-	//Pagina places
+	//Pagina my places
 	define("DIR_SHOW_PLACES", DIR_RAIZ_APP."web/places/show/");
+
+	//Pagina menu - datos
+	define("DIR_MENU_DATA", DIR_RAIZ_APP."web/menu/data/");
+
+	//Pagina menu - baja
+	define("DIR_MENU_DELETE", DIR_RAIZ_APP."web/menu/delete/");

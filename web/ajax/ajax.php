@@ -151,6 +151,7 @@
 			//Para pasar parámetros de vuelta
 			$list = array();
 			$sitios = array();
+			$visitados = array();
 
 			if(isset($_POST['categoria']) || isset($_POST['continente']) || isset($_POST['pais'])) {
 				//Recoger datos para filtrar
@@ -220,22 +221,24 @@
 						$entra = false;
 						//comprobar si se quiere visitar o ya se ha visitado
 						if (isset($_SESSION['user'])){
-							foreach ($visitados as $key=>$value) {
-								//$firephp->log($value['placeId'], 'array');
-								if($value['placeId'] == $fila->placeId) {
-				                	if ($value['visited'] == 0) {
-				                		//$firephp->log($fila->placeId, 'result 0');
-				                		$entra = true;
-				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisitMap('.$value['placeId'].')">Ya no quiero visitarlo!</a>';
-				                    	break;
-				                    }
-				                	else if ($value['visited'] == 1) {
-				                		//$firephp->log($fila->placeId, 'result 1');
-				                		$entra = true;
-				                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="notVisitedMap('.$value['placeId'].')">No lo he visitado!</a>';
-				                    	break;
-				                    }
-				                }
+							if(count($visitados) > 0){
+								foreach ($visitados as $key=>$value) {
+									//$firephp->log($value['placeId'], 'array');
+									if($value['placeId'] == $fila->placeId) {
+					                	if ($value['visited'] == 0) {
+					                		//$firephp->log($fila->placeId, 'result 0');
+					                		$entra = true;
+					                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="dontWantToVisitMap('.$value['placeId'].')">Ya no quiero visitarlo!</a>';
+					                    	break;
+					                    }
+					                	else if ($value['visited'] == 1) {
+					                		//$firephp->log($fila->placeId, 'result 1');
+					                		$entra = true;
+					                    	$enlaces .= '<a href="javascript: void(0)" class="enlace" onclick="notVisitedMap('.$value['placeId'].')">No lo he visitado!</a>';
+					                    	break;
+					                    }
+					                }
+								}
 							}
 							if ($entra == false) {
 				                $enlaces .= '<a href="javascript: void(0)" style="text-align: none;" class="enlace" onclick="wantToVisitMap('.$fila->placeId.')">Quiero visitarlo!</a>';

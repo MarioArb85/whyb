@@ -8,7 +8,7 @@
 			$consulta = "SELECT countryId, countryname_es FROM countries ORDER BY countryname_es";
 
 	   		if($resultado = $conexion->query($consulta)) {
-		        $countries = "<select id='selCountries' name='selCountries' >";
+		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	if ($fila->countryId == $country)
 		        		$countries .= "<option value='".$fila->countryId."' selected>".$fila->countryname_es."</option>";

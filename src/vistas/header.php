@@ -8,7 +8,7 @@ class header {
           <a href="/whyb/web/log/" class="enlace" style="margin-left: 50px;">Iniciar sesión</a><br/>';
     }
     else
-      $cab = "Conectado como:&nbsp;&nbsp;&nbsp;<a href='/whyb/web/menu/' class='enlace'>$usuario</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<a href='/whyb/web/disconnect/' class='enlace'>cerrar sesión</a>";
+      $cab = "Conectado como:&nbsp;&nbsp;&nbsp;<a href='".DIR_MENU_DATA."' class='enlace'>$usuario</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<a href='/whyb/web/disconnect/' class='enlace'>cerrar sesión</a>";
 
     $cabecera = "  
           <div id='cabecera'>

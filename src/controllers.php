@@ -91,11 +91,18 @@ $app->get('/places/show/', function () use ($app) {
 ->bind('show_my_places')
 ;
 
-//Menu usuario - mis sitios unesco
-$app->get('/menu/', function () use ($app) {
+//Menu usuario - datos usuario
+$app->get('/menu/data/', function () use ($app) {
     return menu_controller::menu();
 })
-->bind('menu')
+->bind('menu_data')
+;
+
+//Menu usuario - baja usuario
+$app->get('/menu/delete/', function () use ($app) {
+    return 'chipiron';
+})
+->bind('menu_delete')
 ;
 
 //disconnect
