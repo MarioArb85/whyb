@@ -52,7 +52,7 @@
         $firephp->log($resultado, 'Mensaje');
 
         if($resultado != null || $resultado != ''){
-          if ($resultado->getPassword() == md5($request->get('txtPassReg'))){
+          if ($resultado->getPassword() == $request->get('txtPassReg')){
             //Usuario y contraseña correctos
             $_SESSION['user'] = $request->get('txtUserNameReg');
             $_SESSION['userId'] = $resultado->getUserId();
@@ -69,6 +69,7 @@
           return 'Redirigiendo...';
         }
         else{
+          $firephp->log($resultado, 'Mensaje');
           $_SESSION['error'] = 'Error al logearse';
           $dire = '/whyb/web/log/';
           header('Location: '.$dire);

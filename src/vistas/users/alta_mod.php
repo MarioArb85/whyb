@@ -10,9 +10,9 @@
 				$mensaje = '<p>Error al crear el usuario. Por favor inténtelo mas tarde</p>';
 
 			$cuerpo = "
-			<div id='divForm'>
-		        <img src='/whyb/web/img/imgForm.png' id='imgForm'/>
-		        <div id='resultNewUser'>
+			<div id='divForm' class='divRegForm'>
+		        <img src='/whyb/web/img/imgForm.png' id='imgForm' class='imgFormReg'/>
+		        <div id='resultNewUser' class='cuerpoForm'>
 					<div id='textNewUser'>
 					$mensaje
 					</div>

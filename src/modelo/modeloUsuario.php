@@ -16,7 +16,7 @@
       				die('Error de conexión (' . $conexion->connect_errno . ') ' . $conexion->connect_error);
 
       			$consulta = "INSERT INTO users (rolId, countryId, nickname, password, email, name, birthdate, sex)
-	                 		VALUES (3, '".$request->get('selCountries')."', '".$request->get('txtUserName')."', '".md5($request->get('txtPass'))."',
+	                 		VALUES (3, '".$request->get('selCountries')."', '".$request->get('txtUserName')."', '".$request->get('txtPass')."',
                      '".$request->get('txtMail')."', '".$request->get('txtName')."', '$dob', '".$sex = $request->get('sex')."')";
 				
 				$resultado = $conexion->query($consulta);

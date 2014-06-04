@@ -612,12 +612,12 @@
 
   //Comprobar campos formulario
   if ($('#formulario').length){
-      $( "#formulario" ).click(function() {
+      $( "#formularioBtn" ).click(function() {
         var error = false;
 
         //Comprobar campo usuario
         if(!$("#txtUserName").val().match(/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_\s]{4,}$/)){
-          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre tiene que tener al menos 4 carateres entre letras y números');
+          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;Al menos 4 carateres entre letras y números');
           $("#txtUserName").removeClass("correcto");
           $("#txtUserName").addClass("error");
           error = true;
@@ -637,8 +637,8 @@
         }
 
         //Comprobar campo contaseña
-        if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
-          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La contraseña debe tener  al menos un número y una letra');
+        if(!$("#txtPass").val().match(/(?=^.{6,12}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/)){
+          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;Entre 6 y 12 caracteres y al menos una mayúscula y un número');
           $("#txtPass").addClass("error"); 
           $("#txtPassRep").addClass("error");
           error = true;  
@@ -686,11 +686,22 @@
           }
         }
 
+        var passCodificada = hex_md5($('#txtPass').val());
+        $('#txtPass').val(passCodificada);
+        $('#txtPassRep').val(passCodificada);
+        
         if (error == true){
           return false;
         }
       });
     }
+
+    //Codificar pass al inicar sesión
+    $( "#iniSesionFormBtn" ).click(function() {
+      var passCodificada = hex_md5($('#txtPassReg').val());
+      $('#txtPassReg').val(passCodificada);
+      alert(passCodificada);
+    });
 
     //Comprobaciones al perder el foco
     if($("#txtUserName").length){
@@ -724,14 +735,14 @@
         else{
           $("#txtUserName").removeClass("correcto");
           $("#txtUserName").addClass("error");
-          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;El nombre tiene que tener al menos 4 carateres entre letras y números');
+          $("#userError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;Al menos 4 carateres entre letras y números');
         }
       });
     
       //Comprobar si las contraseñas son correctas
       $("#txtPass").keyup(function() {
-        if(!$("#txtPass").val().match(/^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i)){
-          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;La contraseña debe tener al menos un número y una letra');
+        if(!$("#txtPass").val().match(/(?=^.{6,12}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/)){
+          $("#passError").html('<img src="/whyb/web/img/error.png" class="imgForm"/>&nbsp;&nbsp;Entre 6 y 12 caracteres y al menos una mayúscula y un número');
           $("#txtPass").removeClass("correcto");
           $("#txtPass").addClass("error");
         }

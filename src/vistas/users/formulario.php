@@ -11,7 +11,7 @@ header('Content-Type: text/html; charset=utf-8');
 		    $cuerpo = "
 		    <div id='divForm' class='divRegForm'>
 		        <img src='/whyb/web/img/imgForm.png' id='imgForm' class='imgFormReg'/>
-		        <div id='cuerpoForm'>
+		        <div class='cuerpoForm'>
 		        	<h1>Formulario de registro</h1>
 		          	<br/><br/>
 		          	<span class='required' hidden='true'>Los campos marcados con * son obligatorios</span>

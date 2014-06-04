@@ -129,7 +129,7 @@ a:hover {
 
 .required {
 	color: red;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
 .enlace {
@@ -213,7 +213,7 @@ a:hover {
 	margin-bottom: 30px;*/
 }
 
-#cuerpoForm {
+.cuerpoForm {
 	position: relative;
 	float: left;
 	height: 550px;
