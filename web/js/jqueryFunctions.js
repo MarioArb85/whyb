@@ -1,6 +1,6 @@
   $(document).ready(function(){
     //Recoge pais por ip y hace la busqueda al cargar la pagina
-    if ($('#selCountries').length){
+    if ($('#formulario').length){
       $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
         $('#selCountries > option[value="'+data.address.country_code+'"]').attr('selected', 'selected');
       

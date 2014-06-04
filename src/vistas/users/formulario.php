@@ -3,9 +3,9 @@ header('Content-Type: text/html; charset=utf-8');
 	class formulario{
 
 		static function construye() {
-			$dia = formularios::buildDay();
-			$mes = formularios::buildMonth();
-			$anio = formularios::buildYear();
+			$dia = formularios::buildDay(null);
+			$mes = formularios::buildMonth(null);
+			$anio = formularios::buildYear(null);
 			$select = formularios::buildCountries(null);
 
 		    $cuerpo = "

@@ -83,5 +83,23 @@
 
 		    return $avisos;	  
 		}
+
+		//Recuperar datos usuario
+		static function userData($userId){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "SELECT userId, countryId, nickname, email, name, birthdate, sex FROM users WHERE userId = $userId";
+	      	if ($resultado = $conexion->query($consulta)) {
+	        	if($fila = $resultado->fetch_object()) { 
+	        		$userData = new Usuario($fila->userId, null, $fila->countryId, $fila->nickname, null, $fila->email, null, $fila->name, $fila->birthdate, $fila->sex);
+        		}	
+        		$resultado->free();
+      		}
+      		
+      		AccesoBBDD::cierraConexionBD($conexion);
+	 		return $userData;
+	    	
+	  	}
 	}
 ?>

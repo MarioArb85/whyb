@@ -10,9 +10,12 @@
 	   		if($resultado = $conexion->query($consulta)) {
 		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
 		        while ($fila = $resultado->fetch_object()) {
-		        	$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_es."</option>";
+		        	if ($fila->countryId == $country)
+		        		$countries .= "<option value='".$fila->countryId."' selected>".$fila->countryname_es."</option>";
+		        	else
+		        		$countries .= "<option value='".$fila->countryId."'>".$fila->countryname_es."</option>";
 		        }       
-		        // se libera el cursor
+		        //se libera el cursor
 		        $resultado->free();
 		        $countries .= "</select>";
 		    }
@@ -58,30 +61,40 @@
 		}
 
 		//Pinta año
-		static function buildYear(){
+		static function buildYear($anio){
 			$year = '<select id="selYear" name="selYear">';
 			for ($i = 2010; $i>=1900; $i--){
-				$year .= "<option value='$i'>$i</option>";
+				if($i == $anio)
+					$year .= "<option value='$i' selected>$i</option>";	
+				else		
+					$year .= "<option value='$i'>$i</option>";
 			}
 			$year .= '</select>';
+
 			return $year;
 		}
 
 		//Pinta mes
-		static function buildMonth(){
+		static function buildMonth($mes){
 			$month = '<select id="selMonth" name="selMonth">';
 			for ($i = 1; $i<=12; $i++){
-				$month .= "<option value='$i'>$i</option>";
+				if($i == $mes)
+					$month .= "<option value='$i' selected>$i</option>";
+				else
+					$month .= "<option value='$i'>$i</option>";
 			}
 			$month .= '</select>';
 			return $month;
 		}
 
 		//Pinta dia
-		static function buildDay(){
+		static function buildDay($dia){
 			$day = '<select id="selDay" name="selDay">';
 			for ($i = 1; $i<=31; $i++){
-				$day .= "<option value='$i'>$i</option>";
+				if($i == $dia)
+					$day .= "<option value='$i' selected>$i</option>";
+				else
+					$day .= "<option value='$i'>$i</option>";
 			}
 			$day .= '</select>';
 			return $day;
