@@ -371,6 +371,20 @@
 			echo json_encode($mensaje);
 			break;
 
+		case 'modificarDatosUsuario':
+			$userId = $_SESSION['userId'];
+			$name = $_POST['name'];
+			$dateOfBirth = $_POST['dateOfBirth'];
+			$sex = $_POST['sex'];
+			$country = $_POST['country'];
+
+			modeloUsuario::modifyuser($userId, $name, $dateOfBirth, $sex, $country);
+
+			$mensaje = 'Usuario modificado correctamente.';
+
+			echo json_encode($mensaje);
+			break;
+
 		case 'dontWantToVisit':
 			$userId = $_SESSION['userId'];
 			$placeId = $_POST['placeId'];

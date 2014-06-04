@@ -700,7 +700,31 @@
     $( "#iniSesionFormBtn" ).click(function() {
       var passCodificada = hex_md5($('#txtPassReg').val());
       $('#txtPassReg').val(passCodificada);
-      alert(passCodificada);
+    });
+
+    //Modificar usuario
+    $("#UserMenuBtn").click(function(){
+      var name = $("#txtMenuName").val();
+      var dateOfBirth = $("#selYear").val()+"-"+$("#selMonth").val()+"-"+$("#selDay").val();
+      var sex = $("input[name='sex']:checked").val(); 
+      var country = $("#selCountries").val();
+
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'modificarDatosUsuario',
+          name: name,
+          dateOfBirth: dateOfBirth,
+          sex: sex,
+          country: country
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          alert(resultado);
+        }
+      });
     });
 
     //Comprobaciones al perder el foco

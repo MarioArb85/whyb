@@ -101,5 +101,19 @@
 	 		return $userData;
 	    	
 	  	}
+
+	  	//Modificar datos usuario
+		static function modifyuser($userId, $name, $dateOfBirth, $sex, $countryId){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "UPDATE users SET name = '$name', birthdate = '$dateOfBirth', sex = '$sex', countryId = '$countryId' WHERE userId=$userId;";
+      		$firephp->log($consulta, 'Mensaje');
+	      	$resultado = $conexion->query($consulta);
+
+      		AccesoBBDD::cierraConexionBD($conexion);
+	 		
+	 		return $resultado;
+	  	}
 	}
 ?>

@@ -34,43 +34,39 @@
             <div id='menuResults'/>
               <h1>Modificar datos de usuario</h1>
               <br/><br/>
-              <form id='userForm' action='/whyb/web/form/result/' method='post'>
-                  <table>
-                    <tr>
-                        <th><span class='required'>*</span> Usuario:</th>
-                        <td><input type='text' id ='txtUserName' name='txtUserName' value='".$userData->getNickname()."' style='background-color: LightGray;'readonly/></td>
-                        <td><span id='userError' class='required'></span></td>
-                    </tr>
-                    <tr>
-                        <th><span class='required'>*</span> Email:</th>
-                      <td><input type='text' id ='txtMail' name='txtMail' value='".$userData->getEmail()."'/></td>
-                      <td><span id='mailError' class='required'></span></td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;&nbsp;&nbsp;Nombre:</th>
-                        <td><input type='text' name='txtName' value='".$userData->getName()."'/></td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;&nbsp;&nbsp;Fecha de nacimiento:</th>
-                        <td>&nbsp;$dia&nbsp;/&nbsp;$mes&nbsp;/&nbsp;$anio</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;&nbsp;&nbsp;Sexo:</th>
-                        <td>
-                          <input type='radio' name='sex' value='male' $male>Hombre
-                          <input type='radio' name='sex' value='female' $female>Mujer
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><span class='required'>*</span> Pais:</th>
-                        <td>
-                          $select
-                        </td> 
-                    </tr>
+                 <table>
+                  <tr>
+                    <th><span class='required'>*</span> Usuario:</th>
+                    <td><input type='text' id ='txtUserMenuName' name='txtUserName' value='".$userData->getNickname()."' style='background-color: LightGray;' readonly/></td>
+                  </tr>
+                  <tr>
+                    <th><span class='required'>*</span> Email:</th>
+                    <td><input type='text' id ='txtMenuMail' value='".$userData->getEmail()."' style='background-color: LightGray;' readonly/></td>
+                  </tr>
+                  <tr>
+                    <th>&nbsp;&nbsp;&nbsp;Nombre:</th>
+                    <td><input type='text' id='txtMenuName' value='".$userData->getName()."'/></td>
+                  </tr>
+                  <tr>
+                    <th>&nbsp;&nbsp;&nbsp;Fecha de nacimiento:</th>
+                    <td>&nbsp;$dia&nbsp;/&nbsp;$mes&nbsp;/&nbsp;$anio</td>
+                  </tr>
+                  <tr>
+                    <th>&nbsp;&nbsp;&nbsp;Sexo:</th>
+                    <td>
+                    <input type='radio' name='sex' value='male' $male>Hombre
+                    <input type='radio' name='sex' value='female' $female>Mujer
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span class='required'>*</span> Pais:</th>
+                    <td>
+                      $select
+                    </td> 
+                  </tr>
                 </table>
                 <br/><br/><br/><br/>
-                  <input type='submit'  value='Actualizar datos' id='formularioBtn' class='formularioBtn enlace' style='font-size:150%;'/></td>
-                </form>      
+                <a id='UserMenuBtn' class='enlace' style='padding-left: 100px; cursor:pointer;'>Actualizar datos</a>      
             </div>    	
         </div>
         <div id='paginacion'></div>";
