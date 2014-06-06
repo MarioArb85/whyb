@@ -497,6 +497,7 @@
             var marker = new google.maps.Marker({
               position: new google.maps.LatLng(this.lat, this.lng),
               map: map,
+              icon: '/whyb/web/img/mine.png',
               title: this.title,
             });
             //Meter marker en array de marcadores

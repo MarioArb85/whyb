@@ -42,6 +42,7 @@
       var marker = new google.maps.Marker({
                   position: new google.maps.LatLng(40.416742, -3.703719),
                   draggable: true,
+                  icon: '/whyb/web/img/mine.png',
                   map: mapMio,
                   title: ''
                 });

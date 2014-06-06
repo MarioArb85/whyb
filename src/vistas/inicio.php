@@ -10,10 +10,44 @@ class inicio {
     <img id='imgPortada' src='".$rutaImg."'>
     <div id='cuerpo'>
     <div id='textInicio'>
-      <p>Percipit salutatus tincidunt per et, mea viderer phaedrum referrentur eu. Quas bonorum apeirian pro eu. Percipit nominati vel ne, eu corpora iudicabit eloquentiam per. Sed clita posidonium interpretaris et. Et porro latine fabellas his, ea modus libris eirmod sit. In cum enim fugit, ex per labore dicunt delicata. Eu vidit latine bonorum vim, ad adhuc errem pri, quas elitr interesset eos at.</p>
-      <br/><br/>
-      <a href='".DIR_UNESCO."' class='bigLink enlace'>Sitios Unesco</a>
-      <a href='".DIR_MAP."' class='bigLink enlace' style='margin-left: 150px;'>Mapa Unesco</a>
+      <p>'Where have you been' es un diario de viajes que, una vez vez registrado, te permite guardar los luagres que has visitado en todo el mundo
+       y adjuntar un breve comentario sobre cada uno de ellos. También puedes buscar los sitios catalogados por la UNESCO como
+       Patrimonio de la Humanidad y guardarlos en tu lista de 'Lugares que quiero visitar'.</p>
+      <br/>
+      <table id='tablaInicio' style='margin-left: 170px;'>
+        <tr class='marginTop'>
+          <th>
+            <a href='".DIR_UNESCO."' class='bigLink enlace'>Sitios Unesco</a>
+          </th>
+          <td>
+            <p>Ir al listado de sitios de la Unesco</p>
+          </td>
+        <tr>
+        <tr>
+          <th>
+            <a href='".DIR_MAP."' class='bigLink enlace marginTop'>Mapa Unesco</a>
+          </th>
+          <td>
+            <p>Mapa con los luagares Patrimonio de la Humanidad</p>
+          </td>
+        <tr>
+        <tr>
+          <th>
+            <a href='".DIR_PLACES."' class='bigLink enlace'>Mis lugares</a>
+          </th>
+          <td>
+            <p>Guarda tus sitios favoritos</p>
+          </td>
+        <tr>
+        <tr>
+          <th>
+            <a href='".DIR_SHOW_PLACES."' class='bigLink enlace'>Ver mis lugares</a>
+          </th>
+          <td>
+            <p>Gestiona tus lugares visitados y los que quieres visitar</p>
+          </td>
+        <tr>
+      <table>
     </div>
     </div>";
 	  

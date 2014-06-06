@@ -42,7 +42,7 @@
             <a href='".DIR_SHOW_PLACES."' id='menuUnesco' class='linkMenu'>Ver mis lugares</a>
           </div>
           <div id='menuResults'/>
-            <h1>Modificar datos de usuario</h1>
+            <h1 style='margin-left:35px;'>Modificar datos de usuario</h1>
             <br/><br/>
              <table>
               <tr>
