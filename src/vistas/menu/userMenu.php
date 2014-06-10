@@ -24,14 +24,14 @@
           $male = 'checked';
         else if($userData->getSex() == 'female')
           $female = 'checked';
-
+        
       	$body = "
+        <div id='divCargandoUserMenu' class='cargandoBueno'>
+          Cargando...
+          <br/><br/><br/>
+          <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
+        </div>
         <div id='menuPage'>
-          <div id='divCargandoUserMenu'>
-            <div id='cargandoImgUserMenu'>
-              <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
-            </div>
-          </div>
           <div id='menuFilters'>
           	<a href='".DIR_MENU_DATA."' id='menuDatos' class='linkMenu filterSelected'>Datos usuario</a>
             <a href='".DIR_MENU_DELETE."' id='menuBaja' class='linkMenu'>Darse de baja</a>

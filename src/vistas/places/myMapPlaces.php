@@ -17,10 +17,10 @@ class myMapPlaces {
     $formularioMisSitios = formularios::buildMyCountries(0, 1);
 
     $body = "
-            <div id='divCargandoMap' class='cargandoMap' style='display: none; width: 840px;'>
-                <div class='cargandoImgUserMap'>
-                    <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
-                </div>
+            <div id='divCargandoMap' class='cargandoBueno'>
+                Cargando...
+                <br/><br/><br/>
+                <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
             </div>
             <div id='myMapPage'>  
                 <div id='filters'>

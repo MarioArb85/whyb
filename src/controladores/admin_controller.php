@@ -4,6 +4,7 @@
     static function login() {
       global $firephp;
       //Destruir sesion
+      session_unset();
       session_destroy();
 
       $titulo = "WHYB Admin";

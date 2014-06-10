@@ -6,10 +6,10 @@ class places {
     global $firephp;
 
     $body = '
-            <div id="divCargandoMap" class="cargandoMap" style="display: none;">
-                <div class="cargandoImgMap">
-                    <img src="/whyb/web/img/load.gif" height="30px" width="30px"/>
-                </div>
+            <div id="divCargandoMap" class="cargandoBueno">
+                Cargando...
+                <br/><br/><br/>
+                <img src="/whyb/web/img/load.gif" height="30px" width="30px"/>
             </div>
             <div id="mapPage">  
                 <div id="filters">

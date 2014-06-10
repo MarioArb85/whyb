@@ -15,10 +15,10 @@ class unesco {
     $checkCont = formularios::buildContinents();
 
     $body = "
-        <div id='divCargando' class='cargando' display='none'>
-            <div class='cargandoImg'>
-                <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
-            </div>
+        <div id='divCargando' class='cargandoBueno'>
+            Cargando...
+            <br/><br/><br/>
+            <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
         </div>
         <div id='unescoPage'>
             <div id='filters'>

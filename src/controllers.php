@@ -24,6 +24,13 @@ $firephp = FirePHP::getInstance(true);
 $app->get('/', function () use ($app) {
     global $firephp;
     $titulo = "Where have you been";
+    $firephp->log($_SESSION['userRol'], 'rol');
+    if($_SESSION['userRol'] == 1 || $_SESSION['userRol'] == 2) {
+        session_unset();
+        session_destroy();
+    }
+
+    $firephp->log($_SESSION['user'], 'usuario');
     $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
     $body= inicio::construye();
     $footer = footer::construye();
