@@ -4,4 +4,5 @@
 	require 'modeloUsuario.php';
 	require 'usuario.php';
 	require 'modeloSitios.php';
+	require 'modeloAdmin.php';
 ?>

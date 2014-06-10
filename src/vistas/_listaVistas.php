@@ -1,4 +1,5 @@
 <?php
+	require 'admin/admin_login.php';
 	require 'maps/mapa.php';
 	require 'menu/userMenu.php';
 	require 'menu/cabecera.php';

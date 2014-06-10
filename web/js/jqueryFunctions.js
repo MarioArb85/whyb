@@ -703,6 +703,12 @@
       $('#txtPassReg').val(passCodificada);
     });
 
+    //Codificar pass al inicar sesión privada
+    $( "#iniPrivateSesionFormBtn" ).click(function() {
+      var passCodificada = hex_md5($('#txtPrivatePassReg').val());
+      $('#txtPrivatePassReg').val(passCodificada);
+    });
+
     //Modificar usuario
     $("#UserMenuBtn").click(function(){
       var name = $("#txtMenuName").val();

@@ -212,6 +212,13 @@ a:hover {
 	margin: 0px 50px;
 }
 
+#divIniPrivateSesion{
+	position: relative;
+	float: left;
+	height: 250px;
+	margin: 80px 450px;
+}
+
 #textInicio {
 	position: relative;
     text-align: center;

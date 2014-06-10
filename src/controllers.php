@@ -112,6 +112,21 @@ $app->get('/disconnect/', function () use ($app) {
 ->bind('disconnect')
 ;
 
+//Administración página
+$app->get('/admin/', function () use ($app) {
+    //return 'ss';
+    return admin_controller::login();
+})
+->bind('admin')
+;
+
+//Menu privado
+$app->post('/admin/log/', function (Request $request) {
+    return admin_controller::logAdmin($request);
+})
+->bind('admin_log')
+;
+
 $app->get('/hello/{name}', function ($name) use ($app) {
     return 'Hello '.$app->escape($name);
 });
