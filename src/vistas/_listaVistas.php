@@ -2,6 +2,7 @@
 	require 'admin/admin_login.php';
 	require 'admin/admin_menu.php';
 	require 'admin/admin_listado.php';
+	require 'admin/admin_modify.php';
 	require 'maps/mapa.php';
 	require 'menu/userMenu.php';
 	require 'menu/cabecera.php';

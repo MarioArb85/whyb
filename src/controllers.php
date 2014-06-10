@@ -140,12 +140,19 @@ $app->get('/admin/menu/', function () use ($app) {
 ->bind('admin_menu')
 ;
 
-//Administración página
+//Administración página - listado
 $app->get('/admin/menu/list/', function () use ($app) {
     return admin_controller::listado();
 })
 ->bind('admin_menu_listado')
 ;
+
+//Administración página - modificar sitio
+$app->get('/admin/menu/modify/{unescoId}', function ($unescoId) use ($app) {
+    $place = $app->escape($unescoId);
+    return admin_controller::modify($place);
+    //return $place;
+});
 
 $app->get('/hello/{name}', function ($name) use ($app) {
     return 'Hello '.$app->escape($name);

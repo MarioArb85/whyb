@@ -109,6 +109,10 @@ tr {
 	text-align: left;
 } 
 
+ul {
+	list-style-type: disc;
+}
+
 a {
 	font-family: radiohead;
 	font-size: 140%;
@@ -224,6 +228,13 @@ a:hover {
 	float: left;
 	height: 250px;
 	margin: 80px 350px;
+}
+
+#divPrivateModify{
+	position: relative;
+	float: left;
+	height: 250px;
+	margin: 20px 350px;
 }
 
 #textInicio {
@@ -705,6 +716,7 @@ a:hover {
 	background-color: white;
 	border:0px;
 	padding-left: 20px;
+	cursor: pointer;
 }
 
 .formularioBtn:hover {

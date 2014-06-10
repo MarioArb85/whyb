@@ -323,7 +323,7 @@
 			        	$body .= '<td>'.$fila->categoryName_es.'</td>';
 			        	$body .= '<td>'.$fila->countryName_es.'</td>';
 			        	$body .= '<td>'.$fila->continentName_es.'</td>';
-			        	$body .= '<td><a href="javascript: void(0)"><img src="/whyb/web/img/edit.jpg" height="20px" width="20px"/></a></td>';
+			        	$body .= '<td><a href="/whyb/web/admin/menu/modify/'.$fila->placeId.'"><img src="/whyb/web/img/edit.jpg" height="20px" width="20px"/></a></td>';
 			        	$body .= '<td><a href="javascript: void(0)" onclick=\'borraUnesco("'.$fila->placeId.'")\'><img src="/whyb/web/img/error.png" height="20px" width="20px"/></a></td>';
 			        	$body .= '</tr>';
 	        		}

@@ -144,5 +144,23 @@
 
 			return $resultado;
 		}
+
+		//Consultar datos sitio de la Unesco
+		static function dataUnesco($unescoId){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "SELECT categoryId, countryId, continentId, latitude, longitude, unesco_es, unescoimage, web_es FROM places WHERE placeId = $unescoId";
+	      	
+			if ($resultado = $conexion->query($consulta)) {
+				while ($fila = $resultado->fetch_object()) {
+					$datos[] = array('category' => $fila->categoryId, 'country' => $fila->countryId, 'continent' => $fila->continentId, 'lat' => $fila->latitude, 'lng' => $fila->longitude, 'name' => $fila->unesco_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es);
+				}
+			}
+
+			AccesoBBDD::cierraConexionBD($conexion);
+
+			return $datos;
+		}
 	}
 ?>

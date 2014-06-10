@@ -80,5 +80,22 @@
       //$firephp->log($paco, 'Mensaje');
       return $pagina;
     }
+
+    //Menu usuario - listado sitios unesco
+    static function modify($unescoId) {
+      global $firephp;
+      $titulo = "WHYB Modify Unesco place";
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
+      $menu='';
+      $data = modeloSitios::dataUnesco($unescoId);
+      $firephp->log($data, 'Datos que devuelve');
+
+      $body = admin_modify::construye($data); 
+      $footer = footer::construye();
+      $paginaDetalle = new plantillaPagina($titulo, $header,$menu, $body, $footer);
+      $pagina = $paginaDetalle->mostrar();
+      //$firephp->log($paco, 'Mensaje');
+      return $pagina;
+    }
   }
 ?>
