@@ -64,3 +64,9 @@
 
 	//Pagina menu - baja
 	define("DIR_MENU_DELETE", DIR_RAIZ_APP."web/menu/delete/");
+
+	//Pagina menu privado
+	define("DIR_ADMIN_MENU", DIR_RAIZ_APP."web/admin/menu/");
+
+	//Pagina menu privado - listado unesco
+	define("DIR_ADMIN_MENU_LIST", DIR_RAIZ_APP."web/admin/menu/list/");

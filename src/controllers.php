@@ -114,17 +114,30 @@ $app->get('/disconnect/', function () use ($app) {
 
 //Administración página
 $app->get('/admin/', function () use ($app) {
-    //return 'ss';
     return admin_controller::login();
 })
 ->bind('admin')
 ;
 
-//Menu privado
+//Logeo menu privado
 $app->post('/admin/log/', function (Request $request) {
     return admin_controller::logAdmin($request);
 })
 ->bind('admin_log')
+;
+
+//Administración página
+$app->get('/admin/menu/', function () use ($app) {
+    return admin_controller::menu();
+})
+->bind('admin_menu')
+;
+
+//Administración página
+$app->get('/admin/menu/list/', function () use ($app) {
+    return admin_controller::listado();
+})
+->bind('admin_menu_listado')
 ;
 
 $app->get('/hello/{name}', function ($name) use ($app) {

@@ -27,8 +27,9 @@
       if($resultado != null || $resultado != ''){
         if ($resultado->getPassword() == $request->get('txtPrivatePassReg') && $resultado->getRolId() == 1){
           //Usuario y contraseña correctos
-          $_SESSION['user'] = $request->get('txtUserNameReg');
+          $_SESSION['user'] = $request->get('txtPrivateUserNameReg');
           $_SESSION['userId'] = $resultado->getUserId();
+          $_SESSION['userRol'] = $resultado->getRolId();
           header('Location: /whyb/web/admin/menu/');
           die();
         }
@@ -47,6 +48,36 @@
         header('Location: '.$dire);
         die();
       }
+    }
+
+    //Menu usuario
+    static function menu() {
+      global $firephp;
+
+      $titulo = "WHYB Menu";
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
+      $menu='';
+      $body = admin_menu::construye();   
+      $footer = footer::construye();
+      $paginaDetalle = new plantillaPagina($titulo, $header,$menu, $body, $footer);
+      $pagina = $paginaDetalle->mostrar();
+      //$firephp->log($paco, 'Mensaje');
+      return $pagina;
+    }
+
+    //Menu usuario - listado sitios unesco
+    static function listado() {
+      global $firephp;
+
+      $titulo = "WHYB Menu";
+      $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
+      $menu='';
+      $body = admin_listado::construye();   
+      $footer = footer::construye();
+      $paginaDetalle = new plantillaPagina($titulo, $header,$menu, $body, $footer);
+      $pagina = $paginaDetalle->mostrar();
+      //$firephp->log($paco, 'Mensaje');
+      return $pagina;
     }
   }
 ?>
