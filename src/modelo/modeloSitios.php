@@ -78,7 +78,7 @@
 			return $resultado;
 		}
 
-		//Borrar sitio UNESCO
+		//Borrar sitio UNESCO o privado
 		static function deletePlace($placeId, $userId, $myPlace){
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
@@ -130,6 +130,19 @@
 		    }
 			AccesoBBDD::cierraConexionBD($conexion);
 			return $sitios;
+		}
+
+		//Borrar sitio UNESCO
+		static function deleteUnesco($unescoId){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "DELETE FROM places WHERE placeId = $unescoId";
+	      	$resultado = $conexion->query($consulta);
+
+			AccesoBBDD::cierraConexionBD($conexion);
+
+			return $resultado;
 		}
 	}
 ?>

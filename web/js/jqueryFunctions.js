@@ -309,10 +309,10 @@
           $('#privateResults').html(resultado);
         },
         beforeSend: function() {
-          $('#divCargando').css("display","block");
+          $('#loadingPrivateResults').css("display","block");
         },
         complete: function() {
-          $('#divCargando').css("display","none");
+          $('#loadingPrivateResults').css("display","none");
         }
       });
     });
@@ -1279,6 +1279,36 @@
           },
           complete: function() {
             $('#divCargandoMap').css("display","none");
+          }
+      });
+    }
+  }
+
+  function borraUnesco(unescoId){
+    var conf = confirm("¿Estas seguro que quieres eliminar este lugar de la Unesco?");
+    if (conf == true){ 
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'deletePrivatePlaces',
+          unescoId: unescoId
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          if (resultado == true) {
+            $('#privateResult'+unescoId).remove();
+            alert('¡El lugar se ha eliminado correctamente!');
+          }
+          else
+            alert('Ha ocurrido un error. Vuelva a intentarlo mas tarde.');
+        },
+          beforeSend: function() {
+            $('#loadingPrivateResults').css("display","block");
+          },
+          complete: function() {
+            $('#loadingPrivateResults').css("display","none");
           }
       });
     }

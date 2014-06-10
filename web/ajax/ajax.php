@@ -318,13 +318,13 @@
 			        $body .= '<th>Eliminar</th>';
 			        $body .= '</tr>';
 			        while ($fila = $resultado->fetch_object()) {
-			        	$body .= '<tr>';
+			        	$body .= '<tr id="privateResult'.$fila->placeId.'">';
 			        	$body .= '<td>'.$fila->unesco_es.'</td>';
 			        	$body .= '<td>'.$fila->categoryName_es.'</td>';
 			        	$body .= '<td>'.$fila->countryName_es.'</td>';
 			        	$body .= '<td>'.$fila->continentName_es.'</td>';
-			        	$body .= '<td><a href="#"><img src="/whyb/web/img/edit.jpg" height="20px" width="20px"/></a></td>';
-			        	$body .= '<td><a href="#"><img src="/whyb/web/img/error.png" height="20px" width="20px"/></a></td>';
+			        	$body .= '<td><a href="javascript: void(0)"><img src="/whyb/web/img/edit.jpg" height="20px" width="20px"/></a></td>';
+			        	$body .= '<td><a href="javascript: void(0)" onclick=\'borraUnesco("'.$fila->placeId.'")\'><img src="/whyb/web/img/error.png" height="20px" width="20px"/></a></td>';
 			        	$body .= '</tr>';
 	        		}
 	        		$body .= '</table>';
@@ -337,6 +337,14 @@
 			}
 
 			echo json_encode($list);
+			break;
+
+		case 'deletePrivatePlaces':
+			$unescoId = $_POST['unescoId'];
+
+			$result = modeloSitios::deleteUnesco($unescoId);
+			
+			echo json_encode($result);
 			break;
 
 		case 'quieroVisitar':

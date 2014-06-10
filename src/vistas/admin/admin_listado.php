@@ -15,6 +15,11 @@ class admin_listado {
     $checkCont = formularios::buildContinents();
 
     $body = "
+        <div id='loadingPrivateResults' class='cargandoBueno'>
+            Cargando...
+            <br/><br/><br/>
+            <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
+        </div>
         <div id='privateListPage'>
             <div id='privateFilters'>
                 <a href='javascript: void(0)' onclick='ocultar(\"placesCategory\",\"imgCategory\")' class='linkFilter'>&nbsp;<img id='imgCategory' src='/whyb/web/img/flecha_abajo.png'/>&nbsp;&nbsp;Categoría:</a>
