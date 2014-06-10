@@ -115,5 +115,49 @@
 	 		
 	 		return $resultado;
 	  	}
+
+	  	//Borrar usuario
+		static function deleteUser($userId){
+			global $firephp;
+			$cont = 0;
+			$sitios = array();
+
+      		$conexion = accesoBBDD::abreConexionBD();
+
+      		//Recupera si existen el Id de los lugares que ha visitado el usuario 
+      		$consulta = "SELECT placeId FROM placesvisited WHERE userId = $userId and isUnesco = 0";
+      		$firephp->log($consulta, 'Query consulta sitios propios');
+
+      		if ($resultado = $conexion->query($consulta)) {
+				while ($fila = $resultado->fetch_object()) {	
+			        $sitios[] = $fila->placeId;
+		    	}
+		    }
+		    $firephp->log($sitios, 'Resultado sitios propios');
+
+		    //Borra todos los registros de la tabla placesvisited del usuario
+		    $consulta = "DELETE FROM placesvisited WHERE userId = $userId";
+		    $conexion->query($consulta);
+
+		    //Borra en caso de existir los lugares credos por el usuario
+		    if (count($sitios) > 0){
+		    	$consulta = "DELETE FROM places WHERE placeId IN (";
+		    	foreach ($sitios as $userPlace) {
+		    		$consulta .= "$userPlace,";
+		    	}
+		    	$consulta = substr($consulta, 0, -1);
+		    	$consulta .=");";
+		    	$firephp->log($consulta, 'Query borrar sitios propios');
+		    	$conexion->query($consulta);
+		    } 
+
+			//Borra el usuario de la tabla users
+		    $consulta = "DELETE FROM users WHERE userId = $userId";
+		    $conexion->query($consulta);
+
+      		AccesoBBDD::cierraConexionBD($conexion);
+	 		
+	 		return $resultado;
+	  	}
 	}
 ?>

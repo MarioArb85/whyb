@@ -388,6 +388,18 @@
 			echo json_encode($mensaje);
 			break;
 
+		case 'bajaUsuario':
+			$userId = $_SESSION['userId'];
+
+			modeloUsuario::deleteUser($userId);
+
+			$mensaje = 'Usuario dado de baja correctamente.';
+
+			session_destroy();
+
+			echo json_encode($mensaje);
+			break;
+
 		case 'dontWantToVisit':
 			$userId = $_SESSION['userId'];
 			$placeId = $_POST['placeId'];
@@ -419,8 +431,8 @@
 		case 'deleteWU':
 			$userId = $_SESSION['userId'];
 			$placeId = $_POST['placeId'];
-			$isUnesco = $_POST['isUnesco'];
-			$resultado = modeloSitios::deletePlace($placeId, $userId, $isUnesco);
+			$myPlace = $_POST['myPlace'];
+			$resultado = modeloSitios::deletePlace($placeId, $userId, $myPlace);
 			echo json_encode($resultado);
 			break;
 

@@ -79,7 +79,7 @@
 		}
 
 		//Borrar sitio UNESCO
-		static function deletePlace($placeId, $userId, $isUnesco){
+		static function deletePlace($placeId, $userId, $myPlace){
 			global $firephp;
       		$conexion = accesoBBDD::abreConexionBD();
 
@@ -87,7 +87,7 @@
 	      	$resultado = $conexion->query($consulta);
 
 	      	//CIUDADO!!!! BORRA SITIO DE LA UNESCO!!
-	      	if ($isUnesco == 'true'){
+	      	if ($myPlace == 'true'){
 	      		$consulta = "DELETE FROM places WHERE placeId = $placeId";
 	      		$resultado = $conexion->query($consulta);
 	      	}

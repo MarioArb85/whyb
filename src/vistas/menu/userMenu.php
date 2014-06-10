@@ -18,7 +18,7 @@
         $dia = formularios::buildDay($day);
         $mes = formularios::buildMonth($month);
         $anio = formularios::buildYear($year);
-        $select = formularios::buildCountries($userData->getCountryId());
+        $select = formularios::buildCountries($userData->getCountryId(), 'userInfo');
 
         if($userData->getSex() == 'male')
           $male = 'checked';

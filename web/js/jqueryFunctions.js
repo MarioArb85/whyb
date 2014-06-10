@@ -708,7 +708,7 @@
       var name = $("#txtMenuName").val();
       var dateOfBirth = $("#selYear").val()+"-"+$("#selMonth").val()+"-"+$("#selDay").val();
       var sex = $("input[name='sex']:checked").val(); 
-      var country = $("#selCountries").val();
+      var country = $("#selCountriesUser").val();
 
       //Funcion ajax        
       $.ajax({
@@ -732,6 +732,32 @@
           $('#divCargandoUserMenu').css("display","none");
         }
       });
+    });
+
+    //Baja usuario
+    $("#UserDeleteMenuBtn").click(function(){
+      var pregunta = confirm('Seguro que quieres dar de baja el usuario? \n Se perderán todos los lugares que has guardado.');
+      if (pregunta == true) {
+        //Funcion ajax        
+        $.ajax({
+          url: '/whyb/web/ajax/ajax.php',
+          type: 'POST',
+          data: {
+            func: 'bajaUsuario'
+          },                
+          dataType: 'json',
+          success: function(resultado) {
+            alert(resultado);
+            //Redirigir a la pagina principal!
+          },
+          beforeSend: function() {
+            $('#divCargandoUserMenu').css("display","block");
+          },
+          complete: function() {
+            $('#divCargandoUserMenu').css("display","none");
+          }
+        });
+      }
     });
 
     //Comprobaciones al perder el foco
@@ -1183,7 +1209,7 @@
       });
   }
 
-  function deletePlace(placeId, isUnesco){
+  function deletePlace(placeId, myPlace){
     var segurir = confirm ('¿Seguro que deseas elimiar este lugar?');
     if (segurir == true) {
       //Funcion ajax        
@@ -1193,7 +1219,7 @@
         data: {
           func: 'deleteWU',
           placeId: placeId,
-          isUnesco: isUnesco
+          myPlace: myPlace
         },                
         dataType: 'json',
         success: function(resultado) {

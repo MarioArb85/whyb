@@ -2,13 +2,18 @@
 	class formularios {
 
 		//Pinta select
-		static function buildCountries($country){
+		static function buildCountries($country,$page){
 			$conexion = AccesoBBDD::abreConexionBD();
+
+			if ($page == 'userInfo')
+				$selectName = 'selCountriesUser';
+			else
+				$selectName = 'selCountries';
 
 			$consulta = "SELECT countryId, countryname_es FROM countries ORDER BY countryname_es";
 
 	   		if($resultado = $conexion->query($consulta)) {
-		        $countries = "<select id='selCountries' name='selCountries' style='width:120px;'>";
+		        $countries = "<select id='$selectName' name='selCountries' style='width:120px;'>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	if ($fila->countryId == $country)
 		        		$countries .= "<option value='".$fila->countryId."' selected>".$fila->countryname_es."</option>";

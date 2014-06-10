@@ -8,7 +8,7 @@
         $body = "
         <div id='menuPage'>
           <div id='divCargandoUserMenu'>
-            <div id='cargandoImgUserMap'>
+            <div id='cargandoImgUserMenu'>
               <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
             </div>
           </div>
