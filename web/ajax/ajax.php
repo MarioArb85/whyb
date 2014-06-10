@@ -260,6 +260,85 @@
 			echo json_encode($list);
 			break;
 
+		case 'private_list':
+			//Para pasar parámetros de vuelta
+			$list = array();
+
+			if(isset($_POST['categoria']) || isset($_POST['continente']) || isset($_POST['pais'])) {
+				//Recoger datos para filtrar
+				if (isset($_POST['categoria'])){
+					$cat = $_POST['categoria'];
+					//$category = explode(",", $cat);
+				}
+
+				if (isset($_POST['continente'])){
+					$cont = $_POST['continente'];
+					//$continent = explode(",", $cont);
+				}
+
+				if (isset($_POST['pais']))
+					$country = $_POST['pais'];
+
+			    $consulta = "SELECT	p.unescoimage, p.unesco_es, t.categoryName_es, c.countryName_es, d.continentName_es, p.web_es, p.placeId, p.latitude, p.longitude FROM places p, category t, countries c, continents d WHERE ";
+
+				if (isset($cat)){
+					$consulta .= "(";
+					foreach ($cat as $cat) {
+						$consulta .= " t.categoryId = ".$cat." or"; 
+					}
+					$consulta = substr($consulta, 0, -2);
+					$consulta .= ") and ";
+				}
+
+				if (isset($cont)){
+					$consulta .= "(";
+					foreach ($cont as $cont) {
+						$consulta .= " d.continentId = ".$cont." or"; 
+					}
+					$consulta = substr($consulta, 0, -2);
+					$consulta .= ") and ";
+				}
+
+				if (isset($country)){
+					$consulta .= " c.countryId = '".$country."' and";
+				}
+
+				$consulta .= " t.categoryId != 0 and";
+
+				$consulta .= " p.categoryId = t.categoryId and p.countryId = c.countryId and p.continentId = d.continentId;";
+				$firephp->log($consulta, 'Mensaje');
+				if ($resultado = $conexion->query($consulta)) {
+			        $body = '<table id="tablePrivateResults">';
+			        $body .= '<tr>';
+			        $body .= '<th>Nombre</th>';
+			        $body .= '<th>Categoria</th>';
+			        $body .= '<th>Pais</th>';
+			        $body .= '<th>Continente</th>';
+			        $body .= '<th>Modificar</th>';
+			        $body .= '<th>Eliminar</th>';
+			        $body .= '</tr>';
+			        while ($fila = $resultado->fetch_object()) {
+			        	$body .= '<tr>';
+			        	$body .= '<td>'.$fila->unesco_es.'</td>';
+			        	$body .= '<td>'.$fila->categoryName_es.'</td>';
+			        	$body .= '<td>'.$fila->countryName_es.'</td>';
+			        	$body .= '<td>'.$fila->continentName_es.'</td>';
+			        	$body .= '<td><a href="#"><img src="/whyb/web/img/edit.jpg" height="20px" width="20px"/></a></td>';
+			        	$body .= '<td><a href="#"><img src="/whyb/web/img/error.png" height="20px" width="20px"/></a></td>';
+			        	$body .= '</tr>';
+	        		}
+	        		$body .= '</table>';
+
+	        		$list[] = $body;
+
+			        // se libera el cursor
+			        $resultado->free();			
+				}
+			}
+
+			echo json_encode($list);
+			break;
+
 		case 'quieroVisitar':
 			//Para pasar parámetros de vuelta
 			$list = array();

@@ -279,6 +279,46 @@ a:hover {
 	/*border: 1px solid black;*/
 }
 
+#privateListPage {
+	position: relative;
+	/*height: 1000px;*/
+	height: auto;
+	width: 1200px;
+	margin: 50px auto;
+	/*border: 1px solid black;*/
+}
+
+#privateFilters {
+	position: relative;
+	float: left;
+	margin: 25px;
+	width: 150px;
+	height: 440px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#privateResults {
+	position: relative;
+	float: left;
+	margin: 15px 0px 0px -25px;
+	width: 1020px;
+	/*height: 940px;*/
+	height: auto;
+	/*border: 1px solid black;*/
+}
+
+#tablePrivateResults{
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+#tablePrivateResults th,td{
+	padding: 5px;
+	text-align: center;
+	border: 1px solid black;
+}
+
 #placesPage {
 	position: relative;
 	height: 1000px;
@@ -576,6 +616,7 @@ a:hover {
 
 #footer {
 	position: relative;
+	float:left;
 	background-color: white;
 	margin: 20px auto 0px auto;
 	height: 40px;

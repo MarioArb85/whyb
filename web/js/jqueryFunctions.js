@@ -280,6 +280,43 @@
       });
     });
 
+    //Actualizar por ajax menu privado sitios Unesco
+    $('#updatePrivateListBtn').click(function(){
+      //Seleccionar categoria
+      var category = getCategory('placesCategory', 'checkCat');
+      //Seleccionar continente
+      var continent = getContinent();
+      //Seleccionar pais
+      var country = getCountry('placesCountry', 'selCountries');
+
+      //Comprobar si están todos los campos vacíos antes de enviar la consulta
+      if(country == undefined && category == '' && continent == ''){
+        alert('Tienes que elegir algún parámetro!')
+        return false;
+      }
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'private_list',
+          categoria: category,
+          continente: continent,
+          pais: country
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          $('#privateResults').html(resultado);
+        },
+        beforeSend: function() {
+          $('#divCargando').css("display","block");
+        },
+        complete: function() {
+          $('#divCargando').css("display","none");
+        }
+      });
+    });
+
     //Actualizar por ajax sitios que quiero visitar
       $('#btnQuieroVisitar').click(function(){
       clearOverlays();
