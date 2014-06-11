@@ -5,6 +5,11 @@ class admin_modify {
   static function construye($data) {
   	global $firephp;
 
+    $paises = formularios::buildCountries($data[country],'privateData');
+    $categories = formularios::selectCategories($data[category]);
+    $continents = formularios::selectContinents($data[continent]);
+
+
     $body = "<div class='divRegForm'>
                 <div id='divPrivateModify'>
                     <h1>Modificar datos lugar de la Unesco</h1>
@@ -12,40 +17,40 @@ class admin_modify {
                     <table>
                         <tr>
                             <th>Nombre:</th>
-                            <td><input type='text' id ='txtUnescoName' name='txtUnescoName' autofocus/></td>
+                            <td><input type='text' id ='txtUnescoName' name='txtUnescoName' value='".$data[name]."' size='64' autofocus/></td>
                         </tr>
                         <tr>
                             <th>Latitud:</th>
-                            <td><input type='text' id ='txtUnescoLong' name='txtUnescoLong'/></td>
+                            <td><input type='text' id ='txtUnescoLong' name='txtUnescoLong' value='".$data[lat]."' size='10'></td>
                         </tr>
                         <tr>
                             <th>Longitud:</th>
-                            <td><input type='text' id ='txtUnescoLat' name='txtUnescoLat'/></td>
+                            <td><input type='text' id ='txtUnescoLat' name='txtUnescoLat' value='".$data[lng]."' size='10'/></td>
                         </tr>
                         <tr>
                             <th>Imagen:</th>
-                            <td><input type='text' id ='txtUnescoImage' name='txtUnescoImage'/></td>
+                            <td><input type='text' id ='txtUnescoImage' name='txtUnescoImage' value='".$data[img]."' size='48'/></td>
                         </tr>
                         <tr>
                             <th>Web:</th>
-                            <td><input type='text' id ='txtUnescoWeb' name='txtUnescoWeb'/></td>
+                            <td><input type='text' id ='txtUnescoWeb' name='txtUnescoWeb' value='".$data[web]."' size='32'/></td>
                         </tr>
                         <tr>
                             <th>Categoría:</th>
-                            <td></td>
+                            <td>$categories</td>
                         </tr>
                         <tr>
                             <th>País:</th>
-                            <td></td>
+                            <td>$paises</td>
                         </tr>
                         <tr>
                             <th>Continente:</th>
-                            <td></td> 
+                            <td>$continents</td> 
                         </tr>
                     </table>
                     <br/><br/><br/><br/>
                     <input type='submit'  value='Modificar' id='formularioUnescoBtn' class='formularioBtn enlace' style='font-size:150%;'/></td>
-                    <a href='/whyb/web/admin/menu/' style='margin-left: 100px;' class='enlace'>Volver al menú principal</a></td>
+                    <a href='".DIR_ADMIN_MENU_LIST."' style='margin-left: 100px;' class='enlace'>Volver al listado</a></td>
                 </div>    
             </div>";
 

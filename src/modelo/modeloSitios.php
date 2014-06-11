@@ -154,7 +154,7 @@
 	      	
 			if ($resultado = $conexion->query($consulta)) {
 				while ($fila = $resultado->fetch_object()) {
-					$datos[] = array('category' => $fila->categoryId, 'country' => $fila->countryId, 'continent' => $fila->continentId, 'lat' => $fila->latitude, 'lng' => $fila->longitude, 'name' => $fila->unesco_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es);
+					$datos = ['category' => $fila->categoryId, 'country' => $fila->countryId, 'continent' => $fila->continentId, 'lat' => $fila->latitude, 'lng' => $fila->longitude, 'name' => $fila->unesco_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es];
 				}
 			}
 

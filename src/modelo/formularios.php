@@ -7,6 +7,8 @@
 
 			if ($page == 'userInfo')
 				$selectName = 'selCountriesUser';
+			else if ($page == 'privateData')
+				$selectName = 'selPrivateData';
 			else
 				$selectName = 'selCountries';
 
@@ -159,6 +161,50 @@
 		        $resultado->free();
 		    }
 			return $cities;
+		}
+
+		//Select cateagories
+		static function selectCategories($category){
+			$conexion = AccesoBBDD::abreConexionBD();
+
+			$consulta = "SELECT categoryId, categoryName_es FROM category ORDER BY categoryName_es";
+
+	   		if($resultado = $conexion->query($consulta)) {
+		        $countries = "<select id='privateCategories' name='privateCategories'>";
+		        while ($fila = $resultado->fetch_object()) {
+		        	if ($fila->categoryId == $category)
+		        		$countries .= "<option value='".$fila->categoryId."' selected>".$fila->categoryName_es."</option>";
+		        	else
+		        		$countries .= "<option value='".$fila->categoryId."'>".$fila->categoryName_es."</option>";
+		        }   
+		        $countries .= "</select>";    
+		        //se libera el cursor
+		        $resultado->free(); 
+		    }
+
+			return $countries;
+		}
+
+		//Select cateagories
+		static function selectContinents($continent){
+			$conexion = AccesoBBDD::abreConexionBD();
+
+			$consulta = "SELECT continentId, continentName_es FROM continents ORDER BY continentName_es";
+
+	   		if($resultado = $conexion->query($consulta)) {
+		        $countries = "<select id='privateCategories' name='privateCategories'>";
+		        while ($fila = $resultado->fetch_object()) {
+		        	if ($fila->continentId == $continent)
+		        		$countries .= "<option value='".$fila->continentId."' selected>".$fila->continentName_es."</option>";
+		        	else
+		        		$countries .= "<option value='".$fila->continentId."'>".$fila->continentName_es."</option>";
+		        }   
+		        $countries .= "</select>";    
+		        //se libera el cursor
+		        $resultado->free(); 
+		    }
+
+			return $countries;
 		}
 	}
 ?>

@@ -88,8 +88,6 @@
       $header = header::construye((isset($_SESSION['user']))? $_SESSION['user'] : "");
       $menu='';
       $data = modeloSitios::dataUnesco($unescoId);
-      $firephp->log($data, 'Datos que devuelve');
-
       $body = admin_modify::construye($data); 
       $footer = footer::construye();
       $paginaDetalle = new plantillaPagina($titulo, $header,$menu, $body, $footer);
