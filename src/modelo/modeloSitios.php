@@ -154,13 +154,27 @@
 	      	
 			if ($resultado = $conexion->query($consulta)) {
 				while ($fila = $resultado->fetch_object()) {
-					$datos = ['category' => $fila->categoryId, 'country' => $fila->countryId, 'continent' => $fila->continentId, 'lat' => $fila->latitude, 'lng' => $fila->longitude, 'name' => $fila->unesco_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es];
+					$datos = ['id' => $unescoId, 'category' => $fila->categoryId, 'country' => $fila->countryId, 'continent' => $fila->continentId, 'lat' => $fila->latitude, 'lng' => $fila->longitude, 'name' => $fila->unesco_es, 'img' => $fila->unescoimage, 'web' => $fila->web_es];
 				}
 			}
 
 			AccesoBBDD::cierraConexionBD($conexion);
 
 			return $datos;
+		}
+
+		//Modificar sitio Unesco
+		static function updateUnesco($unescoId, $nombre, $lat, $lon, $img, $web, $categoria, $pais, $continente){
+			global $firephp;
+      		$conexion = accesoBBDD::abreConexionBD();
+
+	      	$consulta = "UPDATE places SET categoryId=$categoria, countryId='$pais',continentId=$continente, latitude=$lat, longitude=$lon, unesco_es='$nombre', unescoimage='$img', web_es='$web' WHERE placeId = $unescoId;";
+	      	$firephp->log($consulta, 'consulta');
+	      	$resultado = $conexion->query($consulta);
+
+			AccesoBBDD::cierraConexionBD($conexion);
+
+			return $resultado;
 		}
 	}
 ?>

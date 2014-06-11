@@ -339,6 +339,27 @@
 			echo json_encode($list);
 			break;
 
+		case 'modifyUnescoplace':
+			$unescoId = $_POST['unescoId'];
+			$nombre = $_POST['nombre'];
+			$lat = $_POST['lat'];
+			$lon = $_POST['longit'];
+			$img = $_POST['img'];
+			$web = $_POST['webpage'];
+			$categoria = $_POST['categoria'];
+			$pais = $_POST['pais'];
+			$continente = $_POST['continente'];
+
+			$result = modeloSitios::updateUnesco($unescoId, $nombre, $lat, $lon, $img, $web, $categoria, $pais, $continente);
+			
+			if($result == true)
+				$mensaje = 'Se ha modificado el lugar correctamente.';
+			else
+				$mensaje = 'Ha ocurrido un error. Por favor, inténtelo mas tarde';
+
+			echo json_encode($mensaje);
+			break;
+
 		case 'deletePrivatePlaces':
 			$unescoId = $_POST['unescoId'];
 

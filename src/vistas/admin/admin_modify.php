@@ -9,8 +9,13 @@ class admin_modify {
     $categories = formularios::selectCategories($data[category]);
     $continents = formularios::selectContinents($data[continent]);
 
-
-    $body = "<div class='divRegForm'>
+    $body = "
+            <div id='loadingPrivateResults' class='cargandoBueno'>
+                Cargando...
+                <br/><br/><br/>
+                <img src='/whyb/web/img/load.gif' height='30px' width='30px'/>
+            </div>
+            <div class='divRegForm'>
                 <div id='divPrivateModify'>
                     <h1>Modificar datos lugar de la Unesco</h1>
                     <br/><br/>
@@ -47,8 +52,11 @@ class admin_modify {
                             <th>Continente:</th>
                             <td>$continents</td> 
                         </tr>
+                        <tr>
+                            <th><input type='hidden' id='txtUnescoId' value='".$data[id]."'></th>
+                        </tr>
                     </table>
-                    <br/><br/><br/><br/>
+                    <br/><br/><br/>
                     <input type='submit'  value='Modificar' id='formularioUnescoBtn' class='formularioBtn enlace' style='font-size:150%;'/></td>
                     <a href='".DIR_ADMIN_MENU_LIST."' style='margin-left: 100px;' class='enlace'>Volver al listado</a></td>
                 </div>    

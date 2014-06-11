@@ -192,7 +192,7 @@
 			$consulta = "SELECT continentId, continentName_es FROM continents ORDER BY continentName_es";
 
 	   		if($resultado = $conexion->query($consulta)) {
-		        $countries = "<select id='privateCategories' name='privateCategories'>";
+		        $countries = "<select id='privateContinents' name='privateContinents'>";
 		        while ($fila = $resultado->fetch_object()) {
 		        	if ($fila->continentId == $continent)
 		        		$countries .= "<option value='".$fila->continentId."' selected>".$fila->continentName_es."</option>";
