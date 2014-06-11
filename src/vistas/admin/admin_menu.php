@@ -18,7 +18,7 @@ class admin_menu {
                     <h1>Menu privado para la gestión de la web</h1>
                     <ul id='privateMenu' style='padding-left: 30px;'>
                         <li><a href='".DIR_ADMIN_MENU_LIST."'>Listado de lugares Unesco</a></li>
-                        <li><a href='#'>Agregar lugares Unesco (xml)</a></li>
+                        <li><a href='#' id='linkNewUnescoPlaces'>Agregar lugares Unesco (xml)</a></li>
                     </ul>
                 </div>    
             </div>";

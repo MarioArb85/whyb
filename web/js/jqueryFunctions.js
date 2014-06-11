@@ -282,75 +282,37 @@
 
     //Modificar sitio Unesco
     $('#formularioUnescoBtn').click(function(){
-      //id
-      var unescoId = $("#txtUnescoId").val();
-      //Nombre
-      var nombre = $("#txtUnescoName").val();
-      //Latitud
-      var lat = $("#txtUnescoLong").val();
-      //Longitud
-      var longit = $("#txtUnescoLat").val();
-      //Imagen
-      var img = $("#txtUnescoImage").val();
-      //Web
-      var webpage = $("#txtUnescoWeb").val();
-      //Categoria
-      var categoriaUnesco = $("#privateCategories").val();
-      //Pais
-      var pais = $("#selPrivateData").val();
-      //Continente
-      var continente = $("#privateContinents").val();
-
-      console.log(categoriaUnesco);
-      console.log(pais);
-      console.log(continente);
-      console.log(webpage);
-
-      if (nombre == "")
-        alert('Hay que rellenar todos los campos!')
-      else if (lat == '')
-        alert('Hay que rellenar todos los campos!')
-      else if (longit == '')
-        alert('Hay que rellenar todos los campos!')
-      else if (img == '')
-        alert('Hay que rellenar todos los campos!')
-      else if (webpage = '')
-        alert('Hay que rellenar todos los campos!')
-      else if (categoriaUnesco = '')
-        alert('Hay que rellenar todos los campos!')
-      else if (pais = '')
-        alert('Hay que rellenar todos los campos!')
-      else if (continente = '')
-        alert('Hay que rellenar todos los campos!')
-      else {
-        //Funcion ajax        
-        $.ajax({
-          url: '/whyb/web/ajax/ajax.php',
-          type: 'POST',
-          data: {
-            func: 'modifyUnescoplace',
-            unescoId: unescoId,
-            nombre: nombre,
-            lat: lat,
-            longit: longit,
-            img: img,
-            webpage: webpage,
-            pais: pais,
-            continente: continente,
-            categoria: categoriaUnesco
-          },                
-          dataType: 'json',
-          success: function(resultado) {
-            alert(resultado);
-          },
-          beforeSend: function() {
-            $('#loadingPrivateResults').css("display","block");
-          },
-          complete: function() {
-            $('#loadingPrivateResults').css("display","none");
-          }
-        });
+      if ($("#txtUnescoName").val() == "" || $("#txtUnescoLat").val() == '' || $("#txtUnescoLong").val() == '' || $("#txtUnescoImage").val() == '' || $("#txtUnescoWeb").val() == ''){
+        alert('Hay que rellenar todos los campos!');
+        return false;
       }
+      //Funcion ajax        
+      $.ajax({
+        url: '/whyb/web/ajax/ajax.php',
+        type: 'POST',
+        data: {
+          func: 'modifyUnescoplace',
+          unescoId: $("#txtUnescoId").val(),
+          nombre: $("#txtUnescoName").val(),
+          lat: $("#txtUnescoLat").val(),
+          longit: $("#txtUnescoLong").val(),
+          img: $("#txtUnescoImage").val(),
+          webpage: $("#txtUnescoWeb").val(),
+          pais: $("#selPrivateData").val(),
+          continente: $("#privateContinents").val(),
+          categoria: $("#privateCategories").val()
+        },                
+        dataType: 'json',
+        success: function(resultado) {
+          alert(resultado);
+        },
+        beforeSend: function() {
+          $('#loadingPrivateResults').css("display","block");
+        },
+        complete: function() {
+          $('#loadingPrivateResults').css("display","none");
+        }
+      });
     });
 
     //Actualizar por ajax menu privado sitios Unesco
@@ -975,6 +937,31 @@
         }
       });
     }
+
+    //Insertar datos Unesco en la tabla de prueba
+    $("#linkNewUnescoPlaces").click(function(){
+      var pregunta = confirm("Vas a dar de alta todos los lugares de la Unesco desde un archivo '.xml'\n¿Quieres continuar?");
+      if (pregunta == true) {
+        //Funcion ajax        
+        $.ajax({
+          url: '/whyb/web/ajax/ajax.php',
+          type: 'POST',
+          data: {
+            func: 'InsertarDatosUnesco'
+          },                
+          dataType: 'json',
+          success: function(resultado) {
+            alert(resultado);
+          },
+          beforeSend: function() {
+            //$('#divCargandoUserMenu').css("display","block");
+          },
+          complete: function() {
+            //$('#divCargandoUserMenu').css("display","none");
+          }
+        });
+      }
+    });
   });
 
   function getCategory(div,check){

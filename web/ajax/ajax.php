@@ -360,6 +360,53 @@
 			echo json_encode($mensaje);
 			break;
 
+
+		case 'InsertarDatosUnesco':
+			//Leer archivo xml
+			$xml = simplexml_load_file("c:/xampp/htdocs/whyb/vendor/unesco/unesco_places_ES.xml");
+			
+			$consulta = "INSERT INTO prueba_xml (`countryId`, `region`, `category`, `name`, `latitude`, `longitude`, `web`, `image`) VALUES ";
+
+			foreach ($xml->row as $fila) {
+		        //Guardando los datos en variables
+		        $cuontryId = $fila->iso_code;
+		        $region = $fila->region;
+		        $category = $fila->category;
+		        $name = $fila->site;
+		        $latitude = $fila->latitude;
+		        $longitude = $fila->longitude;
+		        $web = $fila->http_url;
+		        $image = $fila->image_url;
+
+		        //Convertir pagina a español
+		        $web = str_replace("/en/","/es/",$web);
+
+		        //Covertir codigo pais a mayusculas
+		        $cuontryId = strtoupper($cuontryId);
+
+		        //Generar consulta para introducir los datos
+		    	$consulta .= " ('$cuontryId', '$region', '$category', '$name', $latitude, $longitude, '$web', '$image'),";
+			}
+
+			//Cambiar la ultima , por ;
+			$consulta = substr($consulta, 0, -1);
+			$consulta .= ";";
+
+		    //Ver en consola la consulta buena
+			//$firephp->log($consulta, 'consulta');
+
+			//Insertar en la base de datos
+		    $result = $conexion->query($consulta);
+		    //$firephp->log($result, 'resultado');
+
+			if($result == true)
+				$mensaje = 'Se ha modificado el lugar correctamente.';
+			else
+				$mensaje = 'Ha ocurrido un error. Por favor, inténtelo mas tarde';
+
+			echo json_encode($mensaje);
+			break;
+
 		case 'deletePrivatePlaces':
 			$unescoId = $_POST['unescoId'];
 

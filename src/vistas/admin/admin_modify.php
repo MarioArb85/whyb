@@ -26,11 +26,11 @@ class admin_modify {
                         </tr>
                         <tr>
                             <th>Latitud:</th>
-                            <td><input type='text' id ='txtUnescoLong' name='txtUnescoLong' value='".$data[lat]."' size='10'></td>
+                            <td><input type='text' id ='txtUnescoLat' name='txtUnescoLat' value='".$data[lat]."' size='10'></td>
                         </tr>
                         <tr>
                             <th>Longitud:</th>
-                            <td><input type='text' id ='txtUnescoLat' name='txtUnescoLat' value='".$data[lng]."' size='10'/></td>
+                            <td><input type='text' id ='txtUnescoLong' name='txtUnescoLong' value='".$data[lng]."' size='10'/></td>
                         </tr>
                         <tr>
                             <th>Imagen:</th>
